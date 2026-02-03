@@ -1,56 +1,169 @@
+# OpsBoard Pro – AI Development Rules
 
-You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
+## 1. Business Context (Highest Priority)
 
-## TypeScript Best Practices
+OpsBoard Pro is an internal operations console for managing:
+- Incidents
+- Deployments
+- Logs
+- Role-Based Access Control (RBAC)
+- Audit trails
 
-- Use strict type checking
-- Prefer type inference when the type is obvious
-- Avoid the `any` type; use `unknown` when type is uncertain
+The application is authenticated, role-based, and not SEO-oriented.
 
-## Angular Best Practices
+All features MUST respect:
+- Auditability
+- Traceability
+- Access control
 
-- Always use standalone components over NgModules
-- Must NOT set `standalone: true` inside Angular decorators. It's the default in Angular v20+.
-- Use signals for state management
-- Implement lazy loading for feature routes
-- Do NOT use the `@HostBinding` and `@HostListener` decorators. Put host bindings inside the `host` object of the `@Component` or `@Directive` decorator instead
-- Use `NgOptimizedImage` for all static images.
-  - `NgOptimizedImage` does not work for inline base64 images.
+Business rules always override technical or stylistic rules.
 
-## Accessibility Requirements
+---
 
-- It MUST pass all AXE checks.
-- It MUST follow all WCAG AA minimums, including focus management, color contrast, and ARIA attributes.
+## 2. System Architecture (Non-Negotiable)
 
-### Components
+- The application follows Clean Architecture adapted for Angular.
+- Dependency direction is strict and unidirectional:
 
-- Keep components small and focused on a single responsibility
-- Use `input()` and `output()` functions instead of decorators
-- Use `computed()` for derived state
-- Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
-- Prefer inline templates for small components
-- Prefer Reactive forms instead of Template-driven ones
-- Do NOT use `ngClass`, use `class` bindings instead
-- Do NOT use `ngStyle`, use `style` bindings instead
-- When using external templates/styles, use paths relative to the component TS file.
+  Presentation → Application → Domain
 
-## State Management
+- Infrastructure is an outer layer and must NEVER be referenced by UI.
 
-- Use signals for local component state
-- Use `computed()` for derived state
-- Keep state transformations pure and predictable
-- Do NOT use `mutate` on signals, use `update` or `set` instead
+### Forbidden Dependencies
+- Domain importing:
+  - Angular
+  - RxJS
+  - HttpClient
+  - Browser APIs
+  - Any framework-specific code
+- Cross-feature imports
+- Presentation importing Infrastructure directly
 
-## Templates
+---
 
-- Keep templates simple and avoid complex logic
-- Use native control flow (`@if`, `@for`, `@switch`) instead of `*ngIf`, `*ngFor`, `*ngSwitch`
-- Use the async pipe to handle observables
-- Do not assume globals like (`new Date()`) are available.
-- Do not write arrow functions in templates (they are not supported).
+## 3. Domain Rules
 
-## Services
+- Domain code MUST be framework-agnostic.
+- Domain MUST NOT depend on Angular, RxJS, HTTP, or browser APIs.
 
-- Design services around a single responsibility
-- Use the `providedIn: 'root'` option for singleton services
-- Use the `inject()` function instead of constructor injection
+The Domain layer defines ONLY:
+- Business models
+- Business rules
+- Use cases
+- Repository interfaces (ports)
+
+The Domain layer contains NO state management and NO side effects.
+
+---
+
+## 4. Feature Architecture (Bounded Contexts)
+
+- Each feature is a bounded context.
+- Each feature MUST expose exactly ONE Facade.
+- Features MUST be lazy-loaded.
+- No feature may depend on another feature directly.
+
+### Mandatory Feature Structure
+
+feature-x/
+├── domain/
+├── application/
+├── presentation/
+├── feature-x.routes.ts
+└── feature-x.providers.ts
+
+
+---
+
+## 5. Application Layer
+
+- Each feature exposes a single Facade.
+- State management lives exclusively in this layer.
+- DTO ↔ Domain mapping MUST occur here.
+- Application orchestrates:
+  - Use cases
+  - State transitions
+  - Security decisions (but not enforcement)
+
+The Application layer depends on Domain, never the inverse.
+
+---
+
+## 6. Infrastructure Layer
+
+- All I/O logic lives here:
+  - HTTP
+  - APIs
+  - Storage
+  - External services
+- Infrastructure implements Domain repository interfaces.
+- NO business rules allowed.
+- NO UI imports allowed.
+
+Infrastructure is replaceable without affecting Domain or UI.
+
+---
+
+## 7. Presentation Layer
+
+- Pages and containers are smart.
+- UI components are dumb by default.
+- UI communicates with the Application layer ONLY via Facades.
+- UI MUST NOT contain business logic.
+
+Presentation depends on Application, never on Infrastructure.
+
+---
+
+## 8. UI Architecture
+
+- Atomic Design is mandatory.
+- Atoms and Molecules:
+  - MUST NOT inject services
+  - MUST be stateless and reusable
+- Organisms and Pages may interact with Facades.
+
+---
+
+## 9. Styling Rules
+
+- Use SCSS and CSS Variables.
+- All colors, spacing, and typography use design tokens.
+- No inline styles.
+- Tailwind is NOT allowed as a base styling solution.
+
+---
+
+## 10. State and Security
+
+- State is feature-scoped.
+- Global mutable state is forbidden.
+- RBAC and feature flags MUST be enforced via guards.
+- All critical actions MUST generate an `AuditEvent`.
+
+Security is enforced at:
+- Route level
+- Application level
+- Never in the Domain
+
+---
+
+## 11. Structure Rules
+
+- No cross-feature imports.
+- Shared code lives ONLY in `shared/`.
+- Feature folders MUST follow:
+  - domain/
+  - application/
+  - presentation/
+
+Violations of structure are considered architectural defects.
+
+---
+
+## 12. Testing Rules
+
+- Tests must verify behavior, not implementation details.
+- Domain logic MUST be tested without Angular TestBed.
+- Application logic may be tested with mocked ports.
+- UI tests assert inputs, outputs, and accessibility only.
