@@ -10,12 +10,24 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             {
+                path: 'dashboard',
+                loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
+            },
+            {
                 path: 'incidents',
                 loadChildren: () => import('./features/incidents/incidents.routes').then(m => m.INCIDENTS_ROUTES)
             },
             {
+                path: 'deployments',
+                loadChildren: () => import('./features/deployments/deployments.routes').then(m => m.DEPLOYMENT_ROUTES)
+            },
+            {
+                path: 'logs',
+                loadChildren: () => import('./features/logs/logs.routes').then(m => m.LOGS_ROUTES)
+            },
+            {
                 path: '',
-                redirectTo: 'incidents',
+                redirectTo: 'dashboard',
                 pathMatch: 'full'
             }
         ]

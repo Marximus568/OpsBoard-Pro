@@ -1,0 +1,72 @@
+.top-bar {
+    height: 64px;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-xl);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 32px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.username {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: capitalize;
+}
+
+.role {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+}
+
+.avatar {
+    color: var(--color-primary-500);
+    display: flex;
+    align-items: center;
+
+    .material-icons {
+        font-size: 32px;
+    }
+}

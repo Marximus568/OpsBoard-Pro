@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { authState, selectUser, selectIsAuthenticated, selectIsLoading, selectAuthError, selectMfaRequired, AuthState } from './auth.state';
 import { IAUTH_REPOSITORY } from '../domain/repositories/auth.repository';
 
@@ -7,6 +8,7 @@ import { IAUTH_REPOSITORY } from '../domain/repositories/auth.repository';
 })
 export class AuthFacade {
     private readonly authRepository = inject(IAUTH_REPOSITORY);
+    private readonly router = inject(Router);
 
     // Selectors
     readonly user = selectUser;
@@ -15,7 +17,7 @@ export class AuthFacade {
     readonly isLoading = selectIsLoading;
     readonly error = selectAuthError;
 
-    async login(credentials: unknown): Promise<void> {
+    async login(credentials: unknown, returnUrl?: string): Promise<void> {
         this.updateState({ isLoading: true, error: null });
         try {
             const result = await this.authRepository.login(credentials);
@@ -33,6 +35,7 @@ export class AuthFacade {
                     mfaRequired: false,
                     isLoading: false
                 });
+                await this.router.navigateByUrl(returnUrl || '/dashboard');
             }
         } catch (err) {
             this.updateState({
@@ -42,7 +45,7 @@ export class AuthFacade {
         }
     }
 
-    async verifyMfa(code: string): Promise<void> {
+    async verifyMfa(code: string, returnUrl?: string): Promise<void> {
         this.updateState({ isLoading: true, error: null });
         try {
             const result = await this.authRepository.verifyMfa(code);
@@ -52,6 +55,7 @@ export class AuthFacade {
                 mfaRequired: false,
                 isLoading: false
             });
+            await this.router.navigateByUrl(returnUrl || '/dashboard');
         } catch (err) {
             this.updateState({
                 isLoading: false,

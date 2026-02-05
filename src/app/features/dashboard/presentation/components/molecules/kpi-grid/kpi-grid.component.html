@@ -1,0 +1,6 @@
+<div class="kpi-grid">
+    @for (metric of metrics(); track metric.label) {
+    <app-kpi-card [label]="metric.label" [value]="metric.value" [color]="metric.color" [icon]="metric.icon">
+    </app-kpi-card>
+    }
+</div>

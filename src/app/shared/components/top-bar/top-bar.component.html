@@ -1,0 +1,21 @@
+<header class="top-bar">
+    <div class="page-title">
+        <!-- Optional dynamic title -->
+    </div>
+    <div class="user-actions">
+        <button class="icon-btn">
+            <span class="material-icons">notifications</span>
+        </button>
+        @if (auth.user(); as user) {
+        <div class="user-profile">
+            <div class="user-info">
+                <span class="username">{{ user.email.split('@')[0] }}</span>
+                <span class="role">Administrator</span>
+            </div>
+            <div class="avatar">
+                <span class="material-icons">account_circle</span>
+            </div>
+        </div>
+        }
+    </div>
+</header>

@@ -129,8 +129,12 @@ Presentation depends on Application, never on Infrastructure.
 
 - Use SCSS and CSS Variables.
 - All colors, spacing, and typography use design tokens.
-- No inline styles.
+- No inline styles or inline templates. All components MUST use external `.html` and `.scss` files.
 - Tailwind is NOT allowed as a base styling solution.
+
+## 10. Component Design
+- Prefer reuse of shared components (`shared/components/atoms`) over feature-specific implementations for generic UI elements (badges, cards, buttons).
+- All UI components MUST specify `ChangeDetectionStrategy.OnPush`.
 
 ---
 

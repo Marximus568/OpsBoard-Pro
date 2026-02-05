@@ -1,0 +1,13 @@
+<div class="kpi-card" [style.border-left-color]="color">
+    <div class="kpi-header">
+        <span class="label">{{ label }}</span>
+        @if (icon) {
+        <span class="icon" [style.color]="color">
+            <i class="icon-placeholder"></i>
+        </span>
+        }
+    </div>
+    <div class="kpi-body">
+        <span class="value">{{ value }}</span>
+    </div>
+</div>

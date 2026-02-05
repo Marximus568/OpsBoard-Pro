@@ -1,0 +1,12 @@
+<div class="log-row" [class.is-detailed]="showDetail" (click)="toggleDetail()" (keydown.enter)="toggleDetail()"
+    (keydown.space)="onKeyDown($any($event))" tabindex="0" role="button" [attr.aria-expanded]="showDetail">
+    <span class="timestamp">{{ log.timestamp | date: 'HH:mm:ss.SSS' }}</span>
+    <app-log-status-badge [level]="log.level"></app-log-status-badge>
+    <span class="service">{{ log.service }}</span>
+    <span class="message">{{ log.message }}</span>
+</div>
+@if (showDetail && log.payload) {
+<div class="log-detail">
+    <pre>{{ log.payload | json }}</pre>
+</div>
+}

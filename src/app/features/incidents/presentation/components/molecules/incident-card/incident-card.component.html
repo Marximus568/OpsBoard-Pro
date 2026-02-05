@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header">
+        <app-badge [type]="getPriorityType()">{{ incident.priority }}</app-badge>
+        <span class="date">{{ incident.createdAt | date:'short' }}</span>
+    </div>
+    <h3 class="title">{{ incident.title }}</h3>
+    <p class="description">{{ incident.description }}</p>
+    <div class="card-footer">
+        <span class="reporter">By: {{ incident.reportedBy }}</span>
+        <app-badge [type]="getStatusType()">{{ incident.status }}</app-badge>
+    </div>
+</div>

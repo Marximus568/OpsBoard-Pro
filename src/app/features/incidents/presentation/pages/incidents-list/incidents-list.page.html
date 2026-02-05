@@ -1,0 +1,25 @@
+<div class="page-container">
+    <header class="page-header">
+        <h1>Incidents</h1>
+        <button class="btn-primary">New Incident</button>
+    </header>
+
+    <div class="content">
+        @if (isLoading$ | async) {
+        <div class="loading-state">
+            Loading incidents...
+        </div>
+        }
+
+        @if (error$ | async; as error) {
+        <div class="error-state">
+            Error: {{ error }}
+        </div>
+        }
+
+        @if ((isLoading$ | async) === false && (error$ | async) === null) {
+        <app-incident-list-view [incidents]="(incidents$ | async) || []">
+        </app-incident-list-view>
+        }
+    </div>
+</div>

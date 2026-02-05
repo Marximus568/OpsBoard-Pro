@@ -1,0 +1,46 @@
+.log-row {
+    display: grid;
+    grid-template-columns: 100px 80px 140px 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background 0.1s;
+    align-items: center;
+}
+
+.log-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.timestamp {
+    color: var(--text-secondary);
+}
+
+.service {
+    color: var(--color-primary-400);
+    font-weight: 500;
+}
+
+.message {
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.log-detail {
+    background: #1e1e1e;
+    padding: var(--spacing-md);
+    margin: 0 var(--spacing-md) var(--spacing-sm);
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid var(--border-color);
+}
+
+pre {
+    margin: 0;
+    color: #d4d4d4;
+}

@@ -1,0 +1,21 @@
+<div class="chart-card">
+    <h3>Estado por Prioridad</h3>
+    <div class="pie-container">
+        <svg viewBox="-1 -1 2 2" class="pie-svg">
+            @for (slice of slices(); track slice.label) {
+            <path [attr.d]="slice.path" [attr.fill]="slice.color">
+                <title>{{ slice.label }}: {{ slice.value }}%</title>
+            </path>
+            }
+        </svg>
+        <div class="legend">
+            @for (slice of slices(); track slice.label) {
+            <div class="legend-item">
+                <span class="dot" [style.background-color]="slice.color"></span>
+                <span class="label">{{ slice.label }}</span>
+                <span class="percent">{{ slice.value }}%</span>
+            </div>
+            }
+        </div>
+    </div>
+</div>

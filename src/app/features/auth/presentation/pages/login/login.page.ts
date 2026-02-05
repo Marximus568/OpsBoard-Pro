@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AuthFacade } from '../../../application/auth.facade';
 
 @Component({
@@ -12,6 +13,7 @@ import { AuthFacade } from '../../../application/auth.facade';
 })
 export class LoginPage {
     private readonly fb = inject(FormBuilder);
+    private readonly route = inject(ActivatedRoute);
     private readonly authFacade = inject(AuthFacade);
 
     readonly loginForm = this.fb.group({
@@ -27,13 +29,15 @@ export class LoginPage {
     readonly error = this.authFacade.error;
     readonly mfaRequired = this.authFacade.mfaRequired;
 
+    private readonly returnUrl = this.route.snapshot.queryParams['returnUrl'];
+
     async onSubmit(): Promise<void> {
         if (this.loginForm.invalid) return;
-        await this.authFacade.login(this.loginForm.value);
+        await this.authFacade.login(this.loginForm.value, this.returnUrl);
     }
 
     async onMfaSubmit(): Promise<void> {
         if (this.mfaForm.invalid) return;
-        await this.authFacade.verifyMfa(this.mfaForm.get('code')?.value || '');
+        await this.authFacade.verifyMfa(this.mfaForm.get('code')?.value || '', this.returnUrl);
     }
 }
