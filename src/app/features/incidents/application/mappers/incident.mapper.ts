@@ -39,7 +39,17 @@ export class IncidentMapper {
     /**
      * Transforms a Domain Incident Entity into a JSON-compatible format for sending to the API.
      */
-    static toPersistence(entity: Incident): any {
-        return entity.toJSON();
+    static toPersistence(entity: Incident): IncidentDto {
+        const props = entity.toJSON();
+        return {
+            id: props.id,
+            title: props.title,
+            description: props.description,
+            status: props.status,
+            priority: props.priority,
+            createdAt: props.createdAt.toISOString(),
+            updatedAt: props.updatedAt.toISOString(),
+            reportedBy: props.reportedBy
+        };
     }
 }
