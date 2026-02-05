@@ -11,23 +11,23 @@ export enum LogLevel {
     providedIn: 'root'
 })
 export class LoggingService {
-    debug(message: string, ...args: any[]): void {
+    debug(message: string, ...args: unknown[]): void {
         this.log(LogLevel.DEBUG, message, ...args);
     }
 
-    info(message: string, ...args: any[]): void {
+    info(message: string, ...args: unknown[]): void {
         this.log(LogLevel.INFO, message, ...args);
     }
 
-    warn(message: string, ...args: any[]): void {
+    warn(message: string, ...args: unknown[]): void {
         this.log(LogLevel.WARN, message, ...args);
     }
 
-    error(message: string, ...args: any[]): void {
+    error(message: string, ...args: unknown[]): void {
         this.log(LogLevel.ERROR, message, ...args);
     }
 
-    private log(level: LogLevel, message: string, ...args: any[]): void {
+    private log(level: LogLevel, message: string, ...args: unknown[]): void {
         // Current simple implementation, no UI dependency
         const timestamp = new Date().toISOString();
         const prefix = `[${timestamp}] [${LogLevel[level]}]`;

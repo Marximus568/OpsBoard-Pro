@@ -1,0 +1,108 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-secondary);
+    padding: var(--spacing-md);
+}
+
+.login-card {
+    background-color: var(--bg-primary);
+    padding: var(--spacing-xl);
+    border-radius: var(--spacing-sm);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+
+    h1 {
+        color: var(--color-primary-600);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    p {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+
+    label {
+        font-weight: var(--font-weight-medium);
+        font-size: var(--font-size-sm);
+    }
+
+    input {
+        padding: var(--spacing-sm);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-family: inherit;
+        transition: border-color 0.2s;
+
+        &:focus {
+            outline: none;
+            border-color: var(--color-primary-500);
+            box-shadow: 0 0 0 2px var(--color-primary-100);
+        }
+
+        &.invalid {
+            border-color: var(--color-error);
+        }
+    }
+}
+
+.error-msg {
+    color: var(--color-error);
+    font-size: var(--font-size-xs);
+}
+
+.error-summary {
+    background-color: #fee2e2;
+    color: var(--color-error);
+    padding: var(--spacing-sm);
+    border-radius: 4px;
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-primary-600);
+    color: white;
+    padding: var(--spacing-sm);
+    border: none;
+    border-radius: 4px;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover:not(:disabled) {
+        opacity: 0.9;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.login-footer {
+    margin-top: var(--spacing-xl);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}

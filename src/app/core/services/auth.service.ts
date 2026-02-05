@@ -13,7 +13,7 @@ export interface AuthResponse {
 }
 
 export abstract class AuthService {
-    abstract login(credentials: any): Observable<AuthResponse>;
+    abstract login(credentials: unknown): Observable<AuthResponse>;
     abstract logout(): void;
     abstract refresh(): Observable<AuthResponse>;
     abstract getCurrentUser(): User | null;

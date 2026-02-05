@@ -1,0 +1,119 @@
+{
+    "users": [
+        {
+            "uuid": "usr-001",
+            "user_email": "admin@opsboard.io",
+            "full_name": "Admin User",
+            "password": "admin123",
+            "permission_roles": [
+                "role-admin"
+            ],
+            "active": true,
+            "mfaEnabled": true,
+            "createdAt": "2026-01-10T10:00:00Z"
+        }
+    ],
+    "roles": [
+        {
+            "id": "role-admin",
+            "name": "Admin",
+            "permissions": [
+                "INCIDENT_READ",
+                "INCIDENT_WRITE",
+                "DEPLOY_APPROVE",
+                "AUDIT_READ"
+            ]
+        }
+    ],
+    "permissions": [],
+    "incidents": [
+        {
+            "id": "inc-1001",
+            "title": "API latency spike",
+            "description": "High latency detected on payment service",
+            "status": "IN_PROGRESS",
+            "priority": "HIGH",
+            "reportedBy": "Admin User",
+            "service": "payment-api",
+            "assigneeId": "usr-001",
+            "slaBreached": false,
+            "createdAt": "2026-02-01T08:00:00Z",
+            "updatedAt": "2026-02-01T09:15:00Z"
+        }
+    ],
+    "incident_events": [
+        {
+            "id": "evt-9001",
+            "incidentId": "inc-1001",
+            "type": "STATUS_CHANGED",
+            "from": "OPEN",
+            "to": "IN_PROGRESS",
+            "performedBy": "usr-001",
+            "createdAt": "2026-02-01T08:30:00Z"
+        }
+    ],
+    "deployments": [
+        {
+            "id": "dep-2001",
+            "service": "payment-api",
+            "version": "v1.3.0",
+            "status": "PENDING",
+            "requestedBy": "usr-002",
+            "approvedBy": null,
+            "createdAt": "2026-02-01T10:00:00Z"
+        }
+    ],
+    "deployment_steps": [
+        {
+            "id": "step-01",
+            "deploymentId": "dep-2001",
+            "name": "Build",
+            "status": "SUCCESS",
+            "startedAt": "2026-02-01T10:01:00Z",
+            "endedAt": "2026-02-01T10:03:00Z"
+        }
+    ],
+    "logs": [
+        {
+            "id": "log-5001",
+            "level": "ERROR",
+            "service": "payment-api",
+            "message": "Database timeout",
+            "correlationId": "corr-abc-123",
+            "timestamp": "2026-02-01T10:05:00Z"
+        }
+    ],
+    "audit_events": [
+        {
+            "id": "aud-7001",
+            "actorId": "usr-001",
+            "action": "INCIDENT_ASSIGNED",
+            "resourceType": "INCIDENT",
+            "resourceId": "inc-1001",
+            "correlationId": "corr-abc-123",
+            "createdAt": "2026-02-01T08:40:00Z"
+        }
+    ],
+    "feature_flags": [
+        {
+            "id": "ff-logs-stream",
+            "name": "LOG_STREAMING",
+            "enabled": true,
+            "rolesAllowed": [
+                "role-admin"
+            ]
+        }
+    ],
+    "settings": [
+        {
+            "userId": "usr-001",
+            "theme": "dark",
+            "language": "es",
+            "savedViews": {
+                "incidents": [
+                    "my-open-incidents"
+                ]
+            }
+        }
+    ]
+}
