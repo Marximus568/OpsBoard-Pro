@@ -1,0 +1,53 @@
+@use "sass:math";
+
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    max-width: 1280px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: calc(var(--spacing-md) * -1);
+    margin-left: calc(var(--spacing-md) * -1);
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    padding-right: var(--spacing-md);
+    padding-left: var(--spacing-md);
+}
+
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        flex: 0 0 math.percentage(math.div($i, 12));
+        max-width: math.percentage(math.div($i, 12));
+        padding-right: var(--spacing-md);
+        padding-left: var(--spacing-md);
+    }
+}
+
+/* Base Responsive Breakpoints */
+$breakpoints: (
+    sm: 640px,
+    md: 768px,
+    lg: 1024px,
+    xl: 1280px
+);
+
+@each $name, $value in $breakpoints {
+    @media (min-width: $value) {
+        @for $i from 1 through 12 {
+            .col-#{$name}-#{$i} {
+                flex: 0 0 math.percentage(math.div($i, 12));
+                max-width: math.percentage(math.div($i, 12));
+            }
+        }
+    }
+}
