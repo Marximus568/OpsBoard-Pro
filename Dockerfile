@@ -18,7 +18,7 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy build artifacts from stage 1
-COPY --from=build /app/dist/ops-board-pro/browser /usr/share/nginx/html
+COPY --from=build /app/dist/OpsBoard-Pro/browser /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80

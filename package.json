@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "lint": "eslint src",
     "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
-    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:ci": "ng test --watch=false",
     "api": "json-server --watch server/db.json --port 3000",
     "prepare": "husky"
   },
@@ -47,6 +47,7 @@
     "@playwright/test": "1.58.1",
     "@types/node": "^25.2.3",
     "@types/uuid": "^10.0.0",
+    "@vitest/browser-playwright": "^4.0.18",
     "angular-eslint": "21.2.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
