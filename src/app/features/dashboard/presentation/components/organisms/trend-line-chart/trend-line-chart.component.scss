@@ -1,25 +1,27 @@
 .chart-card {
-    background: var(--surface-card);
+    background: var(--surface-1);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 h3 {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.875rem;
+    font-weight: 700;
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .svg-container {
     flex: 1;
     width: 100%;
-    min-height: 150px;
+    min-height: 200px;
 }
 
 svg {
@@ -32,36 +34,38 @@ svg {
     stroke: var(--border-color);
     stroke-width: 1;
     stroke-dasharray: 4;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 .chart-line {
     fill: none;
-    stroke: var(--primary-color);
+    stroke: var(--color-primary-500);
     stroke-width: 3;
     stroke-linecap: round;
     stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
 }
 
 .chart-area {
-    fill: var(--primary-color);
-    fill-opacity: 0.1;
+    fill: url(#areaGradient);
+    fill-opacity: 0.3;
 }
 
 .chart-point {
-    fill: var(--surface-card);
-    stroke: var(--primary-color);
+    fill: var(--surface-1);
+    stroke: var(--color-primary-500);
     stroke-width: 2;
 }
 
 .labels {
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
 }
 
 .labels span {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: 600;
 }

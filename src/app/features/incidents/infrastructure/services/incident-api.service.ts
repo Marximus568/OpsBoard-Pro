@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IncidentDto } from '../../application/mappers/incident.mapper';
+import { API_BASE_URL } from '../../../../core/tokens/api.tokens';
 
 /**
  * Service dedicated exclusively to data transport for Incidents.
@@ -12,7 +13,8 @@ import { IncidentDto } from '../../application/mappers/incident.mapper';
 })
 export class IncidentApiService {
     private readonly http = inject(HttpClient);
-    private readonly API_URL = 'http://localhost:3000/incidents';
+    private readonly baseUrl = inject(API_BASE_URL);
+    private readonly API_URL = `${this.baseUrl}/incidents`;
 
     /**
      * Fetches all incidents from the backend.

@@ -6,6 +6,12 @@ import { IncidentActions } from './incident.actions';
 export interface IncidentState extends EntityState<Incident> {
     isLoading: boolean;
     error: string | null;
+    filters: {
+        search: string;
+        status: string | 'ALL';
+        priority: string | 'ALL';
+        severity: string | 'ALL';
+    };
 }
 
 export const adapter: EntityAdapter<Incident> = createEntityAdapter<Incident>();
@@ -13,6 +19,12 @@ export const adapter: EntityAdapter<Incident> = createEntityAdapter<Incident>();
 export const initialState: IncidentState = adapter.getInitialState({
     isLoading: false,
     error: null,
+    filters: {
+        search: '',
+        status: 'ALL',
+        priority: 'ALL',
+        severity: 'ALL'
+    }
 });
 
 export const incidentReducer = createReducer(
@@ -26,9 +38,16 @@ export const incidentReducer = createReducer(
     on(IncidentActions.createIncidentSuccess, (state, { incident }) =>
         adapter.addOne(incident, state)),
 
-    on(IncidentActions.updateIncidentSuccess, (state, { incident }) =>
+    on(IncidentActions.updateIncidentSuccess,
+        IncidentActions.assignIncidentSuccess,
+        IncidentActions.resolveIncidentSuccess, (state, { incident }) =>
         adapter.updateOne({ id: incident.id, changes: incident }, state)),
 
     on(IncidentActions.deleteIncidentSuccess, (state, { id }) =>
-        adapter.removeOne(id, state))
+        adapter.removeOne(id, state)),
+
+    on(IncidentActions.updateFilters, (state, { filters }) => ({
+        ...state,
+        filters: { ...state.filters, ...filters }
+    }))
 );

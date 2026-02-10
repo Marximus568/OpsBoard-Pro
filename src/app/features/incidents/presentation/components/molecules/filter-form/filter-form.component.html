@@ -1,0 +1,22 @@
+<div class="filter-bar">
+    <div class="search-input">
+        <input type="text" placeholder="Search incidents..." [(ngModel)]="filters.search"
+            (ngModelChange)="onFilterChange()">
+    </div>
+
+    <div class="select-group">
+        <select [(ngModel)]="filters.status" (change)="onFilterChange()">
+            <option *ngFor="let s of statuses" [value]="s.value">{{ s.label }}</option>
+        </select>
+
+        <select [(ngModel)]="filters.priority" (change)="onFilterChange()">
+            <option *ngFor="let p of priorities" [value]="p.value">{{ p.label }}</option>
+        </select>
+
+        <select [(ngModel)]="filters.severity" (change)="onFilterChange()">
+            <option *ngFor="let v of severities" [value]="v.value">{{ v.label }}</option>
+        </select>
+    </div>
+
+    <button class="btn-reset" (click)="reset()">Reset</button>
+</div>

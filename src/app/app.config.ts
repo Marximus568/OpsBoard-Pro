@@ -6,6 +6,10 @@ import { provideEffects } from '@ngrx/effects';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { INCIDENTS_PROVIDERS } from './features/incidents/incidents.providers';
+import { AUTH_PROVIDERS } from './features/auth/auth.providers';
+import { environment } from '../environments/environment';
+import { API_BASE_URL } from './core/tokens/api.tokens';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +17,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore(),
-    provideEffects()
+    provideEffects(),
+    { provide: API_BASE_URL, useValue: environment.apiUrl },
+    ...INCIDENTS_PROVIDERS,
+    ...AUTH_PROVIDERS
   ]
 };

@@ -25,7 +25,6 @@
             ]
         }
     ],
-    "permissions": [],
     "incidents": [
         {
             "id": "inc-1001",
@@ -33,23 +32,28 @@
             "description": "High latency detected on payment service",
             "status": "IN_PROGRESS",
             "priority": "HIGH",
-            "reportedBy": "Admin User",
-            "service": "payment-api",
+            "severity": "SEV2",
             "assigneeId": "usr-001",
+            "reporterId": "usr-001",
+            "service": "payment-api",
             "slaBreached": false,
             "createdAt": "2026-02-01T08:00:00Z",
-            "updatedAt": "2026-02-01T09:15:00Z"
-        }
-    ],
-    "incident_events": [
-        {
-            "id": "evt-9001",
-            "incidentId": "inc-1001",
-            "type": "STATUS_CHANGED",
-            "from": "OPEN",
-            "to": "IN_PROGRESS",
-            "performedBy": "usr-001",
-            "createdAt": "2026-02-01T08:30:00Z"
+            "updatedAt": "2026-02-01T09:15:00Z",
+            "resolvedAt": null,
+            "closedAt": null,
+            "tags": [
+                "performance",
+                "payment"
+            ],
+            "timeline": [
+                {
+                    "id": "evt-9001",
+                    "type": "CREATED",
+                    "timestamp": "2026-02-01T08:00:00Z",
+                    "userId": "usr-001",
+                    "description": "Incident reported"
+                }
+            ]
         }
     ],
     "deployments": [
@@ -57,20 +61,23 @@
             "id": "dep-2001",
             "service": "payment-api",
             "version": "v1.3.0",
-            "status": "PENDING",
-            "requestedBy": "usr-002",
-            "approvedBy": null,
-            "createdAt": "2026-02-01T10:00:00Z"
-        }
-    ],
-    "deployment_steps": [
-        {
-            "id": "step-01",
-            "deploymentId": "dep-2001",
-            "name": "Build",
             "status": "SUCCESS",
-            "startedAt": "2026-02-01T10:01:00Z",
-            "endedAt": "2026-02-01T10:03:00Z"
+            "environment": "PRODUCTION",
+            "requestedBy": "usr-001",
+            "approvedBy": "usr-001",
+            "createdAt": "2026-02-01T10:00:00Z",
+            "updatedAt": "2026-02-01T10:15:00Z"
+        },
+        {
+            "id": "dep-2002",
+            "service": "auth-service",
+            "version": "v1.4.2-beta",
+            "status": "RUNNING",
+            "environment": "STAGING",
+            "requestedBy": "usr-001",
+            "approvedBy": "usr-001",
+            "createdAt": "2026-02-10T08:00:00Z",
+            "updatedAt": "2026-02-10T08:05:00Z"
         }
     ],
     "logs": [
@@ -81,39 +88,6 @@
             "message": "Database timeout",
             "correlationId": "corr-abc-123",
             "timestamp": "2026-02-01T10:05:00Z"
-        }
-    ],
-    "audit_events": [
-        {
-            "id": "aud-7001",
-            "actorId": "usr-001",
-            "action": "INCIDENT_ASSIGNED",
-            "resourceType": "INCIDENT",
-            "resourceId": "inc-1001",
-            "correlationId": "corr-abc-123",
-            "createdAt": "2026-02-01T08:40:00Z"
-        }
-    ],
-    "feature_flags": [
-        {
-            "id": "ff-logs-stream",
-            "name": "LOG_STREAMING",
-            "enabled": true,
-            "rolesAllowed": [
-                "role-admin"
-            ]
-        }
-    ],
-    "settings": [
-        {
-            "userId": "usr-001",
-            "theme": "dark",
-            "language": "es",
-            "savedViews": {
-                "incidents": [
-                    "my-open-incidents"
-                ]
-            }
         }
     ]
 }

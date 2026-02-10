@@ -1,12 +1,17 @@
-<div class="card">
+<div class="incident-card" [class.sla-breached]="incident.slaBreached" [routerLink]="['/incidents', incident.id]">
     <div class="card-header">
-        <app-badge [type]="getPriorityType()">{{ incident.priority }}</app-badge>
-        <span class="date">{{ incident.createdAt | date:'short' }}</span>
+        <span class="incident-id">{{ incident.id }}</span>
+        <app-badge [type]="getSeverityType()">{{ incident.severity.label }}</app-badge>
     </div>
-    <h3 class="title">{{ incident.title }}</h3>
-    <p class="description">{{ incident.description }}</p>
+
+    <h3 class="incident-title">{{ incident.title }}</h3>
+    <p class="incident-service">Service: <strong>{{ incident.service }}</strong></p>
+
     <div class="card-footer">
-        <span class="reporter">By: {{ incident.reportedBy }}</span>
-        <app-badge [type]="getStatusType()">{{ incident.status }}</app-badge>
+        <div class="badges-group">
+            <app-badge [type]="getStatusType()">{{ incident.status.label }}</app-badge>
+            <app-badge [type]="getPriorityType()">{{ incident.priority.label }}</app-badge>
+        </div>
+        <span class="updated-time">{{ incident.updatedAt | date:'shortTime' }}</span>
     </div>
 </div>

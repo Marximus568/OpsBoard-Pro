@@ -1,6 +1,6 @@
 import { Incident } from '../../incidents/domain/models/incident.entity';
-import { IncidentStatus } from '../../incidents/domain/models/incident-status.enum';
-import { IncidentPriority } from '../../incidents/domain/models/incident-priority.enum';
+import { IncidentStatusEnum } from '../../incidents/domain/value-objects/incident-status.vo';
+import { PriorityLevel } from '../../incidents/domain/value-objects/priority.vo';
 
 /**
  * KPI Metric model for summarized data.
@@ -36,45 +36,54 @@ export interface TrendPoint {
 export class DashboardMetricsRules {
 
     static calculateOpen(incidents: Incident[]): number {
-        return incidents.filter(i => i.status === IncidentStatus.OPEN).length;
+        return incidents.filter(i => i.status.value === IncidentStatusEnum.OPEN).length;
     }
 
     static calculateInProgress(incidents: Incident[]): number {
-        return incidents.filter(i => i.status === IncidentStatus.IN_PROGRESS).length;
+        return incidents.filter(i => i.status.value === IncidentStatusEnum.IN_PROGRESS).length;
     }
 
     static calculateResolvedToday(incidents: Incident[]): number {
         const today = new Date().toDateString();
         return incidents.filter(i =>
-            i.status === IncidentStatus.RESOLVED &&
+            i.status.value === IncidentStatusEnum.RESOLVED &&
             i.updatedAt.toDateString() === today
         ).length;
     }
 
-    /**
-     * SLA Violation rule: Logic can be refined based on priority and elapsed time.
-     * For now, it uses a placeholder logic (e.g., incidents open > 24h).
-     */
     static calculateSlaViolations(incidents: Incident[]): number {
-        const now = new Date();
-        const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+        // Checking explicit slaBreached property or logic based on creation time
+        return incidents.filter(i => i.slaBreached).length;
+    }
 
-        return incidents.filter(i =>
-            i.status !== IncidentStatus.RESOLVED &&
-            i.status !== IncidentStatus.CLOSED &&
-            (now.getTime() - i.createdAt.getTime()) > ONE_DAY_MS
-        ).length;
+    /**
+     * Calculates average resolution time in hours for resolved incidents.
+     */
+    static calculateAverageResolutionTime(incidents: Incident[]): number {
+        const resolved = incidents.filter(i =>
+            i.status.value === IncidentStatusEnum.RESOLVED &&
+            i.resolvedAt
+        );
+
+        if (resolved.length === 0) return 0;
+
+        const totalHours = resolved.reduce((acc, current) => {
+            const diff = current.resolvedAt!.getTime() - current.createdAt.getTime();
+            return acc + (diff / (1000 * 60 * 60));
+        }, 0);
+
+        return Number((totalHours / resolved.length).toFixed(1));
     }
 
     /**
      * Calculates the count and percentage for each severity/priority level.
      */
     static calculateSeverityDistribution(incidents: Incident[]): SeverityDistribution[] {
-        const priorities = Object.values(IncidentPriority);
+        const priorities = Object.values(PriorityLevel);
         const total = incidents.length || 1;
 
         return priorities.map(p => {
-            const count = incidents.filter(i => i.priority === p).length;
+            const count = incidents.filter(i => i.priority.value === p).length;
             return {
                 priority: p,
                 count,

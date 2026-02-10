@@ -1,12 +1,13 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Incident } from '../../../../domain/models/incident.entity';
+import { RouterModule } from '@angular/router';
 import { BadgeComponent, BadgeType } from '../../../../../../shared/components/atoms/badge/badge.component';
+import { Incident } from '../../../../domain/models/incident.entity';
 
 @Component({
   selector: 'app-incident-card',
   standalone: true,
-  imports: [CommonModule, BadgeComponent],
+  imports: [CommonModule, BadgeComponent, RouterModule],
   templateUrl: './incident-card.component.html',
   styleUrls: ['./incident-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,7 +22,7 @@ export class IncidentCardComponent {
       'HIGH': 'error',
       'CRITICAL': 'critical'
     };
-    return map[this.incident.priority] || 'default';
+    return map[this.incident.priority.value] || 'default';
   }
 
   getStatusType(): BadgeType {
@@ -31,6 +32,12 @@ export class IncidentCardComponent {
       'RESOLVED': 'success',
       'CLOSED': 'default'
     };
-    return map[this.incident.status] || 'default';
+    return map[this.incident.status.value] || 'default';
+  }
+
+  getSeverityType(): BadgeType {
+    if (this.incident.severity.value === 'SEV1') return 'critical';
+    if (this.incident.severity.value === 'SEV2') return 'error';
+    return 'default';
   }
 }

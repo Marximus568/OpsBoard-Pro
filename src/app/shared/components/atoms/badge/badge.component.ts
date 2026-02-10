@@ -1,14 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type BadgeType = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'critical';
+export type BadgeType = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'critical' | 'info';
 
 @Component({
   selector: 'app-badge',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './badge.component.html',
-  styleUrls: ['./badge.component.scss']
+  template: `
+    <span class="badge" [class]="type">
+        <ng-content></ng-content>
+    </span>
+  `,
+  styleUrls: ['./badge.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BadgeComponent {
   @Input() type: BadgeType = 'default';

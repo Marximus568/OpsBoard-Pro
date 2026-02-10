@@ -41,8 +41,20 @@ export class DashboardFacade {
             value: DashboardMetricsRules.calculateSlaViolations(this.incidents()),
             color: 'var(--status-error)',
             icon: 'timer-off'
+        },
+        {
+            label: 'T. Promedio Res.',
+            value: DashboardMetricsRules.calculateAverageResolutionTime(this.incidents()),
+            color: 'var(--color-primary-400)',
+            icon: 'history'
         }
     ]);
+
+    readonly recentIncidents = computed(() =>
+        [...this.incidents()]
+            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+            .slice(0, 5)
+    );
 
     readonly severityDistribution = computed(() =>
         DashboardMetricsRules.calculateSeverityDistribution(this.incidents())

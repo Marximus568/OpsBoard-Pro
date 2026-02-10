@@ -1,12 +1,15 @@
 .top-bar {
-    height: 64px;
-    background-color: var(--bg-primary);
+    height: 72px;
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 var(--spacing-xl);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .user-actions {
@@ -16,31 +19,41 @@
 }
 
 .icon-btn {
-    background: none;
-    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-secondary);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-xs);
-    border-radius: 50%;
-    transition: background-color 0.2s;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    transition: all 0.2s;
 
     &:hover {
-        background-color: var(--bg-secondary);
-        color: var(--text-primary);
+        background-color: var(--color-primary-600);
+        color: white;
+        border-color: var(--color-primary-600);
+        box-shadow: 0 0 10px rgba(79, 70, 229, 0.4);
     }
 }
 
 .user-profile {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: 32px;
-    background-color: var(--bg-secondary);
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    background-color: var(--surface-1);
     border: 1px solid var(--border-color);
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--surface-2);
+        border-color: var(--color-primary-500);
+    }
 }
 
 .user-info {
@@ -50,15 +63,16 @@
 }
 
 .username {
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     color: var(--text-primary);
     text-transform: capitalize;
 }
 
 .role {
-    font-size: 0.6875rem;
-    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-primary-400);
 }
 
 .avatar {

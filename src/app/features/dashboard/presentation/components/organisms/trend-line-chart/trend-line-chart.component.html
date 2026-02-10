@@ -2,6 +2,12 @@
     <h3>Tendencia de Incidentes (7d)</h3>
     <div class="svg-container">
         <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--color-primary-500)" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="var(--color-primary-500)" stop-opacity="0" />
+                </linearGradient>
+            </defs>
             <!-- Grid Lines -->
             <line x1="0" y1="50" x2="400" y2="50" class="grid-line" />
             <line x1="0" y1="100" x2="400" y2="100" class="grid-line" />
@@ -20,7 +26,7 @@
         </svg>
     </div>
     <div class="labels">
-        @for (p of data; track p.date) {
+        @for (p of data(); track p.date) {
         <span>{{ p.date.split('-')[2] }}/{{ p.date.split('-')[1] }}</span>
         }
     </div>
