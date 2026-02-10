@@ -1,0 +1,2238 @@
+{
+  "users": [
+    {
+      "id": "usr-001",
+      "email": "admin@opsboard.com",
+      "password": "hashed_password_123",
+      "fullName": "Admin User",
+      "roles": [
+        "admin"
+      ],
+      "uuid": "usr-001",
+      "user_email": "admin@opsboard.com",
+      "full_name": "Admin User",
+      "active": true,
+      "permission_roles": [
+        "role-admin",
+        "role-operator"
+      ],
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "usr-002",
+      "email": "operator@opsboard.com",
+      "password": "hashed_password_456",
+      "fullName": "Operator User",
+      "roles": [
+        "operator"
+      ],
+      "uuid": "usr-002",
+      "user_email": "operator@opsboard.com",
+      "full_name": "Operator User",
+      "active": true,
+      "permission_roles": [
+        "role-operator"
+      ],
+      "createdAt": "2024-01-02T00:00:00Z"
+    },
+    {
+      "id": "usr-verify-bot",
+      "uuid": "usr-verify-bot",
+      "user_email": "verify@opsboard.pro",
+      "full_name": "Verify Bot",
+      "active": true,
+      "permission_roles": [
+        "role-operator"
+      ],
+      "createdAt": "2026-02-10T22:27:58.208Z"
+    }
+  ],
+  "roles": [
+    {
+      "id": "role-admin",
+      "name": "Administrator",
+      "permissions": [
+        "users:read",
+        "users:write",
+        "users:delete",
+        "incidents:read",
+        "incidents:write",
+        "incidents:delete",
+        "deployments:read",
+        "deployments:write",
+        "audit:read"
+      ]
+    },
+    {
+      "id": "role-operator",
+      "name": "Operator",
+      "permissions": [
+        "incidents:read",
+        "incidents:write",
+        "deployments:read"
+      ]
+    },
+    {
+      "id": "role-viewer",
+      "name": "Viewer",
+      "permissions": [
+        "incidents:read",
+        "deployments:read"
+      ]
+    }
+  ],
+  "featureFlags": [
+    {
+      "id": "flag-001",
+      "key": "feature-advanced-logs",
+      "name": "Advanced Logs",
+      "description": "Enable detailed logging view",
+      "enabled": true,
+      "scope": "GLOBAL"
+    },
+    {
+      "id": "flag-002",
+      "key": "feature-beta-dashboard",
+      "name": "Beta Dashboard",
+      "description": "New dashboard layout",
+      "enabled": false,
+      "scope": "BETA"
+    }
+  ],
+  "configurations": [
+    {
+      "id": "conf-001",
+      "key": "system-theme",
+      "value": "dark",
+      "category": "PREFERENCES"
+    },
+    {
+      "id": "conf-002",
+      "key": "maintenance-mode",
+      "value": "false",
+      "category": "SYSTEM"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "inc-101",
+      "title": "Database Latency Spike",
+      "description": "Significant increase in database query response times affecting multiple services.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": "u1",
+      "reporterId": "u2",
+      "service": "database-cluster",
+      "slaBreached": false,
+      "createdAt": "2023-11-15T10:00:00Z",
+      "updatedAt": "2023-11-15T10:00:00Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "database",
+        "performance"
+      ],
+      "timeline": [
+        {
+          "id": "evt-1",
+          "type": "CREATED",
+          "timestamp": "2023-11-15T10:00:00Z",
+          "userId": "u2",
+          "description": "Incident reported"
+        }
+      ]
+    },
+    {
+      "id": "inc-102",
+      "title": "Payment Gateway Timeout",
+      "description": "Payment processing requests failing with timeout errors.",
+      "status": "IN_PROGRESS",
+      "priority": "CRITICAL",
+      "severity": "SEV1",
+      "assigneeId": null,
+      "reporterId": "u1",
+      "service": "payment-service",
+      "slaBreached": true,
+      "createdAt": "2023-11-15T11:30:00Z",
+      "updatedAt": "2023-11-15T12:00:00Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "payments",
+        "critical"
+      ],
+      "timeline": [
+        {
+          "id": "evt-2",
+          "type": "CREATED",
+          "timestamp": "2023-11-15T11:30:00Z",
+          "userId": "u1",
+          "description": "Incident reported"
+        },
+        {
+          "id": "evt-3",
+          "type": "STATUS_CHANGE",
+          "timestamp": "2023-11-15T12:00:00Z",
+          "userId": "u1",
+          "description": "Status changed to In Progress"
+        }
+      ]
+    },
+    {
+      "id": "inc-103",
+      "title": "Frontend 404 Errors",
+      "description": "Multiple 404 errors detected on the frontend application after last deployment.",
+      "status": "RESOLVED",
+      "priority": "MEDIUM",
+      "severity": "SEV3",
+      "assigneeId": "u2",
+      "reporterId": "u1",
+      "service": "frontend-app",
+      "slaBreached": false,
+      "createdAt": "2023-11-14T09:15:00Z",
+      "updatedAt": "2023-11-14T14:30:00Z",
+      "resolvedAt": "2023-11-14T14:30:00Z",
+      "closedAt": null,
+      "tags": [
+        "frontend",
+        "routing"
+      ],
+      "timeline": [
+        {
+          "id": "evt-4",
+          "type": "CREATED",
+          "timestamp": "2023-11-14T09:15:00Z",
+          "userId": "u1",
+          "description": "Incident reported"
+        },
+        {
+          "id": "evt-5",
+          "type": "RESOLVED",
+          "timestamp": "2023-11-14T14:30:00Z",
+          "userId": "u2",
+          "description": "Resolved by fixing routing config"
+        }
+      ]
+    },
+    {
+      "id": "INC-608B7051",
+      "title": "Ayerfda",
+      "description": "fdasfdfgasf",
+      "status": "OPEN",
+      "priority": "CRITICAL",
+      "severity": "SEV1",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "adsfasdf",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T20:12:32.960Z",
+      "updatedAt": "2026-02-10T20:12:32.960Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [],
+      "timeline": [
+        {
+          "id": "EVT-069AE520",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T20:12:32.960Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-113F8545",
+      "title": "E2E Test Incident",
+      "description": "This is an incident created by the automated E2E test suite.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": "admin-1",
+      "reporterId": "system-user",
+      "service": "e2e-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T21:50:00.198Z",
+      "updatedAt": "2026-02-10T22:11:16.823Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "test",
+        "playwright"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-7BEA9897",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T21:50:00.198Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        },
+        {
+          "id": "EVT-85675FB7",
+          "type": "ASSIGNED",
+          "timestamp": "2026-02-10T22:11:16.823Z",
+          "userId": "admin-1",
+          "description": "Incident assigned to admin-1",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-30893B43",
+      "title": "E2E Test Incident",
+      "description": "This is an incident created by the automated E2E test suite.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T21:54:46.554Z",
+      "updatedAt": "2026-02-10T21:54:46.554Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "test",
+        "playwright"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-1EC4CA2B",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T21:54:46.554Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-BAD8AEAC",
+      "title": "E2E Test Incident",
+      "description": "This is an incident created by the automated E2E test suite.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:18:05.085Z",
+      "updatedAt": "2026-02-10T23:18:05.085Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "test",
+        "playwright"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-9259C6E7",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:18:05.085Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-339935CA",
+      "title": "E2E Test Incident - Automated",
+      "description": "This incident was created by automated E2E tests.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-test-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:18:08.335Z",
+      "updatedAt": "2026-02-10T23:18:08.335Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "automated",
+        "test"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-4A4CDC38",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:18:08.335Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-E7BD5264",
+      "title": "E2E Test Incident - Automated",
+      "description": "This incident was created by automated E2E tests.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-test-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:21:44.561Z",
+      "updatedAt": "2026-02-10T23:21:44.561Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "automated",
+        "test"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-4A67F2E9",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:21:44.561Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-4E381126",
+      "title": "E2E Test Incident - Automated",
+      "description": "This incident was created by automated E2E tests.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-test-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:22:41.608Z",
+      "updatedAt": "2026-02-10T23:22:41.608Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "automated",
+        "test"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-CDF339F8",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:22:41.608Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "id": "dep-201",
+      "serviceName": "auth-service",
+      "version": "v1.2.0",
+      "status": "SUCCESS",
+      "environment": "PRODUCTION",
+      "deployedAt": "2023-11-14T08:00:00Z",
+      "deployedBy": "u1",
+      "createdAt": "2023-11-14T06:00:00Z",
+      "updatedAt": "2023-11-14T08:00:00Z",
+      "history": [
+        {
+          "status": "REQUESTED",
+          "timestamp": "2023-11-14T06:00:00Z",
+          "userId": "u1",
+          "comment": "Deploy auth-service v1.2.0"
+        },
+        {
+          "status": "REVIEW",
+          "timestamp": "2023-11-14T06:15:00Z",
+          "userId": "u2",
+          "comment": "Reviewing changes"
+        },
+        {
+          "status": "APPROVED",
+          "timestamp": "2023-11-14T06:30:00Z",
+          "userId": "u2",
+          "comment": "LGTM"
+        },
+        {
+          "status": "RUNNING",
+          "timestamp": "2023-11-14T07:00:00Z",
+          "userId": "system",
+          "comment": "Deployment started"
+        },
+        {
+          "status": "SUCCESS",
+          "timestamp": "2023-11-14T08:00:00Z",
+          "userId": "system",
+          "comment": "All checks passed"
+        }
+      ],
+      "logs": [
+        "[2023-11-14 07:00] Initializing deployment engine...",
+        "[2023-11-14 07:05] Downloading artifacts v1.2.0...",
+        "[2023-11-14 07:15] Running database migrations...",
+        "[2023-11-14 07:30] Applying security patches...",
+        "[2023-11-14 07:45] Health checks passed.",
+        "[2023-11-14 08:00] Deployment completed successfully."
+      ]
+    },
+    {
+      "id": "dep-202",
+      "serviceName": "payment-service",
+      "version": "v2.0.1",
+      "status": "SUCCESS",
+      "environment": "STAGING",
+      "deployedAt": null,
+      "deployedBy": "u2",
+      "createdAt": "2023-11-15T10:00:00.000Z",
+      "updatedAt": "2026-02-10T22:18:31.237Z",
+      "history": [
+        {
+          "status": "REQUESTED",
+          "timestamp": "2023-11-15T10:00:00.000Z",
+          "userId": "u2",
+          "comment": "Requesting deploy for payment-service v2.0.1"
+        },
+        {
+          "status": "APPROVED",
+          "timestamp": "2026-02-10T22:18:24.974Z",
+          "userId": "admin",
+          "comment": "Aprobación manual"
+        },
+        {
+          "status": "RUNNING",
+          "timestamp": "2026-02-10T22:18:26.202Z",
+          "userId": "system",
+          "comment": "Deployment execution started"
+        },
+        {
+          "status": "SUCCESS",
+          "timestamp": "2026-02-10T22:18:31.237Z",
+          "userId": "system",
+          "comment": "All checks passed"
+        }
+      ],
+      "logs": [
+        "Initializing deployment engine...",
+        "Downloading artifacts...",
+        "Preparing environment...",
+        "Executing database migrations...",
+        "Applying security patches...",
+        "Configuring horizontal scaling...",
+        "Health checks passed.",
+        "Endpoint active: https://payment-service.opsboard-pro.io",
+        "Deployment completed successfully."
+      ]
+    },
+    {
+      "id": "dep-203",
+      "serviceName": "frontend-app",
+      "version": "v3.1.5",
+      "status": "FAILED",
+      "environment": "DEVELOPMENT",
+      "deployedAt": "2023-11-13T15:45:00Z",
+      "deployedBy": "u1",
+      "createdAt": "2023-11-13T14:00:00Z",
+      "updatedAt": "2023-11-13T15:45:00Z",
+      "history": [
+        {
+          "status": "REQUESTED",
+          "timestamp": "2023-11-13T14:00:00Z",
+          "userId": "u1",
+          "comment": "Deploy frontend v3.1.5"
+        },
+        {
+          "status": "APPROVED",
+          "timestamp": "2023-11-13T14:30:00Z",
+          "userId": "u2",
+          "comment": "Approved"
+        },
+        {
+          "status": "RUNNING",
+          "timestamp": "2023-11-13T15:00:00Z",
+          "userId": "system",
+          "comment": "Starting deployment"
+        },
+        {
+          "status": "FAILED",
+          "timestamp": "2023-11-13T15:45:00Z",
+          "userId": "system",
+          "comment": "Build failed"
+        }
+      ],
+      "logs": [
+        "[2023-11-13 15:00] Initializing deployment engine...",
+        "[2023-11-13 15:10] Downloading artifacts v3.1.5...",
+        "[2023-11-13 15:20] ERROR: Build step failed - missing dependency @angular/core",
+        "[2023-11-13 15:45] Deployment aborted."
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "id": "log-5001",
+      "level": "ERROR",
+      "service": "payment-api",
+      "message": "Database timeout",
+      "correlationId": "corr-abc-123",
+      "timestamp": "2026-02-01T10:05:00Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "audit-1001",
+      "timestamp": "2026-02-10T09:00:00Z",
+      "userId": null,
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "ip": "192.168.1.1",
+        "method": "MFA"
+      }
+    },
+    {
+      "id": "audit-1002",
+      "timestamp": "2026-02-10T09:05:00Z",
+      "userId": null,
+      "action": "UPDATE_FLAG",
+      "resource": "FEATURE_FLAG",
+      "metadata": {
+        "flagId": "flag-001",
+        "newValue": true
+      }
+    },
+    {
+      "id": "audit-1003",
+      "timestamp": "2026-02-10T10:15:00Z",
+      "userId": "usr-002",
+      "action": "DEPLOY_REQUEST",
+      "resource": "DEPLOY",
+      "metadata": {
+        "service": "payment-api",
+        "version": "v1.4.0"
+      }
+    },
+    {
+      "id": "e0e5",
+      "timestamp": "2026-02-10T19:01:58.122Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "a4b2",
+      "timestamp": "2026-02-10T19:02:11.649Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "19b0",
+      "timestamp": "2026-02-10T19:02:15.241Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "84e2",
+      "timestamp": "2026-02-10T19:03:19.575Z",
+      "userId": null,
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    },
+    {
+      "id": "6c4f",
+      "timestamp": "2026-02-10T19:28:32.440Z",
+      "userId": null,
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    },
+    {
+      "id": "d983",
+      "timestamp": "2026-02-10T19:57:53.914Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "50fa",
+      "timestamp": "2026-02-10T19:58:18.665Z",
+      "userId": null,
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    },
+    {
+      "id": "3218",
+      "timestamp": "2026-02-10T20:05:28.991Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "5a7b",
+      "timestamp": "2026-02-10T20:05:29.651Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "2a0b",
+      "timestamp": "2026-02-10T20:05:30.061Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "ea03",
+      "timestamp": "2026-02-10T20:05:30.388Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "e345",
+      "timestamp": "2026-02-10T20:05:30.803Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "3a76",
+      "timestamp": "2026-02-10T20:05:31.283Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "208c",
+      "timestamp": "2026-02-10T20:12:32.989Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-608B7051",
+        "title": "Ayerfda"
+      }
+    },
+    {
+      "id": "47b6",
+      "timestamp": "2026-02-10T21:19:19.963Z",
+      "userId": null,
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    },
+    {
+      "id": "192e",
+      "timestamp": "2026-02-10T21:22:30.583Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "806a",
+      "timestamp": "2026-02-10T21:23:10.695Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "1f15",
+      "timestamp": "2026-02-10T21:23:44.585Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "162e",
+      "timestamp": "2026-02-10T21:23:58.824Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "ae3c",
+      "timestamp": "2026-02-10T21:25:34.520Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "8c67",
+      "timestamp": "2026-02-10T21:25:43.333Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "ce3a",
+      "timestamp": "2026-02-10T21:25:54.207Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8e87",
+      "timestamp": "2026-02-10T21:28:53.180Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "9e79",
+      "timestamp": "2026-02-10T21:29:08.362Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "6d66",
+      "timestamp": "2026-02-10T21:30:08.369Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "7876",
+      "timestamp": "2026-02-10T21:47:21.739Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1939",
+      "timestamp": "2026-02-10T21:48:22.037Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ef31",
+      "timestamp": "2026-02-10T21:48:47.018Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "53fd",
+      "timestamp": "2026-02-10T21:49:27.035Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "d0c6",
+      "timestamp": "2026-02-10T21:49:58.800Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "129e",
+      "timestamp": "2026-02-10T21:50:00.217Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-113F8545",
+        "title": "E2E Test Incident"
+      }
+    },
+    {
+      "id": "327e",
+      "timestamp": "2026-02-10T21:54:45.253Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "23bb",
+      "timestamp": "2026-02-10T21:54:46.573Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-30893B43",
+        "title": "E2E Test Incident"
+      }
+    },
+    {
+      "id": "d4ba",
+      "timestamp": "2026-02-10T22:00:33.481Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "73c2",
+      "timestamp": "2026-02-10T22:11:16.841Z",
+      "userId": "admin-1",
+      "action": "ASSIGN_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-113F8545",
+        "assigneeId": "admin-1"
+      }
+    },
+    {
+      "id": "8352",
+      "timestamp": "2026-02-10T22:12:21.332Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "1107",
+      "timestamp": "2026-02-10T22:12:22.086Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "92ac",
+      "timestamp": "2026-02-10T22:17:45.770Z",
+      "userId": "admin-1",
+      "action": "LOGOUT",
+      "resource": "AUTH"
+    },
+    {
+      "id": "2b98",
+      "timestamp": "2026-02-10T22:18:06.711Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "b89d",
+      "timestamp": "2026-02-10T22:18:23.047Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "0325",
+      "timestamp": "2026-02-10T22:18:24.981Z",
+      "userId": "admin",
+      "action": "APPROVE_DEPLOYMENT",
+      "resource": "DEPLOYMENT",
+      "metadata": {
+        "deploymentId": "dep-202",
+        "comment": "Aprobación manual"
+      }
+    },
+    {
+      "id": "1f40",
+      "timestamp": "2026-02-10T22:18:26.202Z",
+      "userId": "system",
+      "action": "EXECUTE_DEPLOYMENT_START",
+      "resource": "DEPLOYMENT",
+      "metadata": {
+        "deploymentId": "dep-202"
+      }
+    },
+    {
+      "id": "0df6",
+      "timestamp": "2026-02-10T22:18:31.237Z",
+      "userId": "system",
+      "action": "EXECUTE_DEPLOYMENT_SUCCESS",
+      "resource": "DEPLOYMENT",
+      "metadata": {
+        "deploymentId": "dep-202"
+      }
+    },
+    {
+      "id": "a097",
+      "timestamp": "2026-02-10T22:20:30.342Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "ce4c",
+      "timestamp": "2026-02-10T22:20:39.841Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "463e",
+      "timestamp": "2026-02-10T22:21:07.909Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "0ddc",
+      "timestamp": "2026-02-10T22:22:39.494Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "66b7",
+      "timestamp": "2026-02-10T22:27:58.219Z",
+      "userId": "admin",
+      "action": "CREATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-q9novhy",
+        "user": {
+          "uuid": "usr-q9novhy",
+          "user_email": "verify@opsboard.pro",
+          "full_name": "Verify Bot",
+          "active": true,
+          "permission_roles": [
+            "role-operator"
+          ],
+          "createdAt": "2026-02-10T22:27:58.208Z"
+        }
+      }
+    },
+    {
+      "id": "2938",
+      "timestamp": "2026-02-10T22:28:19.155Z",
+      "userId": "admin",
+      "action": "DELETE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001"
+      }
+    },
+    {
+      "id": "6918",
+      "timestamp": "2026-02-10T22:30:55.289Z",
+      "userId": "admin",
+      "action": "CREATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-bmjsa8f",
+        "user": {
+          "uuid": "usr-bmjsa8f",
+          "user_email": "fix@opsboard.pro",
+          "full_name": "Fix Verify",
+          "active": true,
+          "permission_roles": [
+            "role-operator"
+          ],
+          "createdAt": "2026-02-10T22:30:55.274Z"
+        }
+      }
+    },
+    {
+      "id": "8c8f",
+      "timestamp": "2026-02-10T22:31:09.923Z",
+      "userId": "admin",
+      "action": "DELETE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-bmjsa8f"
+      }
+    },
+    {
+      "id": "f805",
+      "timestamp": "2026-02-10T23:15:51.491Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b784",
+      "timestamp": "2026-02-10T23:15:51.498Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4df3",
+      "timestamp": "2026-02-10T23:15:51.500Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "66f2",
+      "timestamp": "2026-02-10T23:15:51.664Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1815",
+      "timestamp": "2026-02-10T23:16:18.965Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8129",
+      "timestamp": "2026-02-10T23:16:18.969Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "6209",
+      "timestamp": "2026-02-10T23:16:18.989Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "f204",
+      "timestamp": "2026-02-10T23:16:19.000Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "3824",
+      "timestamp": "2026-02-10T23:16:53.207Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ce9b",
+      "timestamp": "2026-02-10T23:16:53.207Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1b03",
+      "timestamp": "2026-02-10T23:16:53.302Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "49a3",
+      "timestamp": "2026-02-10T23:16:53.374Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4d9d",
+      "timestamp": "2026-02-10T23:17:21.277Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "9dbe",
+      "timestamp": "2026-02-10T23:17:21.289Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "de87",
+      "timestamp": "2026-02-10T23:17:21.387Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4f05",
+      "timestamp": "2026-02-10T23:17:21.445Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "59f7",
+      "timestamp": "2026-02-10T23:17:21.506Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "68de",
+      "timestamp": "2026-02-10T23:17:21.517Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "22d2",
+      "timestamp": "2026-02-10T23:17:52.328Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "78d3",
+      "timestamp": "2026-02-10T23:17:52.404Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "dc34",
+      "timestamp": "2026-02-10T23:17:52.578Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "314e",
+      "timestamp": "2026-02-10T23:17:52.581Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "d6e3",
+      "timestamp": "2026-02-10T23:17:52.715Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "c838",
+      "timestamp": "2026-02-10T23:17:52.780Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5803",
+      "timestamp": "2026-02-10T23:17:55.377Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "09ff",
+      "timestamp": "2026-02-10T23:17:55.519Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "94a1",
+      "timestamp": "2026-02-10T23:17:55.558Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "09c2",
+      "timestamp": "2026-02-10T23:17:55.587Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "23bb",
+      "timestamp": "2026-02-10T23:17:55.790Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4d6f",
+      "timestamp": "2026-02-10T23:17:58.150Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5cfa",
+      "timestamp": "2026-02-10T23:17:58.315Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "48ec",
+      "timestamp": "2026-02-10T23:17:58.318Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1017",
+      "timestamp": "2026-02-10T23:17:58.458Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "47cf",
+      "timestamp": "2026-02-10T23:17:58.526Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4656",
+      "timestamp": "2026-02-10T23:18:00.788Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "72b5",
+      "timestamp": "2026-02-10T23:18:01.093Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8aa8",
+      "timestamp": "2026-02-10T23:18:01.104Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "6ef5",
+      "timestamp": "2026-02-10T23:18:03.804Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5eac",
+      "timestamp": "2026-02-10T23:18:05.103Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-BAD8AEAC",
+        "title": "E2E Test Incident"
+      }
+    },
+    {
+      "id": "e199",
+      "timestamp": "2026-02-10T23:18:06.954Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "60d4",
+      "timestamp": "2026-02-10T23:18:07.088Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "a0be",
+      "timestamp": "2026-02-10T23:18:07.156Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "27a1",
+      "timestamp": "2026-02-10T23:18:08.356Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-339935CA",
+        "title": "E2E Test Incident - Automated"
+      }
+    },
+    {
+      "id": "c42f",
+      "timestamp": "2026-02-10T23:18:09.847Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "0e64",
+      "timestamp": "2026-02-10T23:18:09.877Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b0ae",
+      "timestamp": "2026-02-10T23:18:09.997Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ce31",
+      "timestamp": "2026-02-10T23:18:10.205Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "94a1",
+      "timestamp": "2026-02-10T23:18:12.910Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "9448",
+      "timestamp": "2026-02-10T23:18:13.555Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4fed",
+      "timestamp": "2026-02-10T23:18:16.372Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "7b05",
+      "timestamp": "2026-02-10T23:18:18.578Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "495d",
+      "timestamp": "2026-02-10T23:18:18.605Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "dcb2",
+      "timestamp": "2026-02-10T23:21:40.256Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "3b31",
+      "timestamp": "2026-02-10T23:21:40.325Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "27fe",
+      "timestamp": "2026-02-10T23:21:40.362Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "476d",
+      "timestamp": "2026-02-10T23:21:40.468Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "633c",
+      "timestamp": "2026-02-10T23:21:40.469Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b000",
+      "timestamp": "2026-02-10T23:21:40.509Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "84a0",
+      "timestamp": "2026-02-10T23:21:43.051Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "bb8f",
+      "timestamp": "2026-02-10T23:21:43.173Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ad8d",
+      "timestamp": "2026-02-10T23:21:43.226Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "211b",
+      "timestamp": "2026-02-10T23:21:43.681Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1a93",
+      "timestamp": "2026-02-10T23:21:44.581Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-E7BD5264",
+        "title": "E2E Test Incident - Automated"
+      }
+    },
+    {
+      "id": "500a",
+      "timestamp": "2026-02-10T23:21:45.789Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "65f7",
+      "timestamp": "2026-02-10T23:21:45.813Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "76fb",
+      "timestamp": "2026-02-10T23:21:46.295Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "bee3",
+      "timestamp": "2026-02-10T23:21:48.605Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "a5e1",
+      "timestamp": "2026-02-10T23:21:49.114Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "9d75",
+      "timestamp": "2026-02-10T23:21:49.235Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8d4f",
+      "timestamp": "2026-02-10T23:21:49.259Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8dca",
+      "timestamp": "2026-02-10T23:21:49.699Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "41c7",
+      "timestamp": "2026-02-10T23:22:31.500Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "bad3",
+      "timestamp": "2026-02-10T23:22:31.504Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1087",
+      "timestamp": "2026-02-10T23:22:31.518Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1608",
+      "timestamp": "2026-02-10T23:22:31.538Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "adea",
+      "timestamp": "2026-02-10T23:22:31.575Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "f54c",
+      "timestamp": "2026-02-10T23:22:31.594Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "fc55",
+      "timestamp": "2026-02-10T23:22:34.448Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "86e0",
+      "timestamp": "2026-02-10T23:22:34.451Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "616c",
+      "timestamp": "2026-02-10T23:22:34.510Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "acd1",
+      "timestamp": "2026-02-10T23:22:34.629Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "46a9",
+      "timestamp": "2026-02-10T23:22:34.730Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "328f",
+      "timestamp": "2026-02-10T23:22:34.829Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "2ea9",
+      "timestamp": "2026-02-10T23:22:37.083Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "0061",
+      "timestamp": "2026-02-10T23:22:37.381Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "0239",
+      "timestamp": "2026-02-10T23:22:37.436Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "32ce",
+      "timestamp": "2026-02-10T23:22:37.466Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4c4f",
+      "timestamp": "2026-02-10T23:22:37.588Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "7bd7",
+      "timestamp": "2026-02-10T23:22:37.597Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5ec2",
+      "timestamp": "2026-02-10T23:22:39.745Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "884b",
+      "timestamp": "2026-02-10T23:22:40.176Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "2c7a",
+      "timestamp": "2026-02-10T23:22:40.244Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "df26",
+      "timestamp": "2026-02-10T23:22:40.445Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "c27e",
+      "timestamp": "2026-02-10T23:22:41.629Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-4E381126",
+        "title": "E2E Test Incident - Automated"
+      }
+    },
+    {
+      "id": "dca3",
+      "timestamp": "2026-02-10T23:22:42.682Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "cb15",
+      "timestamp": "2026-02-10T23:22:42.776Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8249",
+      "timestamp": "2026-02-10T23:22:43.280Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "a6b2",
+      "timestamp": "2026-02-10T23:22:45.439Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "63ad",
+      "timestamp": "2026-02-10T23:22:45.471Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b51e",
+      "timestamp": "2026-02-10T23:22:45.994Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "f093",
+      "timestamp": "2026-02-10T23:22:46.131Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "6fc1",
+      "timestamp": "2026-02-10T23:22:46.277Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    }
+  ]
+}

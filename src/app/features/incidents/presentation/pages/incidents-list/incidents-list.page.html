@@ -1,0 +1,33 @@
+<div class="page-container">
+    <header class="page-header">
+        <div class="title-group">
+            <h1>Incidents</h1>
+            <p class="subtitle">Manage and monitor operations center alerts</p>
+        </div>
+        <app-button (btnClick)="onCreateIncident()">
+            New Incident
+        </app-button>
+    </header>
+
+    <div class="page-content">
+        <app-filter-form (filterChange)="onFilterChange($event)"></app-filter-form>
+
+        @if (isLoading$ | async) {
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <span>Syncing with Ops Center...</span>
+        </div>
+        }
+
+        @if (error$ | async; as error) {
+        <div class="error-state">
+            <span class="error-icon">⚠️</span>
+            <p>System error: {{ error }}</p>
+        </div>
+        }
+
+        @if ((isLoading$ | async) === false) {
+        <app-incident-list-view [incidents]="(incidents$ | async) || []"></app-incident-list-view>
+        }
+    </div>
+</div>

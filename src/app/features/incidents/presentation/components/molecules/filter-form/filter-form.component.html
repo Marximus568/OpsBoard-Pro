@@ -1,0 +1,39 @@
+<div class="filter-bar">
+    <div class="search-input">
+        <input type="text" placeholder="Search incidents..." [(ngModel)]="filters.search"
+            (ngModelChange)="onFilterChange()">
+    </div>
+
+    <div class="select-group">
+        <select [(ngModel)]="filters.status" (change)="onFilterChange()">
+            @for (s of statuses; track s.value) {
+            <option [value]="s.value">{{ s.label }}</option>
+            }
+        </select>
+
+        <select [(ngModel)]="filters.priority" (change)="onFilterChange()">
+            @for (p of priorities; track p.value) {
+            <option [value]="p.value">{{ p.label }}</option>
+            }
+        </select>
+
+        <select [(ngModel)]="filters.severity" (change)="onFilterChange()">
+            @for (v of severities; track v.value) {
+            <option [value]="v.value">{{ v.label }}</option>
+            }
+        </select>
+    </div>
+
+    <div class="advanced-filters">
+        <input type="text" placeholder="Service..." [(ngModel)]="filters.service" (ngModelChange)="onFilterChange()">
+
+        <div class="date-range">
+            <input type="date" [(ngModel)]="filters.dateRange.start" (ngModelChange)="onFilterChange()"
+                title="Start Date">
+            <span>-</span>
+            <input type="date" [(ngModel)]="filters.dateRange.end" (ngModelChange)="onFilterChange()" title="End Date">
+        </div>
+    </div>
+
+    <button class="btn-reset" (click)="reset()">Reset</button>
+</div>

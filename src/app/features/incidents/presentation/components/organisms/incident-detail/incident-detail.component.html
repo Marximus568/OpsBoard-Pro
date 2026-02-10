@@ -1,0 +1,69 @@
+<div class="incident-detail">
+    <section class="detail-header">
+        <div class="header-main">
+            <span class="id-tag">{{ incident.id }}</span>
+            <h1>{{ incident.title }}</h1>
+            <div class="metadata">
+                <app-badge [type]="getSeverityType()">{{ incident.severity.label }}</app-badge>
+                <app-badge [type]="getPriorityType()">{{ incident.priority.label }}</app-badge>
+                <app-badge [type]="getStatusType()">{{ incident.status.label }}</app-badge>
+                <span class="service-tag">Service: <strong>{{ incident.service }}</strong></span>
+            </div>
+        </div>
+        <div class="header-actions">
+            @if (incident.canBeAssigned() && incident.assigneeId === null) {
+            <app-button (btnClick)="onAssignToMe()">Assign to Me</app-button>
+            }
+            @if (incident.canBeResolved() && !showResolveForm) {
+            <app-button variant="success" (btnClick)="showResolveForm = true">Resolve Incident</app-button>
+            }
+        </div>
+    </section>
+
+    @if (showResolveForm) {
+    <section class="resolution-form glass-card">
+        <h3>Resolve Incident</h3>
+        <textarea [(ngModel)]="resolutionComment" placeholder="Describe how the incident was resolved..."></textarea>
+        <div class="form-actions">
+            <app-button variant="outline" (btnClick)="showResolveForm = false">Cancel</app-button>
+            <app-button variant="success" [disabled]="!resolutionComment.trim()" (btnClick)="onResolve()">
+                Confirm Resolution
+            </app-button>
+        </div>
+    </section>
+    }
+
+    <div class="detail-content">
+        <section class="info-section">
+            <h2>Description</h2>
+            <p class="description">{{ incident.description }}</p>
+
+            <div class="tags-group">
+                @for (tag of incident.tags; track tag) {
+                <span class="tag">#{{ tag }}</span>
+                }
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <h2>Timeline</h2>
+            <div class="timeline">
+                @for (event of incident.timeline; track event.id; let last = $last) {
+                <div class="timeline-item" [class.last]="last">
+                    <div class="timeline-icon">
+                        <app-icon [name]="getEventIcon(event.type)" [size]="16"></app-icon>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="event-header">
+                            <span class="event-type">{{ event.type }}</span>
+                            <span class="event-time">{{ event.timestamp | date:'MMM d, HH:mm' }}</span>
+                        </div>
+                        <p class="event-desc">{{ event.description }}</p>
+                        <span class="event-user">User: {{ event.userId }}</span>
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>

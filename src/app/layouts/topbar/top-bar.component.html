@@ -1,0 +1,27 @@
+<header class="top-bar">
+    <div class="search-container">
+        <!-- Optional global search could go here -->
+    </div>
+
+    <div class="user-actions">
+        <!-- Theme Toggle -->
+        <button class="icon-btn theme-toggle" (click)="toggleTheme()"
+            [title]="themeService.currentTheme() === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'">
+            @if (themeService.currentTheme() === 'light') {
+            <app-icon name="moon" size="sm"></app-icon>
+            } @else {
+            <app-icon name="sun" size="sm"></app-icon>
+            }
+        </button>
+
+        <div class="user-profile">
+            <div class="user-info">
+                <span class="username">{{ (auth.user()?.fullName) || 'Admin' }}</span>
+                <span class="role">{{ (auth.user()?.roles?.[0] | uppercase) || 'ADMINISTRATOR' }}</span>
+            </div>
+            <div class="avatar">
+                <app-icon name="lock" size="xl"></app-icon>
+            </div>
+        </div>
+    </div>
+</header>

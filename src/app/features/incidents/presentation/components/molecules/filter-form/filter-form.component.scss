@@ -1,0 +1,104 @@
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    background: var(--surface-card);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 24px;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+
+    &:focus {
+        border-color: var(--color-primary-500);
+        box-shadow: var(--shadow-focus);
+    }
+}
+
+.select-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+select {
+    width: auto;
+    min-width: 140px;
+    cursor: pointer;
+}
+
+.advanced-filters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-left: 16px;
+    border-left: 1px solid var(--border-color);
+
+    input[type="text"] {
+        width: 150px;
+    }
+
+    .date-range {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--bg-secondary);
+        padding: 4px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+
+        span {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        input[type="date"] {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+
+            &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                cursor: pointer;
+                opacity: 0.5;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+.btn-reset {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px;
+
+    &:hover {
+        color: var(--color-primary-500);
+        text-decoration: underline;
+    }
+}

@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../assets/styles/tokens/colors.scss';
+@use '../assets/styles/tokens/spacing.scss';
+@use '../assets/styles/tokens/typography.scss';
+@use '../assets/styles/tokens/shadows.scss';
+@use '../assets/styles/theme.scss';
+@use '../assets/styles/grid.scss';

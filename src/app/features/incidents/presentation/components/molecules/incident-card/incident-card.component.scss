@@ -1,0 +1,69 @@
+.incident-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        border-color: var(--color-primary-500);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    &.sla-breached {
+        border-left: 4px solid var(--status-error);
+    }
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.incident-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.incident-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+}
+
+.incident-service {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+
+    strong {
+        color: var(--color-primary-500);
+    }
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.badges-group {
+    display: flex;
+    gap: 8px;
+}
+
+.updated-time {
+    font-size: 12px;
+    color: var(--text-secondary);
+}

@@ -1,0 +1,15 @@
+<div class="chart-card">
+    <h3>Distribución por Severidad</h3>
+    <div class="bar-container">
+        @for (item of data(); track item.priority) {
+        <div class="bar-row">
+            <span class="label">{{ item.priority }}</span>
+            <div class="bar-wrapper">
+                <div class="bar" [style.width.%]="item.percentage" [style.background-color]="getColor(item.priority)">
+                </div>
+            </div>
+            <span class="count">{{ item.count }}</span>
+        </div>
+        }
+    </div>
+</div>

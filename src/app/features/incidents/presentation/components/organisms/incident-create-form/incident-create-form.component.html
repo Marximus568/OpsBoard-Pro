@@ -1,0 +1,99 @@
+<div class="stepper-container">
+    <div class="stepper-header">
+        <div class="step" [class.active]="currentStep >= 1">1. Details</div>
+        <div class="step-divider"></div>
+        <div class="step" [class.active]="currentStep >= 2">2. Classification</div>
+        <div class="step-divider"></div>
+        <div class="step" [class.active]="currentStep >= 3">3. Extras</div>
+    </div>
+
+    <form [formGroup]="incidentForm" (ngSubmit)="onSubmit()">
+        <!-- Step 1: Details -->
+        @if (currentStep === 1) {
+        <div class="step-content">
+            <div class="form-field">
+                <label for="title">Incident Title</label>
+                <input id="title" type="text" formControlName="title" placeholder="e.g., API Gateway Latency Spike">
+                @if (incidentForm.get('title')?.touched && incidentForm.get('title')?.invalid) {
+                <span class="error">
+                    Title is required (min 5 characters)
+                </span>
+                }
+            </div>
+
+            <div class="form-field">
+                <label for="description">Full Description</label>
+                <textarea id="description" formControlName="description" rows="5"
+                    placeholder="Describe the impact and technical details..."></textarea>
+                @if (incidentForm.get('description')?.touched && incidentForm.get('description')?.invalid) {
+                <span class="error">
+                    Description is required (min 10 characters)
+                </span>
+                }
+            </div>
+        </div>
+        }
+
+        <!-- Step 2: Classification -->
+        @if (currentStep === 2) {
+        <div class="step-content">
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="priority">Priority</label>
+                    <select id="priority" formControlName="priority">
+                        @for (p of priorities; track p.value) {
+                        <option [value]="p.value">{{ p.label }}</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="severity">Severity</label>
+                    <select id="severity" formControlName="severity">
+                        @for (s of severities; track s.value) {
+                        <option [value]="s.value">{{ s.label }}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="service">Affected Service</label>
+                <input id="service" type="text" formControlName="service"
+                    placeholder="e.g., auth-service, payment-gateway">
+            </div>
+        </div>
+        }
+
+        <!-- Step 3: Extras -->
+        @if (currentStep === 3) {
+        <div class="step-content">
+            <div class="form-field">
+                <label for="tags">Tags (comma-separated)</label>
+                <input id="tags" type="text" formControlName="tags" placeholder="e.g., api, slow-query, production">
+            </div>
+
+            <div class="summary-box">
+                <h4>Incident Preview</h4>
+                <p><strong>Title:</strong> {{ incidentForm.get('title')?.value }}</p>
+                <p><strong>Service:</strong> {{ incidentForm.get('service')?.value }}</p>
+            </div>
+        </div>
+        }
+
+        <div class="form-actions">
+            <app-button variant="ghost" type="button" (btnClick)="canceled.emit()">Cancel</app-button>
+            <div class="spacer"></div>
+            @if (currentStep > 1) {
+            <app-button variant="secondary" type="button" (btnClick)="prevStep()">Back</app-button>
+            }
+            @if (currentStep < 3) { <app-button variant="primary" type="button" [disabled]="!isStepValid(currentStep)"
+                (btnClick)="nextStep()">Next</app-button>
+                }
+                @if (currentStep === 3) {
+                <app-button variant="primary" type="submit" [disabled]="incidentForm.invalid">Report
+                    Incident</app-button>
+                }
+        </div>
+    </form>
+</div>

@@ -1,0 +1,7 @@
+/* Base badge styles are inherited from app-badge. 
+   Additional feature-specific styles can go here if needed. */
+:host {
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}

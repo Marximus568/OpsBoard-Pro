@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  opsboard-dev:
+    image: node:20-alpine
+    container_name: opsboard-pro-dev
+    working_dir: /app
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start -- --host 0.0.0.0 --poll 2000
+    environment:
+      - NODE_ENV=development
+    networks:
+      - opsboard-dev-network
+
+networks:
+  opsboard-dev-network:
+    driver: bridge

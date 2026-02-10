@@ -1,0 +1,15 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-secondary);
+    background: var(--bg-primary);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius-lg);
+}

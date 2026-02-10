@@ -1,0 +1,18 @@
+<div class="logs-container">
+    <div class="logs-header">
+        <span>Timestamp</span>
+        <span>Prioridad</span>
+        <span>Servicio</span>
+        <span>Mensaje</span>
+    </div>
+    <div class="logs-list">
+        @for (log of facade.filteredLogs(); track log.id) {
+        <app-log-entry-row [log]="log"></app-log-entry-row>
+        } @empty {
+        <div class="empty-state">
+            <span class="material-icons">search_off</span>
+            <p>No se encontraron logs que coincidan con los filtros.</p>
+        </div>
+        }
+    </div>
+</div>

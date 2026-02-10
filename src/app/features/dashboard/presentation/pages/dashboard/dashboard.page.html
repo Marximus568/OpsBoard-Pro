@@ -1,0 +1,31 @@
+<div class="dashboard-page">
+    <header class="dashboard-header">
+        <div>
+            <h1>Panel Operacional</h1>
+            <p class="subtitle">Estado actual de la plataforma en tiempo real</p>
+        </div>
+    </header>
+
+    <section class="metrics-section">
+        <app-kpi-grid [metrics]="facade.metrics()"></app-kpi-grid>
+    </section>
+
+    @defer (on viewport) {
+    <section class="charts-grid">
+        <div class="chart-item trend">
+            <app-trend-line-chart [data]="facade.trendData()"></app-trend-line-chart>
+        </div>
+        <div class="chart-item distribution">
+            <app-distribution-pie-chart [data]="facade.severityDistribution()"></app-distribution-pie-chart>
+        </div>
+        <div class="chart-item severity">
+            <app-severity-bar-chart [data]="facade.severityDistribution()"></app-severity-bar-chart>
+        </div>
+        <div class="chart-item recent-activity">
+            <app-recent-incidents-list [incidents]="facade.recentIncidents()"></app-recent-incidents-list>
+        </div>
+    </section>
+    } @placeholder {
+    <div class="loading-placeholder">Cargando visualizaciones...</div>
+    }
+</div>

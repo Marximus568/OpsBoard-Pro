@@ -1,0 +1,79 @@
+.dashboard-page {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 0;
+        letter-spacing: -1.5px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+        margin-top: 0.5rem;
+    }
+}
+
+.metrics-section {
+    width: 100%;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+}
+
+.chart-item {
+    min-height: 400px;
+}
+
+.trend {
+    grid-column: span 8;
+}
+
+.distribution {
+    grid-column: span 4;
+}
+
+.severity {
+    grid-column: span 5;
+}
+
+.recent-activity {
+    grid-column: span 7;
+}
+
+@media (max-width: 1300px) {
+
+    .trend,
+    .distribution,
+    .severity,
+    .recent-activity {
+        grid-column: span 12;
+    }
+}
+
+.loading-placeholder {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-1);
+    border-radius: 16px;
+    border: 1px dashed var(--border-color);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 1.125rem;
+}

@@ -1,0 +1,92 @@
+<div class="login-container">
+  <div class="login-card">
+    <header class="login-header">
+      <h1>OpsBoard Pro</h1>
+      @if (!mfaRequired()) {
+      <p>Enter your credentials to access the console</p>
+      } @else {
+      <p>A 6-digit code has been sent to your email</p>
+      }
+    </header>
+
+    @if (!mfaRequired()) {
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="admin@opsboard.pro"
+          [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        @if (loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched) {
+        <div class="error-msg">
+          Please enter a valid email address.
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-with-icon">
+          <input type="password" id="password" formControlName="password" placeholder="••••••••"
+            [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="rememberMe">
+          <span class="checkmark"></span>
+          <span class="label-text">Remember Me</span>
+        </label>
+        <div class="risk-info"
+          title="Security Note: Saving your email facilitates future logins but may expose your identity on shared devices.">
+          <span class="material-icons">help_outline</span>
+        </div>
+      </div>
+
+      @if (error()) {
+      <div class="error-summary">
+        {{ error() }}
+      </div>
+      }
+
+      <button type="submit" [disabled]="loginForm.invalid || isLoading()" class="btn-primary">
+        @if (!isLoading()) {
+        <span>Login</span>
+        } @else {
+        <span>Authenticating...</span>
+        }
+      </button>
+    </form>
+    } @else {
+    <form [formGroup]="mfaForm" (ngSubmit)="onMfaSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="code">MFA Code</label>
+        <input type="text" id="code" formControlName="code" placeholder="123456" maxlength="6"
+          [class.invalid]="mfaForm.get('code')?.invalid && mfaForm.get('code')?.touched">
+        @if (mfaForm.get('code')?.invalid && mfaForm.get('code')?.touched) {
+        <div class="error-msg">
+          Please enter a 6-digit verification code.
+        </div>
+        }
+      </div>
+
+      @if (error()) {
+      <div class="error-summary">
+        {{ error() }}
+      </div>
+      }
+
+      <button type="submit" [disabled]="mfaForm.invalid || isLoading()" class="btn-primary">
+        @if (!isLoading()) {
+        <span>Verify</span>
+        } @else {
+        <span>Verifying...</span>
+        }
+      </button>
+    </form>
+    }
+
+    <footer class="login-footer">
+      <p>&copy; 2026 OpsBoard Pro. All rights reserved.</p>
+    </footer>
+  </div>
+</div>

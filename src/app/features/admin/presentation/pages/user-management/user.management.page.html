@@ -1,0 +1,120 @@
+<div class="user-management-container">
+    <div class="page-header">
+        <h1>User Management</h1>
+        <div class="header-actions">
+            <app-button variant="secondary" (btnClick)="onExport()">
+                <app-icon name="download" size="sm"></app-icon> Export
+            </app-button>
+            <app-button variant="primary" (btnClick)="onEdit()">
+                <app-icon name="plus" size="sm"></app-icon> Add User
+            </app-button>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Joined</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (user of users(); track user.uuid) {
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="avatar">{{ user.full_name.charAt(0) }}</div>
+                            <span class="name">{{ user.full_name }}</span>
+                        </div>
+                    </td>
+                    <td>{{ user.user_email }}</td>
+                    <td>
+                        <div class="roles-list">
+                            @for (role of user.permission_roles; track role) {
+                            <app-badge [type]="getRoleBadge(role)">
+                                {{ role }}
+                            </app-badge>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <span class="status-dot" [class.active]="user.active"></span>
+                        {{ user.active ? 'Active' : 'Inactive' }}
+                    </td>
+                    <td>{{ user.createdAt | date:'shortDate' }}</td>
+                    <td class="actions-cell">
+                        <button class="icon-btn" (click)="onEdit(user)" title="Edit User">
+                            <app-icon name="edit" size="sm"></app-icon>
+                        </button>
+                        <button class="icon-btn" [class.danger]="user.active" [class.success]="!user.active"
+                            (click)="onToggleActive(user)" [title]="user.active ? 'Deactivate' : 'Activate'">
+                            <app-icon [name]="user.active ? 'block' : 'check_circle'" size="sm"></app-icon>
+                        </button>
+                        <button class="icon-btn danger" (click)="onDelete(user)" title="Delete User">
+                            <app-icon name="trash" size="sm"></app-icon>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Overlay -->
+@if (isModalOpen()) {
+<div class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>{{ selectedUser()?.uuid ? 'Edit User' : 'New User' }}</h2>
+            <button class="close-btn" (click)="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input id="full_name" type="text" [ngModel]="editForm().full_name"
+                    (ngModelChange)="updateEditForm('full_name', $event)">
+            </div>
+            <div class="form-group">
+                <label for="user_email">Email</label>
+                <input id="user_email" type="email" [ngModel]="editForm().user_email"
+                    (ngModelChange)="updateEditForm('user_email', $event)">
+            </div>
+            <div class="form-group">
+                <label for="permission_roles">Roles (comma separated: role-admin, role-operator)</label>
+                <input id="permission_roles" type="text" [ngModel]="(editForm().permission_roles || []).join(', ')"
+                    (ngModelChange)="updateEditForm('permission_roles', $event)">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <app-button variant="secondary" (btnClick)="closeModal()">Cancel</app-button>
+            <app-button variant="primary" (btnClick)="onSave()">Save Changes</app-button>
+        </div>
+    </div>
+</div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if (isDeleteConfirmOpen()) {
+<div class="modal-overlay">
+    <div class="modal-content delete-confirm">
+        <div class="modal-header">
+            <h2>Delete User</h2>
+            <button class="close-btn" (click)="closeDeleteConfirm()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete <strong>{{ userToDelete()?.full_name }}</strong>?</p>
+            <p class="warning-text">This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+            <app-button variant="secondary" (btnClick)="closeDeleteConfirm()">Cancel</app-button>
+            <app-button variant="danger" (btnClick)="onConfirmDelete()">Delete User</app-button>
+        </div>
+    </div>
+</div>
+}

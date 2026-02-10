@@ -1,0 +1,30 @@
+<div class="deployment-card" [class.running]="deployment.status === 'RUNNING'">
+    <div class="card-header">
+        <div class="service-info">
+            <span class="service-name">{{ deployment.service }}</span>
+            <span class="version">{{ deployment.version }}</span>
+        </div>
+        <app-badge [type]="getStatusType()">{{ deployment.status }}</app-badge>
+    </div>
+
+    <div class="card-body">
+        <div class="info-row">
+            <span class="label">Entorno:</span>
+            <span class="value">{{ deployment.environment }}</span>
+        </div>
+        <div class="info-row">
+            <span class="label">Iniciado:</span>
+            <span class="value">{{ deployment.createdAt | date:'short' }}</span>
+        </div>
+        <div class="info-row">
+            <span class="label">Por:</span>
+            <span class="value">{{ deployment.requestedBy }}</span>
+        </div>
+    </div>
+
+    @if (deployment.status === 'RUNNING') {
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    }
+</div>

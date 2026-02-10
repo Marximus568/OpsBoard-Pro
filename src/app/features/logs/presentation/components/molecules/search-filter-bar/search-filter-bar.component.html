@@ -1,0 +1,31 @@
+<div class="filter-bar">
+    <div class="search-input">
+        <span class="material-icons">search</span>
+        <input type="text" [(ngModel)]="query" (ngModelChange)="onFilterChange()"
+            placeholder="Buscar por mensaje, servicio o ID...">
+    </div>
+
+    <div class="controls">
+        <select [(ngModel)]="selectedLevel" (change)="onFilterChange()">
+            <option [value]="null">Todos los Niveles</option>
+            @for (level of levels; track level) {
+            <option [value]="level">{{ level }}</option>
+            }
+        </select>
+
+        <button class="action-btn" [class.active]="facade.isStreaming()" (click)="facade.toggleStreaming()">
+            <span class="material-icons">{{ facade.isStreaming() ? 'pause' : 'play_arrow' }}</span>
+            {{ facade.isStreaming() ? 'Pausar' : 'Reanudar' }}
+        </button>
+
+        <button class="action-btn" (click)="facade.clearLogs()">
+            <span class="material-icons">block</span>
+            Limpiar
+        </button>
+
+        <button class="action-btn primary" (click)="onExport()">
+            <span class="material-icons">download</span>
+            Exportar
+        </button>
+    </div>
+</div>

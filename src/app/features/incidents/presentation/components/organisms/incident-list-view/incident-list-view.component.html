@@ -1,0 +1,9 @@
+<div class="grid">
+    @for (incident of incidents; track incident.id) {
+    <app-incident-card [incident]="incident"></app-incident-card>
+    } @empty {
+    <div class="empty-state">
+        No incidents found.
+    </div>
+    }
+</div>
