@@ -15,4 +15,5 @@ export interface IAuthRepository {
     refreshToken(token: string): Promise<AuthToken>;
     logout(): Promise<void>;
     verifyMfa(code: string): Promise<LoginResult>;
+    getSavedUser(): User | null;
 }

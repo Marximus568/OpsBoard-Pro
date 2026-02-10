@@ -116,6 +116,23 @@ export class AuthFacade {
         }
     }
 
+    /**
+     * Bootstraps the session from persistent storage.
+     * Called during app initialization via APP_INITIALIZER.
+     */
+    initializeSession(): void {
+        const savedUser = this.authRepository.getSavedUser();
+        if (savedUser) {
+            console.log('[Auth] [PRO] Restoring session for:', savedUser.email);
+            this.updateState({
+                user: savedUser,
+                isAuthenticated: true,
+                isLoading: false
+            });
+            // Also resume refresh cycles if needed
+        }
+    }
+
     private updateState(partialState: Partial<AuthState>): void {
         authState.update(state => ({ ...state, ...partialState }));
     }

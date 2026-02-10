@@ -563,6 +563,125 @@
         "incidentId": "INC-608B7051",
         "title": "Ayerfda"
       }
+    },
+    {
+      "id": "47b6",
+      "timestamp": "2026-02-10T21:19:19.963Z",
+      "userId": "usr-001",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    },
+    {
+      "id": "192e",
+      "timestamp": "2026-02-10T21:22:30.583Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "806a",
+      "timestamp": "2026-02-10T21:23:10.695Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "1f15",
+      "timestamp": "2026-02-10T21:23:44.585Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "162e",
+      "timestamp": "2026-02-10T21:23:58.824Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "ae3c",
+      "timestamp": "2026-02-10T21:25:34.520Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "8c67",
+      "timestamp": "2026-02-10T21:25:43.333Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "ce3a",
+      "timestamp": "2026-02-10T21:25:54.207Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8e87",
+      "timestamp": "2026-02-10T21:28:53.180Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "9e79",
+      "timestamp": "2026-02-10T21:29:08.362Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "6d66",
+      "timestamp": "2026-02-10T21:30:08.369Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
     }
   ]
 }

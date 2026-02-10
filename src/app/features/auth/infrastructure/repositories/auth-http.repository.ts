@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { IAuthRepository, LoginResult } from '../../domain/repositories/auth.repository';
 import { AuthToken } from '../../domain/value-objects/auth-token.vo';
+import { User } from '../../domain/entities/user.entity';
 import { AuthMapper, AuthResponseDto, UserDto } from '../../application/mappers/auth.mapper';
 import { AuthApiService } from '../services/auth-api.service';
 
@@ -17,6 +18,7 @@ import { AuthApiService } from '../services/auth-api.service';
 export class AuthHttpRepository implements IAuthRepository {
     private readonly api = inject(AuthApiService);
     private readonly TOKEN_KEY = 'opsboard_auth_token';
+    private readonly USER_KEY = 'opsboard_user_data';
 
     /**
      * Performs authentication against the remote API.
@@ -35,7 +37,7 @@ export class AuthHttpRepository implements IAuthRepository {
         if (foundUser && foundUser.password === creds.password) {
 
             // Step 3: Simulate MFA Requirement for Admin
-            if (foundUser.user_email === 'admin@opsboard.pro') {
+            if (foundUser.user_email === 'admin@opsboard.com') {
                 return {
                     user: AuthMapper.toDomainUser(foundUser),
                     tokens: new AuthToken('pending', 'pending', 0),
@@ -58,6 +60,7 @@ export class AuthHttpRepository implements IAuthRepository {
             };
 
             this.saveTokens(result.tokens);
+            this.saveUser(foundUser);
             return result;
         }
 
@@ -83,6 +86,7 @@ export class AuthHttpRepository implements IAuthRepository {
      */
     async logout(): Promise<void> {
         localStorage.removeItem(this.TOKEN_KEY);
+        localStorage.removeItem(this.USER_KEY);
     }
 
     /**
@@ -95,9 +99,9 @@ export class AuthHttpRepository implements IAuthRepository {
         if (code === '123456') {
             const mockUser: UserDto = {
                 uuid: 'admin-1',
-                user_email: 'admin@opsboard.pro',
+                user_email: 'admin@opsboard.com',
                 full_name: 'Administrator',
-                permission_roles: ['ADMIN']
+                permission_roles: ['role-admin', 'role-operator']
             };
 
             const mockDto: AuthResponseDto = {
@@ -114,6 +118,7 @@ export class AuthHttpRepository implements IAuthRepository {
             };
 
             this.saveTokens(result.tokens);
+            this.saveUser(mockUser);
             return result;
         }
 
@@ -125,5 +130,19 @@ export class AuthHttpRepository implements IAuthRepository {
      */
     private saveTokens(tokens: AuthToken): void {
         localStorage.setItem(this.TOKEN_KEY, JSON.stringify(tokens));
+    }
+
+    private saveUser(user: UserDto): void {
+        localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    }
+
+    getSavedUser(): User | null {
+        const data = localStorage.getItem(this.USER_KEY);
+        if (!data) return null;
+        try {
+            return AuthMapper.toDomainUser(JSON.parse(data));
+        } catch {
+            return null;
+        }
     }
 }
