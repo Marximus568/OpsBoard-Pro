@@ -6,6 +6,7 @@ import { ButtonComponent } from '../../../../../shared/ui/atoms/button/button.co
 import { IconComponent } from '../../../../../shared/ui/atoms/icon/icon.component';
 import { UserAdmin } from '../../../domain/models/admin-entities';
 import { FormsModule } from '@angular/forms';
+import { ExcelService } from '../../../../../core/services/excel.service';
 
 @Component({
     selector: 'app-user-management',
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserManagementPage implements OnInit {
     private readonly adminFacade = inject(AdminFacade);
+    private readonly excelService = inject(ExcelService);
 
     protected readonly users = this.adminFacade.users;
     protected readonly isLoading = this.adminFacade.isLoading;
@@ -90,5 +92,20 @@ export class UserManagementPage implements OnInit {
             case 'role-operator': return 'warning';
             default: return 'info';
         }
+    }
+
+    onExport(): void {
+        if (!this.users().length) return;
+
+        // Transform data for export
+        const exportData = this.users().map(user => ({
+            Name: user.full_name,
+            Email: user.user_email,
+            Roles: user.permission_roles.join(', '),
+            Status: user.active ? 'Active' : 'Inactive',
+            Joined: new Date(user.createdAt).toLocaleDateString()
+        }));
+
+        this.excelService.exportAsExcelFile(exportData, 'users');
     }
 }

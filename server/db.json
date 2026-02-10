@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": "u1",
+      "id": "usr-001",
       "email": "admin@opsboard.com",
       "password": "hashed_password_123",
       "fullName": "Admin User",
@@ -19,7 +19,7 @@
       "createdAt": "2024-01-01T00:00:00Z"
     },
     {
-      "id": "u2",
+      "id": "usr-002",
       "email": "operator@opsboard.com",
       "password": "hashed_password_456",
       "fullName": "Operator User",
@@ -201,6 +201,33 @@
           "timestamp": "2023-11-14T14:30:00Z",
           "userId": "u2",
           "description": "Resolved by fixing routing config"
+        }
+      ]
+    },
+    {
+      "id": "INC-608B7051",
+      "title": "Ayerfda",
+      "description": "fdasfdfgasf",
+      "status": "OPEN",
+      "priority": "CRITICAL",
+      "severity": "SEV1",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "adsfasdf",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T20:12:32.960Z",
+      "updatedAt": "2026-02-10T20:12:32.960Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [],
+      "timeline": [
+        {
+          "id": "EVT-069AE520",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T20:12:32.960Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
         }
       ]
     }
@@ -440,6 +467,101 @@
       "metadata": {
         "email": "admin@opsboard.com",
         "method": "password"
+      }
+    },
+    {
+      "id": "3218",
+      "timestamp": "2026-02-10T20:05:28.991Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "5a7b",
+      "timestamp": "2026-02-10T20:05:29.651Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "2a0b",
+      "timestamp": "2026-02-10T20:05:30.061Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "ea03",
+      "timestamp": "2026-02-10T20:05:30.388Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "e345",
+      "timestamp": "2026-02-10T20:05:30.803Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "3a76",
+      "timestamp": "2026-02-10T20:05:31.283Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "208c",
+      "timestamp": "2026-02-10T20:12:32.989Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-608B7051",
+        "title": "Ayerfda"
       }
     }
   ]

@@ -1,9 +1,14 @@
 <div class="user-management-container">
     <div class="page-header">
         <h1>User Management</h1>
-        <app-button variant="primary" (onClick)="onEdit({})">
-            <app-icon name="plus" size="sm"></app-icon> Add User
-        </app-button>
+        <div class="header-actions">
+            <app-button variant="secondary" (onClick)="onExport()">
+                <app-icon name="download" size="sm"></app-icon> Export
+            </app-button>
+            <app-button variant="primary" (onClick)="onEdit({})">
+                <app-icon name="plus" size="sm"></app-icon> Add User
+            </app-button>
+        </div>
     </div>
 
     <div class="table-card">
@@ -40,11 +45,15 @@
                     </td>
                     <td>{{ user.createdAt | date:'shortDate' }}</td>
                     <td class="actions-cell">
-                        <button class="icon-btn" (click)="onEdit(user)">
+                        <button class="icon-btn" (click)="onEdit(user)" title="Edit User">
                             <app-icon name="edit" size="sm"></app-icon>
                         </button>
-                        <button class="icon-btn danger" (click)="onToggleActive(user)">
-                            <app-icon [name]="user.active ? 'lock' : 'unlock'" size="sm"></app-icon>
+                        <button class="icon-btn" [class.danger]="user.active" [class.success]="!user.active"
+                            (click)="onToggleActive(user)" [title]="user.active ? 'Deactivate' : 'Activate'">
+                            <app-icon [name]="user.active ? 'block' : 'check_circle'" size="sm"></app-icon>
+                        </button>
+                        <button class="icon-btn danger" (click)="onDelete(user)" title="Delete User">
+                            <app-icon name="trash" size="sm"></app-icon>
                         </button>
                     </td>
                 </tr>
