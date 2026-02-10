@@ -311,6 +311,130 @@
           "metadata": {}
         }
       ]
+    },
+    {
+      "id": "INC-BAD8AEAC",
+      "title": "E2E Test Incident",
+      "description": "This is an incident created by the automated E2E test suite.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:18:05.085Z",
+      "updatedAt": "2026-02-10T23:18:05.085Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "test",
+        "playwright"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-9259C6E7",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:18:05.085Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-339935CA",
+      "title": "E2E Test Incident - Automated",
+      "description": "This incident was created by automated E2E tests.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-test-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:18:08.335Z",
+      "updatedAt": "2026-02-10T23:18:08.335Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "automated",
+        "test"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-4A4CDC38",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:18:08.335Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-E7BD5264",
+      "title": "E2E Test Incident - Automated",
+      "description": "This incident was created by automated E2E tests.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-test-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:21:44.561Z",
+      "updatedAt": "2026-02-10T23:21:44.561Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "automated",
+        "test"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-4A67F2E9",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:21:44.561Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-4E381126",
+      "title": "E2E Test Incident - Automated",
+      "description": "This incident was created by automated E2E tests.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-test-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T23:22:41.608Z",
+      "updatedAt": "2026-02-10T23:22:41.608Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "automated",
+        "test"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-CDF339F8",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T23:22:41.608Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
     }
   ],
   "deployments": [
@@ -1084,6 +1208,1030 @@
       "resource": "USER",
       "metadata": {
         "userId": "usr-bmjsa8f"
+      }
+    },
+    {
+      "id": "f805",
+      "timestamp": "2026-02-10T23:15:51.491Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b784",
+      "timestamp": "2026-02-10T23:15:51.498Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4df3",
+      "timestamp": "2026-02-10T23:15:51.500Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "66f2",
+      "timestamp": "2026-02-10T23:15:51.664Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1815",
+      "timestamp": "2026-02-10T23:16:18.965Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8129",
+      "timestamp": "2026-02-10T23:16:18.969Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "6209",
+      "timestamp": "2026-02-10T23:16:18.989Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "f204",
+      "timestamp": "2026-02-10T23:16:19.000Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "3824",
+      "timestamp": "2026-02-10T23:16:53.207Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ce9b",
+      "timestamp": "2026-02-10T23:16:53.207Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1b03",
+      "timestamp": "2026-02-10T23:16:53.302Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "49a3",
+      "timestamp": "2026-02-10T23:16:53.374Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4d9d",
+      "timestamp": "2026-02-10T23:17:21.277Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "9dbe",
+      "timestamp": "2026-02-10T23:17:21.289Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "de87",
+      "timestamp": "2026-02-10T23:17:21.387Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4f05",
+      "timestamp": "2026-02-10T23:17:21.445Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "59f7",
+      "timestamp": "2026-02-10T23:17:21.506Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "68de",
+      "timestamp": "2026-02-10T23:17:21.517Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "22d2",
+      "timestamp": "2026-02-10T23:17:52.328Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "78d3",
+      "timestamp": "2026-02-10T23:17:52.404Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "dc34",
+      "timestamp": "2026-02-10T23:17:52.578Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "314e",
+      "timestamp": "2026-02-10T23:17:52.581Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "d6e3",
+      "timestamp": "2026-02-10T23:17:52.715Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "c838",
+      "timestamp": "2026-02-10T23:17:52.780Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5803",
+      "timestamp": "2026-02-10T23:17:55.377Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "09ff",
+      "timestamp": "2026-02-10T23:17:55.519Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "94a1",
+      "timestamp": "2026-02-10T23:17:55.558Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "09c2",
+      "timestamp": "2026-02-10T23:17:55.587Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "23bb",
+      "timestamp": "2026-02-10T23:17:55.790Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4d6f",
+      "timestamp": "2026-02-10T23:17:58.150Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5cfa",
+      "timestamp": "2026-02-10T23:17:58.315Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "48ec",
+      "timestamp": "2026-02-10T23:17:58.318Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1017",
+      "timestamp": "2026-02-10T23:17:58.458Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "47cf",
+      "timestamp": "2026-02-10T23:17:58.526Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4656",
+      "timestamp": "2026-02-10T23:18:00.788Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "72b5",
+      "timestamp": "2026-02-10T23:18:01.093Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8aa8",
+      "timestamp": "2026-02-10T23:18:01.104Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "6ef5",
+      "timestamp": "2026-02-10T23:18:03.804Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5eac",
+      "timestamp": "2026-02-10T23:18:05.103Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-BAD8AEAC",
+        "title": "E2E Test Incident"
+      }
+    },
+    {
+      "id": "e199",
+      "timestamp": "2026-02-10T23:18:06.954Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "60d4",
+      "timestamp": "2026-02-10T23:18:07.088Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "a0be",
+      "timestamp": "2026-02-10T23:18:07.156Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "27a1",
+      "timestamp": "2026-02-10T23:18:08.356Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-339935CA",
+        "title": "E2E Test Incident - Automated"
+      }
+    },
+    {
+      "id": "c42f",
+      "timestamp": "2026-02-10T23:18:09.847Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "0e64",
+      "timestamp": "2026-02-10T23:18:09.877Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b0ae",
+      "timestamp": "2026-02-10T23:18:09.997Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ce31",
+      "timestamp": "2026-02-10T23:18:10.205Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "94a1",
+      "timestamp": "2026-02-10T23:18:12.910Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "9448",
+      "timestamp": "2026-02-10T23:18:13.555Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4fed",
+      "timestamp": "2026-02-10T23:18:16.372Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "7b05",
+      "timestamp": "2026-02-10T23:18:18.578Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "495d",
+      "timestamp": "2026-02-10T23:18:18.605Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "dcb2",
+      "timestamp": "2026-02-10T23:21:40.256Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "3b31",
+      "timestamp": "2026-02-10T23:21:40.325Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "27fe",
+      "timestamp": "2026-02-10T23:21:40.362Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "476d",
+      "timestamp": "2026-02-10T23:21:40.468Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "633c",
+      "timestamp": "2026-02-10T23:21:40.469Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b000",
+      "timestamp": "2026-02-10T23:21:40.509Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "84a0",
+      "timestamp": "2026-02-10T23:21:43.051Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "bb8f",
+      "timestamp": "2026-02-10T23:21:43.173Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ad8d",
+      "timestamp": "2026-02-10T23:21:43.226Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "211b",
+      "timestamp": "2026-02-10T23:21:43.681Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1a93",
+      "timestamp": "2026-02-10T23:21:44.581Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-E7BD5264",
+        "title": "E2E Test Incident - Automated"
+      }
+    },
+    {
+      "id": "500a",
+      "timestamp": "2026-02-10T23:21:45.789Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "65f7",
+      "timestamp": "2026-02-10T23:21:45.813Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "76fb",
+      "timestamp": "2026-02-10T23:21:46.295Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "bee3",
+      "timestamp": "2026-02-10T23:21:48.605Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "a5e1",
+      "timestamp": "2026-02-10T23:21:49.114Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "9d75",
+      "timestamp": "2026-02-10T23:21:49.235Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8d4f",
+      "timestamp": "2026-02-10T23:21:49.259Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8dca",
+      "timestamp": "2026-02-10T23:21:49.699Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "41c7",
+      "timestamp": "2026-02-10T23:22:31.500Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "bad3",
+      "timestamp": "2026-02-10T23:22:31.504Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1087",
+      "timestamp": "2026-02-10T23:22:31.518Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1608",
+      "timestamp": "2026-02-10T23:22:31.538Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "adea",
+      "timestamp": "2026-02-10T23:22:31.575Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "f54c",
+      "timestamp": "2026-02-10T23:22:31.594Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "fc55",
+      "timestamp": "2026-02-10T23:22:34.448Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "86e0",
+      "timestamp": "2026-02-10T23:22:34.451Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "616c",
+      "timestamp": "2026-02-10T23:22:34.510Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "acd1",
+      "timestamp": "2026-02-10T23:22:34.629Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "46a9",
+      "timestamp": "2026-02-10T23:22:34.730Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "328f",
+      "timestamp": "2026-02-10T23:22:34.829Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "2ea9",
+      "timestamp": "2026-02-10T23:22:37.083Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "0061",
+      "timestamp": "2026-02-10T23:22:37.381Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "0239",
+      "timestamp": "2026-02-10T23:22:37.436Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "32ce",
+      "timestamp": "2026-02-10T23:22:37.466Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "4c4f",
+      "timestamp": "2026-02-10T23:22:37.588Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "7bd7",
+      "timestamp": "2026-02-10T23:22:37.597Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "5ec2",
+      "timestamp": "2026-02-10T23:22:39.745Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "884b",
+      "timestamp": "2026-02-10T23:22:40.176Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "2c7a",
+      "timestamp": "2026-02-10T23:22:40.244Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "df26",
+      "timestamp": "2026-02-10T23:22:40.445Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "c27e",
+      "timestamp": "2026-02-10T23:22:41.629Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-4E381126",
+        "title": "E2E Test Incident - Automated"
+      }
+    },
+    {
+      "id": "dca3",
+      "timestamp": "2026-02-10T23:22:42.682Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "cb15",
+      "timestamp": "2026-02-10T23:22:42.776Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "8249",
+      "timestamp": "2026-02-10T23:22:43.280Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "a6b2",
+      "timestamp": "2026-02-10T23:22:45.439Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "63ad",
+      "timestamp": "2026-02-10T23:22:45.471Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "b51e",
+      "timestamp": "2026-02-10T23:22:45.994Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "f093",
+      "timestamp": "2026-02-10T23:22:46.131Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "6fc1",
+      "timestamp": "2026-02-10T23:22:46.277Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
       }
     }
   ]
