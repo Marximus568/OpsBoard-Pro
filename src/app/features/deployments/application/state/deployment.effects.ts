@@ -1,8 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { from, of } from 'rxjs';
-import { catchError, map, switchMap, tap, delay } from 'rxjs/operators';
+import { from, of, timer } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { DeploymentActions } from './deployment.actions';
 import { IDEPLOYMENT_REPOSITORY } from '../../deployments.providers';
 import { DeploymentStatus } from '../../domain/models/deployment-status.model';
@@ -35,15 +34,42 @@ export class DeploymentEffects {
                     .addHistory({
                         status: DeploymentStatus.APPROVED,
                         timestamp: new Date(),
-                        userId: 'admin-sim', // Simulations usually from admin
+                        userId: 'admin',
                         comment
                     });
 
                 return from(this.repository.save(approvedDep)).pipe(
                     tap(() => {
-                        this.auditService.log('APPROVE_DEPLOYMENT', 'DEPLOYMENT', 'admin-sim', { deploymentId: id, comment });
+                        this.auditService.log('APPROVE_DEPLOYMENT', 'DEPLOYMENT', 'admin', { deploymentId: id, comment });
                     }),
-                    map(() => DeploymentActions.loadDeployments()), // Refresh list
+                    map(() => DeploymentActions.loadDeployments()),
+                    catchError(error => of(DeploymentActions.loadDeploymentsFailure({ error: error.message })))
+                );
+            })
+        ))
+    ));
+
+    rejectDeployment$ = createEffect(() => this.actions$.pipe(
+        ofType(DeploymentActions.rejectDeployment),
+        switchMap(({ id, comment }) => from(this.repository.getById(id)).pipe(
+            switchMap(deployment => {
+                if (!deployment) return of(DeploymentActions.loadDeploymentsFailure({ error: 'Deployment not found' }));
+
+                const rejectedDep = deployment
+                    .transitionTo(DeploymentStatus.FAILED)
+                    .addHistory({
+                        status: DeploymentStatus.FAILED,
+                        timestamp: new Date(),
+                        userId: 'admin',
+                        comment
+                    })
+                    .addLog(`Deployment rejected: ${comment}`);
+
+                return from(this.repository.save(rejectedDep)).pipe(
+                    tap(() => {
+                        this.auditService.log('REJECT_DEPLOYMENT', 'DEPLOYMENT', 'admin', { deploymentId: id, comment });
+                    }),
+                    map(() => DeploymentActions.loadDeployments()),
                     catchError(error => of(DeploymentActions.loadDeploymentsFailure({ error: error.message })))
                 );
             })
@@ -56,49 +82,71 @@ export class DeploymentEffects {
             switchMap(deployment => {
                 if (!deployment) return of(DeploymentActions.executeDeploymentFailure({ error: 'Deployment not found' }));
 
+                // Phase 1: Start running
                 const runningDep = deployment
                     .transitionTo(DeploymentStatus.RUNNING)
+                    .addHistory({
+                        status: DeploymentStatus.RUNNING,
+                        timestamp: new Date(),
+                        userId: 'system',
+                        comment: 'Deployment execution started'
+                    })
                     .addLog('Initializing deployment engine...')
                     .addLog('Downloading artifacts...')
                     .addLog('Preparing environment...');
 
-                // Log execution start
                 this.auditService.log('EXECUTE_DEPLOYMENT_START', 'DEPLOYMENT', 'system', { deploymentId: id });
 
                 return from(this.repository.save(runningDep)).pipe(
-                    map(() => DeploymentActions.loadDeployments()),
-                    delay(4000), // Simulate work
-                    switchMap(() => from(this.repository.getById(id)).pipe(
-                        switchMap(latest => {
-                            if (!latest) return of(DeploymentActions.loadDeployments());
+                    switchMap(() => {
+                        // Refresh list to show RUNNING state
+                        return timer(2000).pipe(
+                            switchMap(() => from(this.repository.getById(id)).pipe(
+                                switchMap(latest => {
+                                    if (!latest) return of(DeploymentActions.loadDeployments());
 
-                            const secondPhaseDep = latest
-                                .addLog('Executing database migrations...')
-                                .addLog('Applying security patches...')
-                                .addLog('Configuring horizontal scaling...');
+                                    // Phase 2: Add more logs
+                                    const phase2 = latest
+                                        .addLog('Executing database migrations...')
+                                        .addLog('Applying security patches...')
+                                        .addLog('Configuring horizontal scaling...');
 
-                            return from(this.repository.save(secondPhaseDep)).pipe(
-                                map(() => DeploymentActions.loadDeployments()),
-                                delay(4000),
-                                switchMap(() => from(this.repository.getById(id)).pipe(
-                                    map(final => {
-                                        if (!final) return DeploymentActions.loadDeployments();
+                                    return from(this.repository.save(phase2)).pipe(
+                                        switchMap(() => timer(3000).pipe(
+                                            switchMap(() => from(this.repository.getById(id)).pipe(
+                                                switchMap(final => {
+                                                    if (!final) return of(DeploymentActions.loadDeployments());
 
-                                        const successDep = final
-                                            .transitionTo(DeploymentStatus.SUCCESS)
-                                            .addLog('Deployment completed successfully.')
-                                            .addLog(`Endpoint active: https://${final.service}.opsboard-pro.io`);
+                                                    // Phase 3: Complete successfully
+                                                    const successDep = final
+                                                        .transitionTo(DeploymentStatus.SUCCESS)
+                                                        .addHistory({
+                                                            status: DeploymentStatus.SUCCESS,
+                                                            timestamp: new Date(),
+                                                            userId: 'system',
+                                                            comment: 'All checks passed'
+                                                        })
+                                                        .addLog('Health checks passed.')
+                                                        .addLog(`Endpoint active: https://${final.service}.opsboard-pro.io`)
+                                                        .addLog('Deployment completed successfully.');
 
-                                        this.auditService.log('EXECUTE_DEPLOYMENT_SUCCESS', 'DEPLOYMENT', 'system', { deploymentId: id });
-                                        this.repository.save(successDep); // Keep silent save or chain
-                                        return DeploymentActions.loadDeployments();
-                                    })
-                                ))
-                            );
-                        })
-                    ))
+                                                    this.auditService.log('EXECUTE_DEPLOYMENT_SUCCESS', 'DEPLOYMENT', 'system', { deploymentId: id });
+
+                                                    return from(this.repository.save(successDep)).pipe(
+                                                        map(() => DeploymentActions.loadDeployments())
+                                                    );
+                                                })
+                                            ))
+                                        ))
+                                    );
+                                })
+                            ))
+                        );
+                    }),
+                    catchError(error => of(DeploymentActions.executeDeploymentFailure({ error: error.message })))
                 );
             })
         ))
     ));
 }
+

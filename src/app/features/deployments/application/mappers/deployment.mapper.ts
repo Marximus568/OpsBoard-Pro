@@ -26,7 +26,7 @@ export class DeploymentMapper {
         const id = dto.uuid || dto.id || Math.random().toString(36).substring(7);
 
         // Fallback for service
-        const service = dto.service || 'unknown-service';
+        const service = dto.service || dto.serviceName || 'unknown-service';
 
         // Fallback for version (version_tag vs version)
         const version = dto.version_tag || dto.version || 'v0.0.1';
@@ -41,7 +41,7 @@ export class DeploymentMapper {
             : DeploymentStatus.REQUESTED;
 
         // Fallback for user (user_id vs requestedBy)
-        const requestedBy = dto.user_id || dto.requestedBy || 'system';
+        const requestedBy = dto.user_id || dto.requestedBy || dto.deployedBy || 'system';
 
         // Fallback for dates
         const createdAt = dto.timestamp || dto.createdAt ? new Date(dto.timestamp || dto.createdAt) : new Date();
@@ -68,18 +68,18 @@ export class DeploymentMapper {
         });
     }
 
-    static toPersistence(entity: Deployment): DeploymentDto {
+    static toPersistence(entity: Deployment): any {
         return {
-            uuid: entity.id,
-            service: entity.service,
-            version_tag: entity.version,
-            env_name: entity.environment as any,
-            current_status: entity.status,
-            user_id: entity.requestedBy,
-            reviewer_id: (entity as any).reviewedBy, // reviewedBy not getter yet
-            approver_id: (entity as any).approvedBy, // approvedBy not getter yet
-            timestamp: entity.createdAt.toISOString(),
-            last_update: new Date().toISOString(),
+            id: entity.id,
+            serviceName: entity.service,
+            version: entity.version,
+            environment: entity.environment,
+            status: entity.status,
+            deployedBy: entity.requestedBy,
+            reviewedBy: entity.reviewedBy,
+            approvedBy: entity.approvedBy,
+            createdAt: entity.createdAt.toISOString(),
+            updatedAt: new Date().toISOString(),
             history: entity.history.map(h => ({
                 ...h,
                 timestamp: h.timestamp.toISOString()

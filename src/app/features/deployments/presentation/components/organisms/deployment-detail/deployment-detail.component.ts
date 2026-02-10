@@ -20,7 +20,7 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
                     </app-badge>
                 </div>
                 <div class="actions">
-                    @if (canApprove() && auth.user()?.hasRole('ADMIN')) {
+                    @if (canApprove() && auth.user()?.hasRole('role-admin')) {
                         <button class="btn-approve" (click)="onApprove.emit(deployment.id)">
                             <span class="material-icons">check_circle</span> Aprobar
                         </button>

@@ -16,7 +16,7 @@ export enum DeploymentStatus {
  */
 export class DeploymentWorkflowRules {
     private static readonly ALLOWED_TRANSITIONS: Record<DeploymentStatus, DeploymentStatus[]> = {
-        [DeploymentStatus.REQUESTED]: [DeploymentStatus.REVIEW, DeploymentStatus.FAILED],
+        [DeploymentStatus.REQUESTED]: [DeploymentStatus.REVIEW, DeploymentStatus.APPROVED, DeploymentStatus.FAILED],
         [DeploymentStatus.REVIEW]: [DeploymentStatus.APPROVED, DeploymentStatus.FAILED],
         [DeploymentStatus.APPROVED]: [DeploymentStatus.RUNNING, DeploymentStatus.FAILED],
         [DeploymentStatus.RUNNING]: [DeploymentStatus.SUCCESS, DeploymentStatus.FAILED],

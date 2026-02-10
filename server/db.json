@@ -1,202 +1,446 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "u1",
+      "email": "admin@opsboard.com",
+      "password": "hashed_password_123",
+      "fullName": "Admin User",
+      "roles": [
+        "admin"
+      ],
+      "uuid": "usr-001",
+      "user_email": "admin@opsboard.com",
+      "full_name": "Admin User",
+      "active": true,
+      "permission_roles": [
+        "role-admin",
+        "role-operator"
+      ],
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "u2",
+      "email": "operator@opsboard.com",
+      "password": "hashed_password_456",
+      "fullName": "Operator User",
+      "roles": [
+        "operator"
+      ],
+      "uuid": "usr-002",
+      "user_email": "operator@opsboard.com",
+      "full_name": "Operator User",
+      "active": true,
+      "permission_roles": [
+        "role-operator"
+      ],
+      "createdAt": "2024-01-02T00:00:00Z"
+    }
+  ],
+  "roles": [
+    {
+      "id": "role-admin",
+      "name": "Administrator",
+      "permissions": [
+        "users:read",
+        "users:write",
+        "users:delete",
+        "incidents:read",
+        "incidents:write",
+        "incidents:delete",
+        "deployments:read",
+        "deployments:write",
+        "audit:read"
+      ]
+    },
+    {
+      "id": "role-operator",
+      "name": "Operator",
+      "permissions": [
+        "incidents:read",
+        "incidents:write",
+        "deployments:read"
+      ]
+    },
+    {
+      "id": "role-viewer",
+      "name": "Viewer",
+      "permissions": [
+        "incidents:read",
+        "deployments:read"
+      ]
+    }
+  ],
+  "featureFlags": [
+    {
+      "id": "flag-001",
+      "key": "feature-advanced-logs",
+      "name": "Advanced Logs",
+      "description": "Enable detailed logging view",
+      "enabled": true,
+      "scope": "GLOBAL"
+    },
+    {
+      "id": "flag-002",
+      "key": "feature-beta-dashboard",
+      "name": "Beta Dashboard",
+      "description": "New dashboard layout",
+      "enabled": false,
+      "scope": "BETA"
+    }
+  ],
+  "configurations": [
+    {
+      "id": "conf-001",
+      "key": "system-theme",
+      "value": "dark",
+      "category": "PREFERENCES"
+    },
+    {
+      "id": "conf-002",
+      "key": "maintenance-mode",
+      "value": "false",
+      "category": "SYSTEM"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "inc-101",
+      "title": "Database Latency Spike",
+      "description": "Significant increase in database query response times affecting multiple services.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": "u1",
+      "reporterId": "u2",
+      "service": "database-cluster",
+      "slaBreached": false,
+      "createdAt": "2023-11-15T10:00:00Z",
+      "updatedAt": "2023-11-15T10:00:00Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "database",
+        "performance"
+      ],
+      "timeline": [
         {
-            "id": "u1",
-            "email": "admin@opsboard.com",
-            "password": "hashed_password_123",
-            "fullName": "Admin User",
-            "roles": [
-                "admin"
-            ],
-            "uuid": "usr-001",
-            "user_email": "admin@opsboard.com",
-            "full_name": "Admin User",
-            "active": true,
-            "permission_roles": [
-                "role-admin",
-                "role-operator"
-            ],
-            "createdAt": "2024-01-01T00:00:00Z"
-        },
-        {
-            "id": "u2",
-            "email": "operator@opsboard.com",
-            "password": "hashed_password_456",
-            "fullName": "Operator User",
-            "roles": [
-                "operator"
-            ],
-            "uuid": "usr-002",
-            "user_email": "operator@opsboard.com",
-            "full_name": "Operator User",
-            "active": true,
-            "permission_roles": [
-                "role-operator"
-            ],
-            "createdAt": "2024-01-02T00:00:00Z"
+          "id": "evt-1",
+          "type": "CREATED",
+          "timestamp": "2023-11-15T10:00:00Z",
+          "userId": "u2",
+          "description": "Incident reported"
         }
-    ],
-    "roles": [
+      ]
+    },
+    {
+      "id": "inc-102",
+      "title": "Payment Gateway Timeout",
+      "description": "Payment processing requests failing with timeout errors.",
+      "status": "IN_PROGRESS",
+      "priority": "CRITICAL",
+      "severity": "SEV1",
+      "assigneeId": null,
+      "reporterId": "u1",
+      "service": "payment-service",
+      "slaBreached": true,
+      "createdAt": "2023-11-15T11:30:00Z",
+      "updatedAt": "2023-11-15T12:00:00Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "payments",
+        "critical"
+      ],
+      "timeline": [
         {
-            "id": "role-admin",
-            "name": "Administrator",
-            "permissions": [
-                "users:read",
-                "users:write",
-                "users:delete",
-                "incidents:read",
-                "incidents:write",
-                "incidents:delete",
-                "deployments:read",
-                "deployments:write",
-                "audit:read"
-            ]
+          "id": "evt-2",
+          "type": "CREATED",
+          "timestamp": "2023-11-15T11:30:00Z",
+          "userId": "u1",
+          "description": "Incident reported"
         },
         {
-            "id": "role-operator",
-            "name": "Operator",
-            "permissions": [
-                "incidents:read",
-                "incidents:write",
-                "deployments:read"
-            ]
-        },
-        {
-            "id": "role-viewer",
-            "name": "Viewer",
-            "permissions": [
-                "incidents:read",
-                "deployments:read"
-            ]
+          "id": "evt-3",
+          "type": "STATUS_CHANGE",
+          "timestamp": "2023-11-15T12:00:00Z",
+          "userId": "u1",
+          "description": "Status changed to In Progress"
         }
-    ],
-    "featureFlags": [
+      ]
+    },
+    {
+      "id": "inc-103",
+      "title": "Frontend 404 Errors",
+      "description": "Multiple 404 errors detected on the frontend application after last deployment.",
+      "status": "RESOLVED",
+      "priority": "MEDIUM",
+      "severity": "SEV3",
+      "assigneeId": "u2",
+      "reporterId": "u1",
+      "service": "frontend-app",
+      "slaBreached": false,
+      "createdAt": "2023-11-14T09:15:00Z",
+      "updatedAt": "2023-11-14T14:30:00Z",
+      "resolvedAt": "2023-11-14T14:30:00Z",
+      "closedAt": null,
+      "tags": [
+        "frontend",
+        "routing"
+      ],
+      "timeline": [
         {
-            "id": "flag-001",
-            "key": "feature-advanced-logs",
-            "name": "Advanced Logs",
-            "description": "Enable detailed logging view",
-            "enabled": true,
-            "scope": "GLOBAL"
+          "id": "evt-4",
+          "type": "CREATED",
+          "timestamp": "2023-11-14T09:15:00Z",
+          "userId": "u1",
+          "description": "Incident reported"
         },
         {
-            "id": "flag-002",
-            "key": "feature-beta-dashboard",
-            "name": "Beta Dashboard",
-            "description": "New dashboard layout",
-            "enabled": false,
-            "scope": "BETA"
+          "id": "evt-5",
+          "type": "RESOLVED",
+          "timestamp": "2023-11-14T14:30:00Z",
+          "userId": "u2",
+          "description": "Resolved by fixing routing config"
         }
-    ],
-    "configurations": [
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "id": "dep-201",
+      "serviceName": "auth-service",
+      "version": "v1.2.0",
+      "status": "SUCCESS",
+      "environment": "PRODUCTION",
+      "deployedAt": "2023-11-14T08:00:00Z",
+      "deployedBy": "u1",
+      "createdAt": "2023-11-14T06:00:00Z",
+      "updatedAt": "2023-11-14T08:00:00Z",
+      "history": [
         {
-            "id": "conf-001",
-            "key": "system-theme",
-            "value": "dark",
-            "category": "PREFERENCES"
+          "status": "REQUESTED",
+          "timestamp": "2023-11-14T06:00:00Z",
+          "userId": "u1",
+          "comment": "Deploy auth-service v1.2.0"
         },
         {
-            "id": "conf-002",
-            "key": "maintenance-mode",
-            "value": "false",
-            "category": "SYSTEM"
+          "status": "REVIEW",
+          "timestamp": "2023-11-14T06:15:00Z",
+          "userId": "u2",
+          "comment": "Reviewing changes"
+        },
+        {
+          "status": "APPROVED",
+          "timestamp": "2023-11-14T06:30:00Z",
+          "userId": "u2",
+          "comment": "LGTM"
+        },
+        {
+          "status": "RUNNING",
+          "timestamp": "2023-11-14T07:00:00Z",
+          "userId": "system",
+          "comment": "Deployment started"
+        },
+        {
+          "status": "SUCCESS",
+          "timestamp": "2023-11-14T08:00:00Z",
+          "userId": "system",
+          "comment": "All checks passed"
         }
-    ],
-    "incidents": [
+      ],
+      "logs": [
+        "[2023-11-14 07:00] Initializing deployment engine...",
+        "[2023-11-14 07:05] Downloading artifacts v1.2.0...",
+        "[2023-11-14 07:15] Running database migrations...",
+        "[2023-11-14 07:30] Applying security patches...",
+        "[2023-11-14 07:45] Health checks passed.",
+        "[2023-11-14 08:00] Deployment completed successfully."
+      ]
+    },
+    {
+      "id": "dep-202",
+      "serviceName": "payment-service",
+      "version": "v2.0.1",
+      "status": "REQUESTED",
+      "environment": "STAGING",
+      "deployedAt": null,
+      "deployedBy": "u2",
+      "createdAt": "2023-11-15T10:00:00Z",
+      "updatedAt": "2023-11-15T10:00:00Z",
+      "history": [
         {
-            "id": "inc-101",
-            "title": "Database Latency Spike",
-            "severity": "high",
-            "status": "open",
-            "createdAt": "2023-11-15T10:00:00Z",
-            "assigneeId": "u1"
-        },
-        {
-            "id": "inc-102",
-            "title": "Payment Gateway Timeout",
-            "severity": "critical",
-            "status": "investigating",
-            "createdAt": "2023-11-15T11:30:00Z",
-            "assigneeId": null
-        },
-        {
-            "id": "inc-103",
-            "title": "Frontend 404 Errors",
-            "severity": "medium",
-            "status": "resolved",
-            "createdAt": "2023-11-14T09:15:00Z",
-            "assigneeId": "u2"
+          "status": "REQUESTED",
+          "timestamp": "2023-11-15T10:00:00Z",
+          "userId": "u2",
+          "comment": "Requesting deploy for payment-service v2.0.1"
         }
-    ],
-    "deployments": [
+      ],
+      "logs": []
+    },
+    {
+      "id": "dep-203",
+      "serviceName": "frontend-app",
+      "version": "v3.1.5",
+      "status": "FAILED",
+      "environment": "DEVELOPMENT",
+      "deployedAt": "2023-11-13T15:45:00Z",
+      "deployedBy": "u1",
+      "createdAt": "2023-11-13T14:00:00Z",
+      "updatedAt": "2023-11-13T15:45:00Z",
+      "history": [
         {
-            "id": "dep-201",
-            "serviceName": "auth-service",
-            "version": "v1.2.0",
-            "status": "success",
-            "deployedAt": "2023-11-14T08:00:00Z",
-            "deployedBy": "u1"
+          "status": "REQUESTED",
+          "timestamp": "2023-11-13T14:00:00Z",
+          "userId": "u1",
+          "comment": "Deploy frontend v3.1.5"
         },
         {
-            "id": "dep-202",
-            "serviceName": "payment-service",
-            "version": "v2.0.1",
-            "status": "pending",
-            "deployedAt": null,
-            "deployedBy": "u2"
+          "status": "APPROVED",
+          "timestamp": "2023-11-13T14:30:00Z",
+          "userId": "u2",
+          "comment": "Approved"
         },
         {
-            "id": "dep-203",
-            "serviceName": "frontend-app",
-            "version": "v3.1.5",
-            "status": "failed",
-            "deployedAt": "2023-11-13T15:45:00Z",
-            "deployedBy": "u1"
+          "status": "RUNNING",
+          "timestamp": "2023-11-13T15:00:00Z",
+          "userId": "system",
+          "comment": "Starting deployment"
+        },
+        {
+          "status": "FAILED",
+          "timestamp": "2023-11-13T15:45:00Z",
+          "userId": "system",
+          "comment": "Build failed"
         }
-    ],
-    "logs": [
-        {
-            "id": "log-5001",
-            "level": "ERROR",
-            "service": "payment-api",
-            "message": "Database timeout",
-            "correlationId": "corr-abc-123",
-            "timestamp": "2026-02-01T10:05:00Z"
-        }
-    ],
-    "auditLogs": [
-        {
-            "id": "audit-1001",
-            "timestamp": "2026-02-10T09:00:00Z",
-            "userId": "usr-001",
-            "action": "LOGIN",
-            "resource": "AUTH",
-            "metadata": {
-                "ip": "192.168.1.1",
-                "method": "MFA"
-            }
-        },
-        {
-            "id": "audit-1002",
-            "timestamp": "2026-02-10T09:05:00Z",
-            "userId": "usr-001",
-            "action": "UPDATE_FLAG",
-            "resource": "FEATURE_FLAG",
-            "metadata": {
-                "flagId": "flag-001",
-                "newValue": true
-            }
-        },
-        {
-            "id": "audit-1003",
-            "timestamp": "2026-02-10T10:15:00Z",
-            "userId": "usr-002",
-            "action": "DEPLOY_REQUEST",
-            "resource": "DEPLOY",
-            "metadata": {
-                "service": "payment-api",
-                "version": "v1.4.0"
-            }
-        }
-    ]
+      ],
+      "logs": [
+        "[2023-11-13 15:00] Initializing deployment engine...",
+        "[2023-11-13 15:10] Downloading artifacts v3.1.5...",
+        "[2023-11-13 15:20] ERROR: Build step failed - missing dependency @angular/core",
+        "[2023-11-13 15:45] Deployment aborted."
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "id": "log-5001",
+      "level": "ERROR",
+      "service": "payment-api",
+      "message": "Database timeout",
+      "correlationId": "corr-abc-123",
+      "timestamp": "2026-02-01T10:05:00Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "audit-1001",
+      "timestamp": "2026-02-10T09:00:00Z",
+      "userId": "usr-001",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "ip": "192.168.1.1",
+        "method": "MFA"
+      }
+    },
+    {
+      "id": "audit-1002",
+      "timestamp": "2026-02-10T09:05:00Z",
+      "userId": "usr-001",
+      "action": "UPDATE_FLAG",
+      "resource": "FEATURE_FLAG",
+      "metadata": {
+        "flagId": "flag-001",
+        "newValue": true
+      }
+    },
+    {
+      "id": "audit-1003",
+      "timestamp": "2026-02-10T10:15:00Z",
+      "userId": "usr-002",
+      "action": "DEPLOY_REQUEST",
+      "resource": "DEPLOY",
+      "metadata": {
+        "service": "payment-api",
+        "version": "v1.4.0"
+      }
+    },
+    {
+      "id": "e0e5",
+      "timestamp": "2026-02-10T19:01:58.122Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "a4b2",
+      "timestamp": "2026-02-10T19:02:11.649Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "19b0",
+      "timestamp": "2026-02-10T19:02:15.241Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.io",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "84e2",
+      "timestamp": "2026-02-10T19:03:19.575Z",
+      "userId": "usr-001",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    },
+    {
+      "id": "6c4f",
+      "timestamp": "2026-02-10T19:28:32.440Z",
+      "userId": "usr-001",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    },
+    {
+      "id": "d983",
+      "timestamp": "2026-02-10T19:57:53.914Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "50fa",
+      "timestamp": "2026-02-10T19:58:18.665Z",
+      "userId": "usr-001",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "method": "password"
+      }
+    }
+  ]
 }

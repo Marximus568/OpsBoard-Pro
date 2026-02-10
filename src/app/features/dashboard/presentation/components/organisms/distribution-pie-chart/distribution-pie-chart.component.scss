@@ -1,8 +1,9 @@
 .chart-card {
-    background: var(--surface-card);
+    background: var(--surface-1);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
     height: 100%;
 }
 

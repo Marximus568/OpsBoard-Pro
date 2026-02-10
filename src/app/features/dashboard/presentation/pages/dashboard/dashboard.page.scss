@@ -31,7 +31,7 @@
 .charts-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 2rem;
+    gap: 2.5rem;
     width: 100%;
 }
 
@@ -58,7 +58,9 @@
 @media (max-width: 1300px) {
 
     .trend,
-    .distribution {
+    .distribution,
+    .severity,
+    .recent-activity {
         grid-column: span 12;
     }
 }
