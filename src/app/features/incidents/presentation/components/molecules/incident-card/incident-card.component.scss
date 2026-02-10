@@ -1,6 +1,6 @@
 .incident-card {
-    background: var(--color-bg-surface, #1e2128);
-    border: 1px solid var(--color-border, #30363d);
+    background: var(--surface-card);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 16px;
     transition: all 0.2s ease-in-out;
@@ -9,13 +9,13 @@
     overflow: hidden;
 
     &:hover {
-        border-color: var(--color-accent-primary, #6366f1);
+        border-color: var(--color-primary-500);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--shadow-md);
     }
 
     &.sla-breached {
-        border-left: 4px solid var(--color-status-error, #f87171);
+        border-left: 4px solid var(--status-error);
     }
 }
 
@@ -29,23 +29,23 @@
 .incident-id {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
-    color: var(--color-text-muted, #8b949e);
+    color: var(--text-secondary);
 }
 
 .incident-title {
     font-size: 16px;
     font-weight: 600;
-    color: var(--color-text-primary, #ffffff);
+    color: var(--text-primary);
     margin: 0 0 8px 0;
 }
 
 .incident-service {
     font-size: 13px;
-    color: var(--color-text-secondary, #c9d1d9);
+    color: var(--text-secondary);
     margin: 0 0 16px 0;
 
     strong {
-        color: var(--color-accent-primary, #6366f1);
+        color: var(--color-primary-500);
     }
 }
 
@@ -55,7 +55,7 @@
     align-items: center;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid var(--color-border, #30363d);
+    border-top: 1px solid var(--border-color);
 }
 
 .badges-group {
@@ -65,5 +65,5 @@
 
 .updated-time {
     font-size: 12px;
-    color: var(--color-text-muted, #8b949e);
+    color: var(--text-secondary);
 }

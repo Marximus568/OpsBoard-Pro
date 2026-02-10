@@ -2,10 +2,10 @@
     <div class="page-header">
         <h1>User Management</h1>
         <div class="header-actions">
-            <app-button variant="secondary" (onClick)="onExport()">
+            <app-button variant="secondary" (btnClick)="onExport()">
                 <app-icon name="download" size="sm"></app-icon> Export
             </app-button>
-            <app-button variant="primary" (onClick)="onEdit({})">
+            <app-button variant="primary" (btnClick)="onEdit()">
                 <app-icon name="plus" size="sm"></app-icon> Add User
             </app-button>
         </div>
@@ -71,7 +71,7 @@
 <div class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>{{ selectedUser() ? 'Edit User' : 'New User' }}</h2>
+            <h2>{{ selectedUser()?.uuid ? 'Edit User' : 'New User' }}</h2>
             <button class="close-btn" (click)="closeModal()">&times;</button>
         </div>
         <div class="modal-body">
@@ -87,13 +87,33 @@
             </div>
             <div class="form-group">
                 <label for="permission_roles">Roles (comma separated: role-admin, role-operator)</label>
-                <input id="permission_roles" type="text" [ngModel]="editForm().permission_roles.join(', ')"
+                <input id="permission_roles" type="text" [ngModel]="(editForm().permission_roles || []).join(', ')"
                     (ngModelChange)="updateEditForm('permission_roles', $event)">
             </div>
         </div>
         <div class="modal-footer">
-            <app-button variant="secondary" (onClick)="closeModal()">Cancel</app-button>
-            <app-button variant="primary" (onClick)="onSave()">Save Changes</app-button>
+            <app-button variant="secondary" (btnClick)="closeModal()">Cancel</app-button>
+            <app-button variant="primary" (btnClick)="onSave()">Save Changes</app-button>
+        </div>
+    </div>
+</div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if (isDeleteConfirmOpen()) {
+<div class="modal-overlay">
+    <div class="modal-content delete-confirm">
+        <div class="modal-header">
+            <h2>Delete User</h2>
+            <button class="close-btn" (click)="closeDeleteConfirm()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete <strong>{{ userToDelete()?.full_name }}</strong>?</p>
+            <p class="warning-text">This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+            <app-button variant="secondary" (btnClick)="closeDeleteConfirm()">Cancel</app-button>
+            <app-button variant="danger" (btnClick)="onConfirmDelete()">Delete User</app-button>
         </div>
     </div>
 </div>

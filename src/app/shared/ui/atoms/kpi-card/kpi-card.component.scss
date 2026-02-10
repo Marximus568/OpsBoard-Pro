@@ -44,7 +44,11 @@
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.05);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--bg-icon-wrapper);
+    display: flex;
     display: flex;
     align-items: center;
     justify-content: center;

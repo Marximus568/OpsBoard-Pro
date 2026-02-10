@@ -59,12 +59,15 @@
     .table-container {
         flex: 1;
         overflow: auto;
+        /* Allow both horizontal and vertical scrolling */
         background: var(--surface-card);
         border-radius: var(--radius-md);
         box-shadow: var(--shadow-sm);
+        white-space: nowrap; // Force content to stay in one line
 
         .data-table {
             width: 100%;
+            min-width: 800px; // Ensure table has a minimum width to trigger scroll
             border-collapse: collapse;
 
             th {

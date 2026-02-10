@@ -51,7 +51,7 @@ import { LogEntryRowComponent } from '../../molecules/log-entry-row/log-entry-ro
     `,
     styles: [`
         .viewer-card {
-            background: rgba(13, 17, 23, 0.6);
+            background: var(--surface-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             display: flex;
@@ -61,7 +61,7 @@ import { LogEntryRowComponent } from '../../molecules/log-entry-row/log-entry-ro
         }
         .viewer-header {
             padding: 0.75rem 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
@@ -115,7 +115,7 @@ import { LogEntryRowComponent } from '../../molecules/log-entry-row/log-entry-ro
             transition: all 0.2s;
             
             .material-icons { font-size: 20px; }
-            &:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-primary); }
+            &:hover { background: var(--bg-icon-wrapper); color: var(--text-primary); }
             &.active { color: var(--primary-color); background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.2); }
             &.accent {
                 width: auto;
@@ -131,12 +131,12 @@ import { LogEntryRowComponent } from '../../molecules/log-entry-row/log-entry-ro
             flex: 1;
             overflow-y: auto;
             scroll-behavior: smooth;
-            background: #0d1117;
+            background: var(--bg-secondary);
             
             &::-webkit-scrollbar { width: 8px; }
             &::-webkit-scrollbar-track { background: transparent; }
-            &::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
-            &::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+            &::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+            &::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
         }
         .empty-state {
             display: flex;
@@ -151,7 +151,7 @@ import { LogEntryRowComponent } from '../../molecules/log-entry-row/log-entry-ro
         }
         .viewer-footer {
             padding: 0.5rem 1.5rem;
-            background: rgba(255, 255, 255, 0.01);
+            background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             .count { font-size: 0.75rem; color: var(--text-secondary); }
         }

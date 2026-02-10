@@ -23,7 +23,7 @@
     .count {
         font-size: 0.75rem;
         color: var(--text-secondary);
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--bg-icon-wrapper);
         padding: 4px 10px;
         border-radius: 20px;
     }
@@ -48,7 +48,7 @@
 
     td {
         padding: 1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid var(--border-subtle);
     }
 
     tr:last-child td {

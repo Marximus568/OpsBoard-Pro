@@ -1,9 +1,9 @@
 .log-row-container {
     border-bottom: 1px solid var(--border-color);
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--surface-card);
 
     &:hover {
-        background: rgba(255, 255, 255, 0.02);
+        background: var(--bg-secondary);
     }
 }
 
@@ -52,7 +52,7 @@
             border-radius: 4px;
 
             &:hover {
-                background: rgba(255, 255, 255, 0.1);
+                background: var(--bg-icon-wrapper);
                 color: var(--text-primary);
             }
 
@@ -72,13 +72,13 @@
     }
 
     &.is-detailed {
-        background: rgba(99, 102, 241, 0.05);
+        background: var(--surface-2);
     }
 }
 
 .log-detail {
     padding: 1rem 1.5rem 1.5rem 1.5rem;
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--bg-secondary);
     border-top: 1px dashed var(--border-color);
 
     header {
@@ -95,7 +95,7 @@
         }
 
         .copy-payload-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--surface-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
             font-size: 0.75rem;
@@ -104,7 +104,7 @@
             cursor: pointer;
 
             &:hover {
-                background: rgba(255, 255, 255, 0.1);
+                background: var(--bg-icon-wrapper);
             }
         }
     }
@@ -112,9 +112,9 @@
     pre {
         margin: 0;
         padding: 1rem;
-        background: #0d1117;
+        background: var(--surface-card);
         border-radius: 8px;
-        color: #e6edf3;
+        color: var(--text-primary);
         font-size: 0.813rem;
         line-height: 1.5;
         overflow-x: auto;

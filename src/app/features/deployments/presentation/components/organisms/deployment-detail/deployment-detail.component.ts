@@ -143,7 +143,7 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
 
             .btn-approve {
                 background: var(--color-primary-600);
-                color: white;
+                color: var(--text-on-primary);
                 border: none;
                 &:hover { background: var(--color-primary-500); transform: translateY(-2px); }
             }
@@ -157,7 +157,7 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
 
             .btn-execute {
                 background: #10b981;
-                color: white;
+                color: var(--text-on-primary);
                 border: none;
                 &:hover { background: #059669; transform: translateY(-2px); }
             }
@@ -170,10 +170,10 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
         }
 
         .workflow-card, .logs-card {
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--bg-secondary);
             border-radius: 12px;
             padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
 
             h3 {
                 margin: 0 0 1.5rem 0;
@@ -207,7 +207,7 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    span { font-size: 18px; color: white; }
+                    span { font-size: 18px; color: var(--text-on-primary); }
                 }
 
                 .info {
@@ -220,13 +220,13 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
         }
 
         .terminal {
-            background: #0f172a;
+            background: var(--surface-card);
             border-radius: 12px;
             padding: 1.5rem;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.875rem;
             min-height: 300px;
-            color: #94a3b8;
+            color: var(--text-secondary);
 
             .log-line {
                 margin-bottom: 0.5rem;

@@ -36,8 +36,8 @@
                     <td class="timestamp">{{ log.timestamp | date:'medium' }}</td>
                     <td>
                         <div class="user-cell">
-                            <span class="avatar">{{ log.userId.charAt(0).toUpperCase() }}</span>
-                            <span>{{ log.userId }}</span>
+                            <span class="avatar">{{ getUserAvatar(log) }}</span>
+                            <span [title]="getUserIdentifier(log)">{{ getUserIdentifier(log) }}</span>
                         </div>
                     </td>
                     <td>

@@ -26,7 +26,9 @@ export class UserManagementPage implements OnInit {
 
     // Local UI State for Edit Modal
     protected isModalOpen = signal(false);
+    protected isDeleteConfirmOpen = signal(false);
     protected selectedUser = signal<UserAdmin | null>(null);
+    protected userToDelete = signal<UserAdmin | null>(null);
     protected editForm = signal<UserAdmin>({
         uuid: '',
         user_email: '',
@@ -40,9 +42,21 @@ export class UserManagementPage implements OnInit {
         this.adminFacade.loadAll();
     }
 
-    onEdit(user: Partial<UserAdmin>): void {
-        this.selectedUser.set(user as UserAdmin);
-        this.editForm.set({ ...user as UserAdmin });
+    onEdit(user?: UserAdmin): void {
+        if (!user) {
+            this.selectedUser.set(null);
+            this.editForm.set({
+                uuid: '',
+                user_email: '',
+                full_name: '',
+                active: true,
+                permission_roles: [],
+                createdAt: ''
+            });
+        } else {
+            this.selectedUser.set(user);
+            this.editForm.set({ ...user });
+        }
         this.isModalOpen.set(true);
     }
 
@@ -51,9 +65,21 @@ export class UserManagementPage implements OnInit {
     }
 
     onDelete(user: UserAdmin): void {
-        if (confirm(`Are you sure you want to delete ${user.full_name}?`)) {
+        this.userToDelete.set(user);
+        this.isDeleteConfirmOpen.set(true);
+    }
+
+    onConfirmDelete(): void {
+        const user = this.userToDelete();
+        if (user) {
             this.adminFacade.deleteUser(user.uuid);
         }
+        this.closeDeleteConfirm();
+    }
+
+    closeDeleteConfirm(): void {
+        this.isDeleteConfirmOpen.set(false);
+        this.userToDelete.set(null);
     }
 
     async onSave(): Promise<void> {
@@ -62,9 +88,11 @@ export class UserManagementPage implements OnInit {
             this.closeModal();
         } else {
             // Handle creation
+            const newId = 'usr-' + Math.random().toString(36).substring(2, 9);
             const newUser = {
                 ...this.editForm(),
-                uuid: 'usr-' + Math.random().toString(36).substring(2, 9),
+                id: newId,
+                uuid: newId,
                 createdAt: new Date().toISOString()
             };
             this.adminFacade.createUser(newUser as UserAdmin);

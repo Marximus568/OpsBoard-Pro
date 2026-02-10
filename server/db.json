@@ -34,6 +34,17 @@
         "role-operator"
       ],
       "createdAt": "2024-01-02T00:00:00Z"
+    },
+    {
+      "id": "usr-verify-bot",
+      "uuid": "usr-verify-bot",
+      "user_email": "verify@opsboard.pro",
+      "full_name": "Verify Bot",
+      "active": true,
+      "permission_roles": [
+        "role-operator"
+      ],
+      "createdAt": "2026-02-10T22:27:58.208Z"
     }
   ],
   "roles": [
@@ -460,7 +471,7 @@
     {
       "id": "audit-1001",
       "timestamp": "2026-02-10T09:00:00Z",
-      "userId": "usr-001",
+      "userId": null,
       "action": "LOGIN",
       "resource": "AUTH",
       "metadata": {
@@ -471,7 +482,7 @@
     {
       "id": "audit-1002",
       "timestamp": "2026-02-10T09:05:00Z",
-      "userId": "usr-001",
+      "userId": null,
       "action": "UPDATE_FLAG",
       "resource": "FEATURE_FLAG",
       "metadata": {
@@ -526,7 +537,7 @@
     {
       "id": "84e2",
       "timestamp": "2026-02-10T19:03:19.575Z",
-      "userId": "usr-001",
+      "userId": null,
       "action": "LOGIN",
       "resource": "AUTH",
       "metadata": {
@@ -537,7 +548,7 @@
     {
       "id": "6c4f",
       "timestamp": "2026-02-10T19:28:32.440Z",
-      "userId": "usr-001",
+      "userId": null,
       "action": "LOGIN",
       "resource": "AUTH",
       "metadata": {
@@ -559,7 +570,7 @@
     {
       "id": "50fa",
       "timestamp": "2026-02-10T19:58:18.665Z",
-      "userId": "usr-001",
+      "userId": null,
       "action": "LOGIN",
       "resource": "AUTH",
       "metadata": {
@@ -665,7 +676,7 @@
     {
       "id": "47b6",
       "timestamp": "2026-02-10T21:19:19.963Z",
-      "userId": "usr-001",
+      "userId": null,
       "action": "LOGIN",
       "resource": "AUTH",
       "metadata": {
@@ -970,6 +981,109 @@
       "resource": "DEPLOYMENT",
       "metadata": {
         "deploymentId": "dep-202"
+      }
+    },
+    {
+      "id": "a097",
+      "timestamp": "2026-02-10T22:20:30.342Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "ce4c",
+      "timestamp": "2026-02-10T22:20:39.841Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "463e",
+      "timestamp": "2026-02-10T22:21:07.909Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "0ddc",
+      "timestamp": "2026-02-10T22:22:39.494Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "66b7",
+      "timestamp": "2026-02-10T22:27:58.219Z",
+      "userId": "admin",
+      "action": "CREATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-q9novhy",
+        "user": {
+          "uuid": "usr-q9novhy",
+          "user_email": "verify@opsboard.pro",
+          "full_name": "Verify Bot",
+          "active": true,
+          "permission_roles": [
+            "role-operator"
+          ],
+          "createdAt": "2026-02-10T22:27:58.208Z"
+        }
+      }
+    },
+    {
+      "id": "2938",
+      "timestamp": "2026-02-10T22:28:19.155Z",
+      "userId": "admin",
+      "action": "DELETE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001"
+      }
+    },
+    {
+      "id": "6918",
+      "timestamp": "2026-02-10T22:30:55.289Z",
+      "userId": "admin",
+      "action": "CREATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-bmjsa8f",
+        "user": {
+          "uuid": "usr-bmjsa8f",
+          "user_email": "fix@opsboard.pro",
+          "full_name": "Fix Verify",
+          "active": true,
+          "permission_roles": [
+            "role-operator"
+          ],
+          "createdAt": "2026-02-10T22:30:55.274Z"
+        }
+      }
+    },
+    {
+      "id": "8c8f",
+      "timestamp": "2026-02-10T22:31:09.923Z",
+      "userId": "admin",
+      "action": "DELETE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-bmjsa8f"
       }
     }
   ]

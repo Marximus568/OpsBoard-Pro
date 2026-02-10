@@ -56,7 +56,7 @@ import { first } from 'rxjs';
             gap: 1.5rem;
         }
         .back-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--surface-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
             width: 42px;
@@ -67,7 +67,7 @@ import { first } from 'rxjs';
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
-            &:hover { background: rgba(255, 255, 255, 0.1); }
+            &:hover { background: var(--bg-icon-wrapper); }
         }
         .page-header h1 {
             font-size: 1.875rem;

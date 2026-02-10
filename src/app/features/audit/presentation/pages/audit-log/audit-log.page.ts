@@ -7,6 +7,8 @@ import { ButtonComponent } from '../../../../../shared/ui/atoms/button/button.co
 import { IconComponent } from '../../../../../shared/ui/atoms/icon/icon.component';
 
 
+import { AuditLog } from '../../../domain/models/audit-log.entity';
+
 @Component({
     selector: 'app-audit-log',
     standalone: true,
@@ -29,7 +31,7 @@ export class AuditLogPage implements OnInit {
         const term = this.searchTerm().toLowerCase();
         const action = this.filterAction();
         return this.logs().filter(log => {
-            const matchesTerm = log.userId.toLowerCase().includes(term) || log.resource.toLowerCase().includes(term);
+            const matchesTerm = (log.userId?.toLowerCase() || '').includes(term) || (log.resource?.toLowerCase() || '').includes(term);
             const matchesAction = action ? log.action === action : true;
             return matchesTerm && matchesAction;
         });
@@ -37,6 +39,20 @@ export class AuditLogPage implements OnInit {
 
     ngOnInit(): void {
         this.auditFacade.loadLogs();
+    }
+
+    getUserIdentifier(log: AuditLog): string {
+        if (log.userId) return log.userId;
+        const email = log.metadata?.['email'];
+        if (typeof email === 'string') return email;
+        const username = log.metadata?.['username'];
+        if (typeof username === 'string') return username;
+        return 'Unknown User';
+    }
+
+    getUserAvatar(log: AuditLog): string {
+        const identifier = this.getUserIdentifier(log);
+        return identifier.charAt(0).toUpperCase();
     }
 
     exportToCsv(): void {

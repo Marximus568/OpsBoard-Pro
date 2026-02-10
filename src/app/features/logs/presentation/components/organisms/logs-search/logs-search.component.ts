@@ -81,7 +81,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
         .search-container {
             padding: 1.5rem;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--surface-card);
             border: 1px solid var(--border-color);
             margin-bottom: 2rem;
         }
@@ -95,7 +95,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
             flex: 1;
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 0 1rem;
@@ -124,7 +124,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
         .actions { display: flex; gap: 0.75rem; }
         .btn-primary {
             background: var(--primary-color, #6366f1);
-            color: white;
+            color: var(--text-on-primary);
             border: none;
             padding: 0 1.5rem;
             border-radius: 10px;
@@ -134,7 +134,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
             &:hover { opacity: 0.9; }
         }
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--surface-card);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
             padding: 0 1.25rem;
@@ -144,14 +144,14 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
             gap: 0.5rem;
             cursor: pointer;
             &:disabled { opacity: 0.5; cursor: not-allowed; }
-            &:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
+            &:hover:not(:disabled) { background: var(--bg-icon-wrapper); }
         }
         .btn-icon {
             width: 48px;
             height: 48px;
             border-radius: 10px;
             border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--surface-card);
             color: var(--text-primary);
             display: flex;
             align-items: center;
@@ -196,7 +196,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
                     content: 'check';
                     font-family: 'Material Icons';
                     font-size: 14px;
-                    color: white;
+                    color: var(--text-on-primary);
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -205,7 +205,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
             }
         }
         .filter-select {
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
             height: 40px;

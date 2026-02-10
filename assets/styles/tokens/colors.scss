@@ -72,9 +72,28 @@ $border-color: $color-gray-200;
   --color-gray-900: #{$color-gray-900};
 
   /* Theme Defaults (Light) */
-  --bg-primary: var(--color-white);
-  --bg-secondary: var(--color-gray-50);
+  --bg-primary: var(--color-gray-50); // Changed to gray-50 for better contrast with cards
+  --bg-secondary: var(--color-white);
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-500);
   --border-color: var(--color-gray-200);
+
+  /* Status Colors (Default/Light) */
+  --status-success: var(--color-success);
+  --status-error: var(--color-error);
+  --status-warning: var(--color-warning);
+  --status-info: var(--color-info);
+  --status-open: var(--color-success);
+  /* Map Open to Success/Green */
+  --status-progress: var(--color-info);
+  /* Map Progress to Info/Blue */
+
+  /* Surface & Semantic (Light Mode defaults) */
+  --surface-1: var(--color-white);
+  --surface-2: var(--color-gray-50);
+  --surface-card: var(--color-white);
+
+  --bg-icon-wrapper: rgba(0, 0, 0, 0.05);
+  /* Dark for light background */
+  --border-subtle: rgba(0, 0, 0, 0.05);
 }

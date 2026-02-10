@@ -25,8 +25,8 @@ import { IncidentCreateFormComponent } from '../../components/organisms/incident
   `,
     styles: [`
     .page-container { padding: 32px; max-width: 800px; margin: 0 auto; }
-    .page-header { margin-bottom: 32px; h1 { margin: 0; color: white; } p { color: #8b949e; } }
-    .form-wrapper { box-shadow: 0 8px 24px rgba(0,0,0,0.4); border-radius: 12px; }
+    .page-header { margin-bottom: 32px; h1 { margin: 0; color: var(--text-primary); } p { color: var(--text-secondary); } }
+    .form-wrapper { box-shadow: var(--shadow-lg); border-radius: 12px; background: var(--surface-card); }
   `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
