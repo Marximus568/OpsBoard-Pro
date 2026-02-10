@@ -1,173 +1,110 @@
-# OpsBoard Pro – AI Development Rules
+# OpsBoard Pro – AI Development Rules (Enterprise Edition)
 
 ## 1. Business Context (Highest Priority)
-
-OpsBoard Pro is an internal operations console for managing:
-- Incidents
-- Deployments
-- Logs
-- Role-Based Access Control (RBAC)
-- Audit trails
-
-The application is authenticated, role-based, and not SEO-oriented.
-
-All features MUST respect:
-- Auditability
-- Traceability
-- Access control
-
-Business rules always override technical or stylistic rules.
+OpsBoard Pro is a professional-grade internal operations console.
+- **Goal**: Auditability, Traceability, and strict RBAC.
+- **Rule**: Business requirements ALWAYS override technical convenience.
+- **Traceability**: Every critical state change MUST be auditable.
 
 ---
 
-## 2. System Architecture (Non-Negotiable)
+## 2. Core Architecture: Enterprise & Clean
+We follow a strict mandatory architecture based on Clean Architecture and Atomic Design.
 
-- The application follows Clean Architecture adapted for Angular.
-- Dependency direction is strict and unidirectional:
+### Mandatory Directory Structure
+```
+src/app/
+├── core/        (Singleton services, interceptors, guards, global config, auth services, logging)
+├── shared/      (Atomic Design UI + reusable utilities)
+│   └── ui/
+│       ├── atoms/
+│       ├── molecules/
+│       ├── organisms/
+│       └── templates/
+├── features/    (Lazy-loaded features: auth, dashboard, incidents, deployments, logs, admin, audit)
+├── layouts/     (Global layout components: shell, sidenav, topbar, footer)
+└── assets/
+    └── styles/  (Global design tokens, variables, base themes)
+```
 
-  Presentation → Application → Domain
-
-- Infrastructure is an outer layer and must NEVER be referenced by UI.
-
-### Forbidden Dependencies
-- Domain importing:
-  - Angular
-  - RxJS
-  - HttpClient
-  - Browser APIs
-  - Any framework-specific code
-- Cross-feature imports
-- Presentation importing Infrastructure directly
-
----
-
-## 3. Domain Rules
-
-- Domain code MUST be framework-agnostic.
-- Domain MUST NOT depend on Angular, RxJS, HTTP, or browser APIs.
-
-The Domain layer defines ONLY:
-- Business models
-- Business rules
-- Use cases
-- Repository interfaces (ports)
-
-The Domain layer contains NO state management and NO side effects.
+### Strategic Dependencies
+- **Core**: Only imported by `AppModule`/`app.config.ts`.
+- **Shared**: Imported by features as needed.
+- **Features**: MUST be lazy-loaded. No cross-feature dependencies.
+- **Direction**: Presentation → Application (Facades) → Domain.
+- **Infrastructure**: Outer layer implementing Domain interfaces. Invisible to the UI.
 
 ---
 
-## 4. Feature Architecture (Bounded Contexts)
+## 3. Presentation Layer: Atomic Design & Smart/Dumb
+We follow a strict **Smart vs Dumb** and **Atomic Design** pattern.
 
-- Each feature is a bounded context.
-- Each feature MUST expose exactly ONE Facade.
-- Features MUST be lazy-loaded.
-- No feature may depend on another feature directly.
+### Smart Components (Pages & Containers)
+- **Location**: `features/feature-name/presentation/pages/`
+- **Responsibility**: Orchestration.
+- **Actions**: Inject Facades, handle routing, manage complex state transitions.
+- **Naming**: `*-page.ts` or `*-container.ts`.
 
-### Mandatory Feature Structure
+### Dumb Components (Atoms, Molecules, Organisms)
+- **Location**: `shared/ui/` (global) or `features/feature-name/presentation/components/` (local).
+- **Rules**: 
+  - NO service injection. 
+  - Data via `@Input`. Events via `@Output`.
+  - MUST be stateless and reusable.
+- **Naming**: Standard `*.component.ts`.
 
-feature-x/
-├── domain/
-├── application/
-├── presentation/
-├── feature-x.routes.ts
-└── feature-x.providers.ts
-
-
----
-
-## 5. Application Layer
-
-- Each feature exposes a single Facade.
-- State management lives exclusively in this layer.
-- DTO ↔ Domain mapping MUST occur here.
-- Application orchestrates:
-  - Use cases
-  - State transitions
-  - Security decisions (but not enforcement)
-
-The Application layer depends on Domain, never the inverse.
+### Strategic Rules
+- **Change Detection**: MUST use `ChangeDetectionStrategy.OnPush` everywhere.
+- **Performance**: Use `@defer` for non-critical sections and prefetching for heavy routes.
+- **Templates**: No inline templates/styles (use `.html` and `.scss`).
 
 ---
 
-## 6. Infrastructure Layer
+## 4. State Management (Application Layer)
+State lives exclusively in the Application layer, accessed only via **Facades**.
 
-- All I/O logic lives here:
-  - HTTP
-  - APIs
-  - Storage
-  - External services
-- Infrastructure implements Domain repository interfaces.
-- NO business rules allowed.
-- NO UI imports allowed.
-
-Infrastructure is replaceable without affecting Domain or UI.
+- **Preferred Stack**: `NgRx SignalStore` or `NgRx Global Store`.
+- **Facade Pattern**: Each feature MUST expose exactly one facade (e.g., `IncidentsFacade`).
+- **Mappers**: Dedicated mappers `DTO ↔ Domain` MUST be used to isolate the UI from the API.
 
 ---
 
-## 7. Presentation Layer
+## 5. Infrastructure & Critical Concerns
 
-- Pages and containers are smart.
-- UI components are dumb by default.
-- UI communicates with the Application layer ONLY via Facades.
-- UI MUST NOT contain business logic.
+### Centralized Error Handling
+- Errors MUST be normalized in the Infrastructure layer.
+- UI reacts to error states via Facades/Signals, never via raw HTTP error objects.
 
-Presentation depends on Application, never on Infrastructure.
+### Mandatory Interceptors
+- **AuthInterceptor**: Injects tokens into outgoing requests.
+- **CorrelationIdInterceptor**: Adds `X-Correlation-Id` for end-to-end traceability.
+- **RetryInterceptor**: Implements exponential backoff for transient failures.
+- **ErrorNormalizationInterceptor**: Standardizes API errors into domain-friendly types.
 
----
-
-## 8. UI Architecture
-
-- Atomic Design is mandatory.
-- Atoms and Molecules:
-  - MUST NOT inject services
-  - MUST be stateless and reusable
-- Organisms and Pages may interact with Facades.
-
----
-
-## 9. Styling Rules
-
-- Use SCSS and CSS Variables.
-- All colors, spacing, and typography use design tokens.
-- No inline styles or inline templates. All components MUST use external `.html` and `.scss` files.
-- Tailwind is NOT allowed as a base styling solution.
-
-## 10. Component Design
-- Prefer reuse of shared components (`shared/components/atoms`) over feature-specific implementations for generic UI elements (badges, cards, buttons).
-- All UI components MUST specify `ChangeDetectionStrategy.OnPush`.
+### Guards & Security
+- **AuthGuard**: Enforces login status.
+- **RoleGuard**: Enforces RBAC permissions.
+- **FeatureGuard**: Enforces feature flag availability.
+- **Location**: All global guards live in `core/guards/`.
 
 ---
 
-## 10. State and Security
+## 6. Styling & Design Tokens
+We use a **Double-Layer Styling** approach.
 
-- State is feature-scoped.
-- Global mutable state is forbidden.
-- RBAC and feature flags MUST be enforced via guards.
-- All critical actions MUST generate an `AuditEvent`.
+### Global Layer (`src/assets/styles/`)
+- Contains all base design tokens (colors, spacing, shadows, typography).
+- Defines the core design system that ensures consistency across the whole app.
+- **Note**: Use SCSS variables and CSS variables for tokens.
 
-Security is enforced at:
-- Route level
-- Application level
-- Never in the Domain
-
----
-
-## 11. Structure Rules
-
-- No cross-feature imports.
-- Shared code lives ONLY in `shared/`.
-- Feature folders MUST follow:
-  - domain/
-  - application/
-  - presentation/
-
-Violations of structure are considered architectural defects.
+### Feature Layer (Specialization)
+- Each feature component may have its own `.scss` file to *specialize* core tokens.
+- **Rule**: Regional styling MUST NOT break global consistency.
+- **Pro Style**: Use premium aesthetics (glassmorphism, micro-animations, curated palettes).
 
 ---
 
-## 12. Testing Rules
-
-- Tests must verify behavior, not implementation details.
-- Domain logic MUST be tested without Angular TestBed.
-- Application logic may be tested with mocked ports.
-- UI tests assert inputs, outputs, and accessibility only.
+## 7. Testing Standards
+- **Domain**: 100% logic coverage without `TestBed`.
+- **Application**: Test facades via mocked repository implementations.
+- **Component**: Assert `@Input`/`@Output` contracts and basic rendering.

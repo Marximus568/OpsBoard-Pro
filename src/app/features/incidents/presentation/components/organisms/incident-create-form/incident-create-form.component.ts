@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PriorityLevel } from '../../../../domain/value-objects/priority.vo';
 import { SeverityLevel } from '../../../../domain/value-objects/severity.vo';
-import { ButtonComponent } from '../../../../../../shared/components/atoms/button/button.component';
+import { ButtonComponent } from '../../../../../../shared/ui/atoms/button/button.component';
 
 export type FormStep = 1 | 2 | 3;
 

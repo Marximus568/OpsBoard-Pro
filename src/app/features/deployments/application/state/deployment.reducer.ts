@@ -23,5 +23,8 @@ export const deploymentReducer = createReducer(
     on(DeploymentActions.loadDeploymentsSuccess, (state, { deployments }) =>
         adapter.setAll(deployments, { ...state, loading: false })),
     on(DeploymentActions.loadDeploymentsFailure, (state, { error }) =>
-        ({ ...state, loading: false, error }))
+        ({ ...state, loading: false, error })),
+    on(DeploymentActions.selectDeployment, (state, { id }) => ({ ...state, selectedId: id })),
+    on(DeploymentActions.approveDeployment, (state, { id }) => state), // Handled by effects
+    on(DeploymentActions.rejectDeployment, (state, { id }) => state)   // Handled by effects
 );

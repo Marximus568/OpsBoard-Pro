@@ -18,5 +18,16 @@
         </select>
     </div>
 
+    <div class="advanced-filters">
+        <input type="text" placeholder="Service..." [(ngModel)]="filters.service" (ngModelChange)="onFilterChange()">
+
+        <div class="date-range">
+            <input type="date" [(ngModel)]="filters.dateRange.start" (ngModelChange)="onFilterChange()"
+                title="Start Date">
+            <span>-</span>
+            <input type="date" [(ngModel)]="filters.dateRange.end" (ngModelChange)="onFilterChange()" title="End Date">
+        </div>
+    </div>
+
     <button class="btn-reset" (click)="reset()">Reset</button>
 </div>

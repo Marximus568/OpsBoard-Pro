@@ -17,6 +17,7 @@ export class LogsFacade implements OnDestroy {
     private readonly _logs = signal<LogEntry[]>([]);
     private readonly _filters = signal<LogFilters>({});
     private readonly _isStreaming = signal<boolean>(true);
+    private readonly _savedSearches = signal<string[]>(this.loadSavedSearches());
     private readonly _maxBufferSize = 500;
 
     // Derived State
@@ -26,6 +27,7 @@ export class LogsFacade implements OnDestroy {
 
     readonly isStreaming = this._isStreaming.asReadonly();
     readonly filters = this._filters.asReadonly();
+    readonly savedSearches = this._savedSearches.asReadonly();
 
     // Stream control
     private destroy$ = new Subject<void>();
@@ -56,6 +58,64 @@ export class LogsFacade implements OnDestroy {
         this._logs.set([]);
     }
 
+    // Saved Searches logic
+    saveSearch(query: string): void {
+        if (!query || this._savedSearches().includes(query)) return;
+        this._savedSearches.update(s => {
+            const next = [query, ...s].slice(0, 10);
+            localStorage.setItem('opsboard_saved_logs_searches', JSON.stringify(next));
+            return next;
+        });
+    }
+
+    removeSearch(query: string): void {
+        this._savedSearches.update(s => {
+            const next = s.filter(i => i !== query);
+            localStorage.setItem('opsboard_saved_logs_searches', JSON.stringify(next));
+            return next;
+        });
+    }
+
+    private loadSavedSearches(): string[] {
+        const saved = localStorage.getItem('opsboard_saved_logs_searches');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    // Quick Filters
+    applyQuickFilter(type: 'ERRORS' | 'LAST_HOUR' | 'ALL'): void {
+        switch (type) {
+            case 'ERRORS':
+                this.updateFilters({ levels: [LogLevel.ERROR], query: undefined });
+                break;
+            case 'LAST_HOUR':
+                const oneHourAgo = new Date();
+                oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+                this.updateFilters({ dateFrom: oneHourAgo, levels: undefined });
+                break;
+            case 'ALL':
+                this.updateFilters({ levels: undefined, query: undefined, dateFrom: undefined });
+                break;
+        }
+    }
+
+    async copyToClipboard(content: string): Promise<void> {
+        await navigator.clipboard.writeText(content);
+    }
+
+    exportLogs(): void {
+        const content = this.filteredLogs()
+            .map(log => log.toFormattedString())
+            .join('\n');
+
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `logs-export-${new Date().getTime()}.log`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+
     private appendLog(log: LogEntry): void {
         this._logs.update(logs => {
             const next = [log, ...logs];
@@ -82,12 +142,6 @@ export class LogsFacade implements OnDestroy {
             message: messages[Math.floor(Math.random() * messages.length)],
             payload: { traceId: crypto.randomUUID(), detail: 'Mock log entry' }
         });
-    }
-
-    exportLogs(): string {
-        return this.filteredLogs()
-            .map(log => log.toFormattedString())
-            .join('\n');
     }
 
     ngOnDestroy(): void {

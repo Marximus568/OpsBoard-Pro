@@ -1,0 +1,29 @@
+<div class="flags-container">
+    <div class="page-header">
+        <h1>Feature Flags</h1>
+        <app-button variant="primary">
+            <app-icon name="plus" size="sm"></app-icon> New Flag
+        </app-button>
+    </div>
+
+    <div class="flags-list">
+        <div class="flag-item" *ngFor="let flag of flags()">
+            <div class="flag-info">
+                <div class="flag-header">
+                    <h3>{{ flag.name }}</h3>
+                    <app-badge [type]="getScopeBadge(flag.scope)">{{ flag.scope }}</app-badge>
+                </div>
+                <p class="flag-desc">{{ flag.description }}</p>
+                <code class="flag-key">{{ flag.key }}</code>
+            </div>
+
+            <div class="flag-control">
+                <label class="switch">
+                    <input type="checkbox" [checked]="flag.enabled" (change)="onToggle(flag)">
+                    <span class="slider round"></span>
+                </label>
+                <span class="status-label">{{ flag.enabled ? 'Enabled' : 'Disabled' }}</span>
+            </div>
+        </div>
+    </div>
+</div>

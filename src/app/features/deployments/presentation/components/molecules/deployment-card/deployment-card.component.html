@@ -1,6 +1,9 @@
 <div class="deployment-card" [class.running]="deployment.status === 'RUNNING'">
     <div class="card-header">
-        <span class="version">{{ deployment.version }}</span>
+        <div class="service-info">
+            <span class="service-name">{{ deployment.service }}</span>
+            <span class="version">{{ deployment.version }}</span>
+        </div>
         <app-badge [type]="getStatusType()">{{ deployment.status }}</app-badge>
     </div>
 

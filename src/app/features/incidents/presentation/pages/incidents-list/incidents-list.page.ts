@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IncidentsFacade } from '../../../application/incidents.facade';
 import { IncidentListViewComponent } from '../../components/organisms/incident-list-view/incident-list-view.component';
 import { FilterFormComponent, IncidentFilters } from '../../components/molecules/filter-form/filter-form.component';
-import { ButtonComponent } from '../../../../../shared/components/atoms/button/button.component';
+import { ButtonComponent } from '../../../../../shared/ui/atoms/button/button.component';
 
 import { Router } from '@angular/router';
 

@@ -20,11 +20,27 @@
     margin-bottom: 1rem;
 }
 
+.service-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.service-name {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
 .version {
     font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--primary-color);
-    font-size: 1rem;
+    font-size: 0.875rem;
+    background: rgba(99, 102, 241, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    width: fit-content;
 }
 
 .card-body {

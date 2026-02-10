@@ -1,0 +1,62 @@
+<div class="audit-page">
+    <header class="page-header">
+        <h1>Audit Tracing</h1>
+        <p class="subtitle">System-wide critical action logs</p>
+    </header>
+
+    <div class="toolbar">
+        <div class="search-box">
+            <app-icon name="search" [size]="20"></app-icon>
+            <input type="text" placeholder="Search user or resource..." [ngModel]="searchTerm()"
+                (ngModelChange)="searchTerm.set($event)">
+        </div>
+
+        <div class="actions">
+            <app-button variant="outline" (click)="exportToCsv()">
+                <app-icon name="download" [size]="18"></app-icon>
+                Export CSV
+            </app-button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>User ID</th>
+                    <th>Action</th>
+                    <th>Resource</th>
+                    <th>Metadata</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let log of filteredLogs()">
+                    <td class="timestamp">{{ log.timestamp | date:'medium' }}</td>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">{{ log.userId.charAt(0).toUpperCase() }}</span>
+                            <span>{{ log.userId }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <app-badge [type]="'info'">{{ log.action }}</app-badge>
+                    </td>
+                    <td class="resource">{{ log.resource }}</td>
+                    <td class="metadata">
+                        <code *ngIf="log.metadata">{{ log.metadata | json }}</code>
+                        <span *ngIf="!log.metadata" class="text-muted">-</span>
+                    </td>
+                </tr>
+                <tr *ngIf="filteredLogs().length === 0">
+                    <td colspan="5" class="empty-state">
+                        <div class="empty-content">
+                            <app-icon name="search" [size]="48"></app-icon>
+                            <p>No audit logs found matching criteria.</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

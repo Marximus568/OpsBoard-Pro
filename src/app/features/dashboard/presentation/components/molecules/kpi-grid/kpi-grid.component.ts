@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KpiCardComponent } from '../../../../../../shared/components/atoms/kpi-card/kpi-card.component';
+import { KpiCardComponent } from '../../../../../../shared/ui/atoms/kpi-card/kpi-card.component';
 import { KpiMetric } from '../../../../domain/dashboard-metrics.model';
 
 @Component({

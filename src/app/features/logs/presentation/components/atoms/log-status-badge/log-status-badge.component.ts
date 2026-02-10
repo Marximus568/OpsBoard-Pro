@@ -1,7 +1,7 @@
 import { Component, Input, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogLevel } from '../../../../domain/models/log-level.enum';
-import { BadgeComponent, BadgeType } from '../../../../../../shared/components/atoms/badge/badge.component';
+import { BadgeComponent, BadgeType } from '../../../../../../shared/ui/atoms/badge/badge.component';
 
 @Component({
     selector: 'app-log-status-badge',

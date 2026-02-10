@@ -21,6 +21,9 @@
         <div class="chart-item severity">
             <app-severity-bar-chart [data]="facade.severityDistribution()"></app-severity-bar-chart>
         </div>
+        <div class="chart-item recent-activity">
+            <app-recent-incidents-list [incidents]="facade.recentIncidents()"></app-recent-incidents-list>
+        </div>
     </section>
     } @placeholder {
     <div class="loading-placeholder">Cargando visualizaciones...</div>

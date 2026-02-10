@@ -48,7 +48,11 @@
 }
 
 .severity {
-    grid-column: span 12;
+    grid-column: span 5;
+}
+
+.recent-activity {
+    grid-column: span 7;
 }
 
 @media (max-width: 1300px) {

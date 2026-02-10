@@ -1,10 +1,17 @@
 <div class="page-container">
     <header class="page-header">
-        <h1>Logs Explorer</h1>
-        <p>Análisis y monitoreo de registros en tiempo real.</p>
+        <div class="header-left">
+            <h1>Logs Explorer</h1>
+            <p>Análisis y monitoreo de registros en tiempo real con capacidades de streaming.</p>
+        </div>
+        <div class="header-right">
+            <app-quick-filters></app-quick-filters>
+        </div>
     </header>
 
-    <app-search-filter-bar></app-search-filter-bar>
+    <section class="search-section">
+        <app-logs-search></app-logs-search>
+    </section>
 
     <main class="content">
         <app-logs-viewer></app-logs-viewer>

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
-import { ShellLayoutComponent } from './shared/layouts/shell-layout/shell-layout.component';
+import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { ShellLayoutComponent } from './layouts/shell/shell-layout.component';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -24,6 +24,18 @@ export const routes: Routes = [
             {
                 path: 'logs',
                 loadChildren: () => import('./features/logs/logs.routes').then(m => m.LOGS_ROUTES)
+            },
+            {
+                path: 'admin',
+                canActivate: [() => import('./core/guards/role.guard').then(m => m.roleGuard)],
+                data: { roles: ['role-admin'] },
+                loadChildren: () => import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES)
+            },
+            {
+                path: 'audit',
+                canActivate: [() => import('./core/guards/role.guard').then(m => m.roleGuard)],
+                data: { roles: ['role-admin'] },
+                loadChildren: () => import('./features/audit/audit.routes').then(m => m.AUDIT_ROUTES)
             },
             {
                 path: '',

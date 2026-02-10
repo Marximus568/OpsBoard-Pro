@@ -5,6 +5,7 @@ import { KpiGridComponent } from '../../components/molecules/kpi-grid/kpi-grid.c
 import { SeverityBarChartComponent } from '../../components/organisms/severity-bar-chart/severity-bar-chart.component';
 import { TrendLineChartComponent } from '../../components/organisms/trend-line-chart/trend-line-chart.component';
 import { DistributionPieChartComponent } from '../../components/organisms/distribution-pie-chart/distribution-pie-chart.component';
+import { RecentIncidentsListComponent } from '../../components/organisms/recent-incidents-list/recent-incidents-list.component';
 
 @Component({
     selector: 'app-dashboard-page',
@@ -14,7 +15,8 @@ import { DistributionPieChartComponent } from '../../components/organisms/distri
         KpiGridComponent,
         SeverityBarChartComponent,
         TrendLineChartComponent,
-        DistributionPieChartComponent
+        DistributionPieChartComponent,
+        RecentIncidentsListComponent
     ],
     templateUrl: './dashboard.page.html',
     styleUrls: ['./dashboard.page.scss'],

@@ -36,8 +36,22 @@ export const selectFilteredIncidents = createSelector(
             const matchesStatus = filters.status === 'ALL' || incident.status.value === filters.status;
             const matchesPriority = filters.priority === 'ALL' || incident.priority.value === filters.priority;
             const matchesSeverity = filters.severity === 'ALL' || incident.severity.value === filters.severity;
+            const matchesService = filters.service === 'ALL' || incident.service.toLowerCase().includes(filters.service.toLowerCase());
 
-            return matchesSearch && matchesStatus && matchesPriority && matchesSeverity;
+            let matchesDate = true;
+            if (filters.dateRange.start || filters.dateRange.end) {
+                const incTime = incident.createdAt.getTime();
+                if (filters.dateRange.start) {
+                    matchesDate = matchesDate && incTime >= new Date(filters.dateRange.start).getTime();
+                }
+                if (filters.dateRange.end) {
+                    const endDate = new Date(filters.dateRange.end);
+                    endDate.setHours(23, 59, 59, 999);
+                    matchesDate = matchesDate && incTime <= endDate.getTime();
+                }
+            }
+
+            return matchesSearch && matchesStatus && matchesPriority && matchesSeverity && matchesService && matchesDate;
         });
     }
 );

@@ -1,0 +1,149 @@
+@use '../../../../../../assets/styles/tokens/colors';
+@use '../../../../../../assets/styles/tokens/spacing';
+@use '../../../../../../assets/styles/tokens/typography';
+
+.user-management-container {
+    padding: spacing.$spacing-xl;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: spacing.$spacing-lg;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            font-size: typography.$font-size-2xl;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+    }
+
+    .table-card {
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        flex: 1;
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th,
+            td {
+                padding: spacing.$spacing-md;
+                text-align: left;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            th {
+                background: rgba(255, 255, 255, 0.03);
+                color: var(--text-secondary);
+                font-weight: 500;
+                font-size: typography.$font-size-sm;
+            }
+
+            td {
+                color: var(--text-primary);
+                font-size: typography.$font-size-sm;
+
+                .user-info {
+                    display: flex;
+                    align-items: center;
+                    gap: spacing.$spacing-sm;
+
+                    .avatar {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: var(--color-primary-500);
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 600;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Modal Styles (Simple implementation)
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+
+    .modal-content {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        width: 500px;
+        padding: spacing.$spacing-lg;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: spacing.$spacing-lg;
+
+            h2 {
+                margin: 0;
+                font-size: typography.$font-size-xl;
+            }
+
+            .close-btn {
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--text-secondary);
+            }
+        }
+
+        .form-group {
+            margin-bottom: spacing.$spacing-md;
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                color: var(--text-secondary);
+                font-size: typography.$font-size-xs;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border-color);
+                border-radius: 6px;
+                color: var(--text-primary);
+
+                &:focus {
+                    outline: none;
+                    border-color: var(--color-primary-500);
+                }
+            }
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: spacing.$spacing-sm;
+            margin-top: spacing.$spacing-xl;
+        }
+    }
+}

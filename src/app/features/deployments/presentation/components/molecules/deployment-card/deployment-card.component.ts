@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Deployment } from '../../../../domain/models/deployment.entity';
-import { BadgeComponent, BadgeType } from '../../../../../../shared/components/atoms/badge/badge.component';
+import { BadgeComponent, BadgeType } from '../../../../../../shared/ui/atoms/badge/badge.component';
 import { DeploymentStatus } from '../../../../domain/models/deployment-status.model';
 
 @Component({
@@ -18,8 +18,8 @@ export class DeploymentCardComponent {
     getStatusType(): BadgeType {
         const map: Record<DeploymentStatus, BadgeType> = {
             [DeploymentStatus.REQUESTED]: 'default',
-            [DeploymentStatus.REVIEW]: 'primary',
-            [DeploymentStatus.APPROVED]: 'success',
+            [DeploymentStatus.REVIEW]: 'info',
+            [DeploymentStatus.APPROVED]: 'warning',
             [DeploymentStatus.RUNNING]: 'primary',
             [DeploymentStatus.SUCCESS]: 'success',
             [DeploymentStatus.FAILED]: 'error'

@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { authState, selectUser, selectIsAuthenticated, selectIsLoading, selectAuthError, selectMfaRequired, AuthState } from './auth.state';
 import { IAUTH_REPOSITORY } from '../domain/repositories/auth.repository';
+import { AuditService } from '../../../core/services/audit.service';
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +10,7 @@ import { IAUTH_REPOSITORY } from '../domain/repositories/auth.repository';
 export class AuthFacade {
     private readonly authRepository = inject(IAUTH_REPOSITORY);
     private readonly router = inject(Router);
+    private readonly auditService = inject(AuditService);
 
     // Selectors
     readonly user = selectUser;
@@ -17,10 +19,16 @@ export class AuthFacade {
     readonly isLoading = selectIsLoading;
     readonly error = selectAuthError;
 
-    async login(credentials: unknown, returnUrl?: string): Promise<void> {
+    async login(credentials: any, returnUrl?: string): Promise<void> {
         this.updateState({ isLoading: true, error: null });
         try {
             const result = await this.authRepository.login(credentials);
+
+            if (credentials.rememberMe) {
+                localStorage.setItem('opsboard_remembered_email', credentials.email);
+            } else {
+                localStorage.removeItem('opsboard_remembered_email');
+            }
 
             if (result.requiresMfa) {
                 this.updateState({
@@ -35,14 +43,39 @@ export class AuthFacade {
                     mfaRequired: false,
                     isLoading: false
                 });
+                this.auditService.log('LOGIN', 'AUTH', result.user.id, { email: credentials.email, method: 'password' });
                 await this.router.navigateByUrl(returnUrl || '/dashboard');
+
+                // Simulate Pro Refresh Logic
+                this.startRefreshTimer(result.tokens);
             }
         } catch (err) {
+            this.auditService.log('LOGIN_FAILED', 'AUTH', 'unknown', { email: credentials.email, error: (err as Error).message });
             this.updateState({
                 isLoading: false,
                 error: (err as Error).message || 'Login failed'
             });
         }
+    }
+
+    getRememberedEmail(): string | null {
+        return localStorage.getItem('opsboard_remembered_email');
+    }
+
+    private startRefreshTimer(tokens: any): void {
+        // In a real app, this would refresh before expiry. 
+        // Here we just simulate a "silent refresh" every 5 minutes if logged in.
+        setTimeout(async () => {
+            if (this.isAuthenticated()) {
+                console.log('[Auth] [PRO] Performing silent refresh...');
+                try {
+                    await this.authRepository.refreshToken(tokens.refreshToken);
+                    console.log('[Auth] [PRO] Session refreshed successfully.');
+                } catch (e) {
+                    console.error('[Auth] [PRO] Refresh failed', e);
+                }
+            }
+        }, 300000); // 5 minutes
     }
 
     async verifyMfa(code: string, returnUrl?: string): Promise<void> {
@@ -55,6 +88,7 @@ export class AuthFacade {
                 mfaRequired: false,
                 isLoading: false
             });
+            this.auditService.log('LOGIN', 'AUTH', result.user.id, { method: 'mfa' });
             await this.router.navigateByUrl(returnUrl || '/dashboard');
         } catch (err) {
             this.updateState({
@@ -65,7 +99,11 @@ export class AuthFacade {
     }
 
     async logout(): Promise<void> {
+        const currentUser = this.user();
         try {
+            if (currentUser) {
+                this.auditService.log('LOGOUT', 'AUTH', currentUser.id);
+            }
             await this.authRepository.logout();
         } finally {
             authState.set({

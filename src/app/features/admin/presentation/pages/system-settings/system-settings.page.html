@@ -1,0 +1,28 @@
+<div class="settings-container">
+    <div class="page-header">
+        <h1>System Settings</h1>
+        <app-button variant="secondary">
+            <app-icon name="sync" size="sm"></app-icon> Reset Defaults
+        </app-button>
+    </div>
+
+    <div class="settings-grid">
+        <div class="category-section" *ngFor="let category of categories()">
+            <h2 class="category-title">{{ category }}</h2>
+
+            <div class="config-card" *ngFor="let config of groupedConfigs()[category]">
+                <div class="config-info">
+                    <label>{{ config.key }}</label>
+                    <span class="config-id">{{ config.id }}</span>
+                </div>
+
+                <div class="config-input">
+                    <input type="text" [ngModel]="config.value" (change)="onSave(config, $any($event.target).value)">
+                    <button class="save-indicator" title="Saved">
+                        <app-icon name="check" size="sm"></app-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,3 +21,14 @@ export const selectDeploymentError = createSelector(
     selectDeploymentState,
     (state) => state.error
 );
+
+export const selectSelectedId = createSelector(
+    selectDeploymentState,
+    (state) => state.selectedId
+);
+
+export const selectActiveDeployment = createSelector(
+    selectAllDeployments,
+    selectSelectedId,
+    (deployments, id) => id ? deployments.find(d => d.id === id) || null : null
+);

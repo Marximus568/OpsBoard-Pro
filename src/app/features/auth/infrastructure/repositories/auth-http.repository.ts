@@ -31,10 +31,19 @@ export class AuthHttpRepository implements IAuthRepository {
         const users: UserDto[] = await firstValueFrom(this.api.getUsersByEmail(creds.email || ''));
         const foundUser = users[0];
 
-        // Step 2: Validate (In a mock/local environment this happens here, in production the API handles it)
+        // Step 2: Validate
         if (foundUser && foundUser.password === creds.password) {
 
-            // Step 3: Simulate AuthResponse (Simulating backend JWT generation)
+            // Step 3: Simulate MFA Requirement for Admin
+            if (foundUser.user_email === 'admin@opsboard.pro') {
+                return {
+                    user: AuthMapper.toDomainUser(foundUser),
+                    tokens: new AuthToken('pending', 'pending', 0),
+                    requiresMfa: true
+                };
+            }
+
+            // Step 4: Simulate AuthResponse
             const mockDto: AuthResponseDto = {
                 access_token: 'jwt-mock-' + Math.random().toString(36).substring(7),
                 refresh_token: 'refresh-mock-' + Math.random().toString(36).substring(7),
@@ -42,7 +51,6 @@ export class AuthHttpRepository implements IAuthRepository {
                 user_data: foundUser
             };
 
-            // Step 4: Delegate transformation to Mapper
             const result: LoginResult = {
                 user: AuthMapper.toDomainUser(mockDto.user_data),
                 tokens: AuthMapper.toDomainToken(mockDto),
@@ -59,9 +67,15 @@ export class AuthHttpRepository implements IAuthRepository {
     /**
      * Refreshes the authentication session.
      */
-    async refreshToken(_token: string): Promise<AuthToken> {
-        // Current simulated implementation
-        return new AuthToken('new-mock-jwt', 'new-refresh-token', Date.now() + 3600000);
+    async refreshToken(token: string): Promise<AuthToken> {
+        // Simulate network delay for "Pro" feel
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        return new AuthToken(
+            'new-jwt-' + Math.random().toString(36).substring(7),
+            'new-refresh-' + Math.random().toString(36).substring(7),
+            Date.now() + 3600000
+        );
     }
 
     /**
@@ -74,8 +88,36 @@ export class AuthHttpRepository implements IAuthRepository {
     /**
      * Verifies an MFA challenge.
      */
-    async verifyMfa(_code: string): Promise<LoginResult> {
-        throw new Error('MFA not implemented in mock');
+    async verifyMfa(code: string): Promise<LoginResult> {
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        if (code === '123456') {
+            const mockUser: UserDto = {
+                uuid: 'admin-1',
+                user_email: 'admin@opsboard.pro',
+                full_name: 'Administrator',
+                permission_roles: ['ADMIN']
+            };
+
+            const mockDto: AuthResponseDto = {
+                access_token: 'jwt-mfa-mock-' + Math.random().toString(36).substring(7),
+                refresh_token: 'refresh-mfa-mock-' + Math.random().toString(36).substring(7),
+                expires_in: 3600,
+                user_data: mockUser
+            };
+
+            const result: LoginResult = {
+                user: AuthMapper.toDomainUser(mockDto.user_data),
+                tokens: AuthMapper.toDomainToken(mockDto),
+                requiresMfa: false
+            };
+
+            this.saveTokens(result.tokens);
+            return result;
+        }
+
+        throw new Error('Invalid MFA code. Hint: use 123456');
     }
 
     /**

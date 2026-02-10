@@ -1,0 +1,98 @@
+@use '../../../../../../assets/styles/tokens/colors';
+@use '../../../../../../assets/styles/tokens/spacing';
+@use '../../../../../../assets/styles/tokens/typography';
+
+.settings-container {
+    padding: spacing.$spacing-xl;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: spacing.$spacing-lg;
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            font-size: typography.$font-size-2xl;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+    }
+
+    .settings-grid {
+        display: flex;
+        flex-direction: column;
+        gap: spacing.$spacing-xl;
+
+        .category-section {
+            .category-title {
+                font-size: typography.$font-size-lg;
+                color: var(--color-primary-400);
+                margin-bottom: spacing.$spacing-md;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: spacing.$spacing-xs;
+            }
+
+            .config-card {
+                background: var(--bg-secondary);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: spacing.$spacing-md spacing.$spacing-lg;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: spacing.$spacing-sm;
+
+                .config-info {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+
+                    label {
+                        font-weight: 500;
+                        color: var(--text-primary);
+                    }
+
+                    .config-id {
+                        font-family: monospace;
+                        font-size: 11px;
+                        color: var(--text-secondary);
+                    }
+                }
+
+                .config-input {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+
+                    input {
+                        background: var(--bg-primary);
+                        border: 1px solid var(--border-color);
+                        border-radius: 6px;
+                        padding: 8px 12px;
+                        color: var(--text-primary);
+                        width: 250px;
+
+                        &:focus {
+                            outline: none;
+                            border-color: var(--color-primary-500);
+                        }
+                    }
+
+                    .save-indicator {
+                        background: none;
+                        border: none;
+                        color: var(--color-success);
+                        margin-left: 8px;
+                        opacity: 0;
+                        transition: opacity 0.3s;
+
+                        /* Logic to show this would require more complex state, skipping for now */
+                    }
+                }
+            }
+        }
+    }
+}

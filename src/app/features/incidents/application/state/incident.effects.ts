@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Incident } from '../../domain/models/incident.entity';
 import { of, from } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { IncidentActions } from './incident.actions';
@@ -8,10 +9,13 @@ import { CreateIncidentUseCase } from '../../domain/use-cases/create-incident.us
 import { AssignIncidentUseCase } from '../../domain/use-cases/assign-incident.use-case';
 import { ResolveIncidentUseCase } from '../../domain/use-cases/resolve-incident.use-case';
 
+import { AuditService } from '../../../../core/services/audit.service';
+
 @Injectable()
 export class IncidentEffects {
     private actions$ = inject(Actions);
     private readonly incidentRepo = inject(IINCIDENT_REPOSITORY);
+    private readonly auditService = inject(AuditService);
 
     // Initializing use cases (could also be provided via DI)
     private readonly createUseCase = new CreateIncidentUseCase(this.incidentRepo);
@@ -35,7 +39,10 @@ export class IncidentEffects {
             ofType(IncidentActions.createIncident),
             switchMap(({ incident }) =>
                 from(this.createUseCase.execute(incident as any)).pipe(
-                    map((newIncident) => IncidentActions.createIncidentSuccess({ incident: newIncident })),
+                    tap((newIncident: Incident) => {
+                        this.auditService.log('CREATE_INCIDENT', 'INCIDENT', incident.reporterId || 'system', { incidentId: newIncident.id, title: newIncident.title });
+                    }),
+                    map((newIncident: Incident) => IncidentActions.createIncidentSuccess({ incident: newIncident })),
                     catchError((error) => of(IncidentActions.createIncidentFailure({ error: error.message })))
                 )
             )
@@ -47,7 +54,10 @@ export class IncidentEffects {
             ofType(IncidentActions.assignIncident),
             switchMap(({ incidentId, assigneeId, userId }) =>
                 from(this.assignUseCase.execute({ incidentId, assigneeId, userId })).pipe(
-                    map((updatedIncident) => IncidentActions.assignIncidentSuccess({ incident: updatedIncident })),
+                    tap((updatedIncident: Incident) => {
+                        this.auditService.log('ASSIGN_INCIDENT', 'INCIDENT', userId, { incidentId, assigneeId });
+                    }),
+                    map((updatedIncident: Incident) => IncidentActions.assignIncidentSuccess({ incident: updatedIncident })),
                     catchError((error) => of(IncidentActions.assignIncidentFailure({ error: error.message })))
                 )
             )
@@ -59,7 +69,10 @@ export class IncidentEffects {
             ofType(IncidentActions.resolveIncident),
             switchMap(({ incidentId, userId, comment }) =>
                 from(this.resolveUseCase.execute({ incidentId, userId, comment })).pipe(
-                    map((updatedIncident) => IncidentActions.resolveIncidentSuccess({ incident: updatedIncident })),
+                    tap((updatedIncident: Incident) => {
+                        this.auditService.log('RESOLVE_INCIDENT', 'INCIDENT', userId, { incidentId });
+                    }),
+                    map((updatedIncident: Incident) => IncidentActions.resolveIncidentSuccess({ incident: updatedIncident })),
                     catchError((error) => of(IncidentActions.resolveIncidentFailure({ error: error.message })))
                 )
             )

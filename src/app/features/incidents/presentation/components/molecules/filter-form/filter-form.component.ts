@@ -9,6 +9,8 @@ export interface IncidentFilters {
     status: IncidentStatusEnum | 'ALL';
     priority: PriorityLevel | 'ALL';
     severity: SeverityLevel | 'ALL';
+    service: string | 'ALL';
+    dateRange: { start: string | null; end: string | null };
     search: string;
 }
 
@@ -27,6 +29,8 @@ export class FilterFormComponent {
         status: 'ALL',
         priority: 'ALL',
         severity: 'ALL',
+        service: 'ALL',
+        dateRange: { start: null, end: null },
         search: ''
     };
 
@@ -63,6 +67,8 @@ export class FilterFormComponent {
             status: 'ALL',
             priority: 'ALL',
             severity: 'ALL',
+            service: 'ALL',
+            dateRange: { start: null, end: null },
             search: ''
         };
         this.onFilterChange();

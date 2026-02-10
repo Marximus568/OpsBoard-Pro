@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { DeploymentsFacade } from '../../../../application/deployments.facade';
 import { DeploymentCardComponent } from '../../molecules/deployment-card/deployment-card.component';
 
@@ -11,7 +12,11 @@ import { DeploymentCardComponent } from '../../molecules/deployment-card/deploym
         @if (facade.deployments().length > 0) {
             <div class="deployment-list">
                 @for (dep of facade.deployments(); track dep.id) {
-                    <app-deployment-card [deployment]="dep"></app-deployment-card>
+                    <app-deployment-card 
+                        [deployment]="dep" 
+                        (click)="selectDeployment(dep.id)"
+                        class="clickable-card">
+                    </app-deployment-card>
                 }
             </div>
         } @else {
@@ -26,6 +31,11 @@ import { DeploymentCardComponent } from '../../molecules/deployment-card/deploym
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
         }
+        .clickable-card {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            &:hover { transform: translateY(-4px); }
+        }
         .empty-state {
             padding: 3rem;
             text-align: center;
@@ -39,8 +49,13 @@ import { DeploymentCardComponent } from '../../molecules/deployment-card/deploym
 })
 export class DeploymentListComponent implements OnInit {
     protected readonly facade = inject(DeploymentsFacade);
+    private readonly router = inject(Router);
 
     ngOnInit(): void {
         this.facade.loadAll();
+    }
+
+    selectDeployment(id: string): void {
+        this.router.navigate(['/deployments', id]);
     }
 }

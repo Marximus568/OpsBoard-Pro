@@ -7,6 +7,7 @@ import { provideEffects } from '@ngrx/effects';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { INCIDENTS_PROVIDERS } from './features/incidents/incidents.providers';
+import { DEPLOYMENTS_PROVIDERS } from './features/deployments/deployments.providers';
 import { AUTH_PROVIDERS } from './features/auth/auth.providers';
 import { environment } from '../environments/environment';
 import { API_BASE_URL } from './core/tokens/api.tokens';
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideEffects(),
     { provide: API_BASE_URL, useValue: environment.apiUrl },
     ...INCIDENTS_PROVIDERS,
+    ...DEPLOYMENTS_PROVIDERS,
     ...AUTH_PROVIDERS
   ]
 };

@@ -24,8 +24,22 @@
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" placeholder="••••••••"
-          [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        <div class="input-with-icon">
+          <input type="password" id="password" formControlName="password" placeholder="••••••••"
+            [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="rememberMe">
+          <span class="checkmark"></span>
+          <span class="label-text">Remember Me</span>
+        </label>
+        <div class="risk-info"
+          title="Security Note: Saving your email facilitates future logins but may expose your identity on shared devices.">
+          <span class="material-icons">help_outline</span>
+        </div>
       </div>
 
       @if (error()) {

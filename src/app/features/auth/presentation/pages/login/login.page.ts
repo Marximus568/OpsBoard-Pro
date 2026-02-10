@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -11,14 +11,15 @@ import { AuthFacade } from '../../../application/auth.facade';
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss']
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
     private readonly fb = inject(FormBuilder);
     private readonly route = inject(ActivatedRoute);
     private readonly authFacade = inject(AuthFacade);
 
     readonly loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        rememberMe: [false]
     });
 
     readonly mfaForm = this.fb.group({
@@ -28,6 +29,13 @@ export class LoginPage {
     readonly isLoading = this.authFacade.isLoading;
     readonly error = this.authFacade.error;
     readonly mfaRequired = this.authFacade.mfaRequired;
+
+    ngOnInit(): void {
+        const remembered = this.authFacade.getRememberedEmail();
+        if (remembered) {
+            this.loginForm.patchValue({ email: remembered, rememberMe: true });
+        }
+    }
 
     private readonly returnUrl = this.route.snapshot.queryParams['returnUrl'];
 

@@ -11,9 +11,27 @@
             </div>
         </div>
         <div class="header-actions">
-            <!-- Actions like Assign, Resolve will go here -->
+            @if (incident.canBeAssigned() && incident.assigneeId === null) {
+            <app-button (btnClick)="onAssignToMe()">Assign to Me</app-button>
+            }
+            @if (incident.canBeResolved() && !showResolveForm) {
+            <app-button variant="success" (btnClick)="showResolveForm = true">Resolve Incident</app-button>
+            }
         </div>
     </section>
+
+    @if (showResolveForm) {
+    <section class="resolution-form glass-card">
+        <h3>Resolve Incident</h3>
+        <textarea [(ngModel)]="resolutionComment" placeholder="Describe how the incident was resolved..."></textarea>
+        <div class="form-actions">
+            <app-button variant="outline" (btnClick)="showResolveForm = false">Cancel</app-button>
+            <app-button variant="success" [disabled]="!resolutionComment.trim()" (btnClick)="onResolve()">
+                Confirm Resolution
+            </app-button>
+        </div>
+    </section>
+    }
 
     <div class="detail-content">
         <section class="info-section">

@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { BadgeComponent, BadgeType } from '../../../../../../shared/components/atoms/badge/badge.component';
+import { BadgeComponent, BadgeType } from '../../../../../../shared/ui/atoms/badge/badge.component';
 import { Incident } from '../../../../domain/models/incident.entity';
 
 @Component({

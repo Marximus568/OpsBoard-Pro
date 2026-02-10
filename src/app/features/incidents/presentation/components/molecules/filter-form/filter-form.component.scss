@@ -44,6 +44,51 @@ select {
     cursor: pointer;
 }
 
+.advanced-filters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-left: 16px;
+    border-left: 1px solid #30363d;
+
+    input[type="text"] {
+        width: 150px;
+    }
+
+    .date-range {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #0d1117;
+        padding: 4px 12px;
+        border-radius: 6px;
+        border: 1px solid #30363d;
+
+        span {
+            font-size: 12px;
+            color: #8b949e;
+        }
+
+        input[type="date"] {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 13px;
+            outline: none;
+
+            &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                cursor: pointer;
+                opacity: 0.5;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
 .btn-reset {
     background: transparent;
     border: none;

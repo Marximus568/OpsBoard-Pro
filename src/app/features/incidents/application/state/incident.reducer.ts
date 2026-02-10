@@ -11,6 +11,8 @@ export interface IncidentState extends EntityState<Incident> {
         status: string | 'ALL';
         priority: string | 'ALL';
         severity: string | 'ALL';
+        service: string | 'ALL';
+        dateRange: { start: string | null; end: string | null };
     };
 }
 
@@ -23,7 +25,9 @@ export const initialState: IncidentState = adapter.getInitialState({
         search: '',
         status: 'ALL',
         priority: 'ALL',
-        severity: 'ALL'
+        severity: 'ALL',
+        service: 'ALL',
+        dateRange: { start: null, end: null }
     }
 });
 
