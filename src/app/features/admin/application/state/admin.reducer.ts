@@ -35,9 +35,19 @@ export const adminReducer = createReducer(
     })),
     on(AdminActions.loadAllDataFailure, (state, { error }) => ({ ...state, isLoading: false, error })),
 
+    on(AdminActions.createUserSuccess, (state, { user }) => ({
+        ...state,
+        users: [...state.users, user]
+    })),
+
     on(AdminActions.updateUserSuccess, (state, { user }) => ({
         ...state,
         users: state.users.map(u => u.uuid === user.uuid ? user : u)
+    })),
+
+    on(AdminActions.deleteUserSuccess, (state, { uuid }) => ({
+        ...state,
+        users: state.users.filter(u => u.uuid !== uuid)
     })),
 
     on(AdminActions.toggleFeatureFlagSuccess, (state, { flag }) => ({

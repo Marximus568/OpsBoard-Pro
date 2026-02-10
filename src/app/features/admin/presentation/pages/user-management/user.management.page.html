@@ -86,9 +86,9 @@
                     (ngModelChange)="updateEditForm('user_email', $event)">
             </div>
             <div class="form-group">
-                <label for="permission_roles">Roles (comma separated)</label>
-                <input id="permission_roles" type="text" [ngModel]="editForm().permission_roles"
-                    (ngModelChange)="updateEditForm('permission_roles', [$event])">
+                <label for="permission_roles">Roles (comma separated: role-admin, role-operator)</label>
+                <input id="permission_roles" type="text" [ngModel]="editForm().permission_roles.join(', ')"
+                    (ngModelChange)="updateEditForm('permission_roles', $event)">
             </div>
         </div>
         <div class="modal-footer">

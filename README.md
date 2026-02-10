@@ -13,6 +13,30 @@
 
 ---
 
+## 📂 Project Structure
+
+```text
+OpsBoard-Pro/
+├── Dockerfile              # Production Docker build
+├── nginx.conf              # Nginx configuration for SPA
+├── docker-compose.yml      # Production deployment
+├── docker-compose.dev.yml  # Development environment
+├── server/
+│   └── db.json             # Mock backend data
+├── src/
+│   ├── app/
+│   │   ├── core/           # Interceptors, Guards, Utilities
+│   │   ├── domain/         # Business entities & logic
+│   │   ├── application/    # Facades, Mappers, State
+│   │   ├── infrastructure/ # API Repositories & Services
+│   │   ├── layouts/        # Shell & Navigation layouts
+│   │   └── shared/         # Atomic UI components
+│   └── environments/       # Environment-specific configs
+└── styles/                 # Global SCSS & Design Tokens
+```
+
+---
+
 ## 🏗️ Architecture: Clean & Scalable
 
 The project strictly adheres to **Clean Architecture** patterns to ensure extreme testability and separation of concerns:
@@ -40,38 +64,50 @@ We use a hybrid approach to state management:
 - **Local Reactive State (Signals)**: UI-bound states like hover effects, form validations, and real-time dashboard filtering.
 - **Facades**: Abstract away the complexities of the Store, providing a clean API for components.
 
-### 2. Atomic Design System
-The UI is organized into granular, reusable units:
-- **Atoms**: `Badge`, `Button`, `Icon`, `Input`. Stateless and visually consistent.
-- **Molecules**: `FilterForm`, `LogEntryRow`, `SavedSearches`. Groups of atoms performing a single function.
-- **Organisms**: `IncidentList`, `DeploymentCard`, `RecentIncidentsList`. Complex UI sections with internal orchestration.
-- **Pages**: `Dashboard`, `UserManagement`, `IncidentDetail`. Composite views that tie features together.
-
-### 3. Workflow State Machines
+### 2. Workflow State Machines
 Deployments and Incidents follow strict state machines defined in the domain layer. Transitions (e.g., `REQUESTED` -> `APPROVED` -> `RUNNING`) are validated before state updates to prevent illegal operations.
 
-### 4. Repository & Mapper Pattern
-Data integrity is enforced by decoupling raw API responses from domain logic through **Mappers**. Every I/O operation goes through a **Repository** contract, allowing for easy swapping between Mock and Real APIs.
+---
+
+## 🐳 Docker Setup
+
+### 1. Development (with Hot-Reload)
+This setup mounts your local code into the container, allowing for real-time development without restarting.
+```bash
+docker compose -f docker-compose.dev.yml up
+```
+The app will be available at `http://localhost:4200`.
+
+### 2. Production Simulation
+This setup mimics a real production environment using a multi-stage Docker build and Nginx for serving.
+```bash
+docker compose up --build
+```
+The app will be available at `http://localhost:80`.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛡️ Architecture & Security Decisions (Docker)
 
-- **Framework**: Angular 19+ (Signals, Built-in Control Flow)
-- **State**: NgRx (Store, Effects, Entity) + Angular Signals
-- **Styling**: Vanilla SCSS (Modular Design Tokens)
-- **Visuals**: Lucide Icons & Custom SVG Atoms
-- **Data Visualization**: High-performance SVG Charts
+### 1. Multi-Stage Builds
+We use a 2-stage Docker build to keep the production image lightweight:
+- **Build Stage**: Uses Node.js 20 to compile the Angular application and install only necessary dependencies.
+- **Runtime Stage**: Uses a minimal Nginx Alpine image to serve the final static assets, completely removing build tools and source code from the final image.
+
+### 2. SPA-Aware Nginx Configuration
+The `nginx.conf` is optimized for Angular and security:
+- **SPA Routing**: Configured to redirect all missing paths to `index.html`, allowing the Angular Router to handle deep-linked URLs.
+- **Performance**: Pre-configured Gzip compression for all text-based assets (JS, CSS, JSON).
+- **Security Headers**: Implements `X-Frame-Options`, `X-XSS-Protection`, and a strict `Content-Security-Policy`.
 
 ---
 
-## 🚦 Getting Started
+## 🚦 Getting Started (Local)
 
 ### 1. Prerequisites
 Ensure you have the latest Node.js and Angular CLI installed.
 
 ### 2. Start the Mock Server
-The project uses `json-server` to simulate a backend.
 ```bash
 npx json-server server/db.json
 ```

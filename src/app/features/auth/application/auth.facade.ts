@@ -11,6 +11,7 @@ export class AuthFacade {
     private readonly authRepository = inject(IAUTH_REPOSITORY);
     private readonly router = inject(Router);
     private readonly auditService = inject(AuditService);
+    private refreshTimer: ReturnType<typeof setTimeout> | undefined;
 
     // Selectors
     readonly user = selectUser;
@@ -63,14 +64,20 @@ export class AuthFacade {
     }
 
     private startRefreshTimer(tokens: { refreshToken: string }): void {
+        if (this.refreshTimer) {
+            clearTimeout(this.refreshTimer);
+        }
+
         // In a real app, this would refresh before expiry. 
         // Here we just simulate a "silent refresh" every 5 minutes if logged in.
-        setTimeout(async () => {
+        this.refreshTimer = setTimeout(async () => {
             if (this.isAuthenticated()) {
                 console.log('[Auth] [PRO] Performing silent refresh...');
                 try {
-                    await this.authRepository.refreshToken(tokens.refreshToken);
+                    const newTokens = await this.authRepository.refreshToken(tokens.refreshToken);
                     console.log('[Auth] [PRO] Session refreshed successfully.');
+                    // Recursive call to keep refreshing
+                    this.startRefreshTimer(newTokens);
                 } catch (e) {
                     console.error('[Auth] [PRO] Refresh failed', e);
                 }
@@ -90,6 +97,8 @@ export class AuthFacade {
             });
             this.auditService.log('LOGIN', 'AUTH', result.user.id, { method: 'mfa' });
             await this.router.navigateByUrl(returnUrl || '/dashboard');
+
+            this.startRefreshTimer(result.tokens);
         } catch (err) {
             this.updateState({
                 isLoading: false,
@@ -106,6 +115,9 @@ export class AuthFacade {
             }
             await this.authRepository.logout();
         } finally {
+            if (this.refreshTimer) {
+                clearTimeout(this.refreshTimer);
+            }
             authState.set({
                 user: null,
                 isAuthenticated: false,
@@ -129,7 +141,17 @@ export class AuthFacade {
                 isAuthenticated: true,
                 isLoading: false
             });
-            // Also resume refresh cycles if needed
+
+            // Resume refresh cycles if tokens exist
+            const tokensRaw = localStorage.getItem('opsboard_auth_token');
+            if (tokensRaw) {
+                try {
+                    const tokens = JSON.parse(tokensRaw);
+                    this.startRefreshTimer(tokens);
+                } catch (e) {
+                    console.error('[Auth] [PRO] Failed to resume refresh timer', e);
+                }
+            }
         }
     }
 

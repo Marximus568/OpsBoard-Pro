@@ -1,0 +1,19 @@
+
+
+services:
+  opsboard-pro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: opsboard-pro-prod
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      - NODE_ENV=production
+    networks:
+      - opsboard-network
+
+networks:
+  opsboard-network:
+    driver: bridge

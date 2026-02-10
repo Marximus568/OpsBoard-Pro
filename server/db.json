@@ -230,6 +230,76 @@
           "metadata": {}
         }
       ]
+    },
+    {
+      "id": "INC-113F8545",
+      "title": "E2E Test Incident",
+      "description": "This is an incident created by the automated E2E test suite.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": "admin-1",
+      "reporterId": "system-user",
+      "service": "e2e-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T21:50:00.198Z",
+      "updatedAt": "2026-02-10T22:11:16.823Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "test",
+        "playwright"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-7BEA9897",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T21:50:00.198Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        },
+        {
+          "id": "EVT-85675FB7",
+          "type": "ASSIGNED",
+          "timestamp": "2026-02-10T22:11:16.823Z",
+          "userId": "admin-1",
+          "description": "Incident assigned to admin-1",
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "INC-30893B43",
+      "title": "E2E Test Incident",
+      "description": "This is an incident created by the automated E2E test suite.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "severity": "SEV2",
+      "assigneeId": null,
+      "reporterId": "system-user",
+      "service": "e2e-service",
+      "slaBreached": false,
+      "createdAt": "2026-02-10T21:54:46.554Z",
+      "updatedAt": "2026-02-10T21:54:46.554Z",
+      "resolvedAt": null,
+      "closedAt": null,
+      "tags": [
+        "e2e",
+        "test",
+        "playwright"
+      ],
+      "timeline": [
+        {
+          "id": "EVT-1EC4CA2B",
+          "type": "CREATED",
+          "timestamp": "2026-02-10T21:54:46.554Z",
+          "userId": "system-user",
+          "description": "Incident reported",
+          "metadata": {}
+        }
+      ]
     }
   ],
   "deployments": [
@@ -288,21 +358,49 @@
       "id": "dep-202",
       "serviceName": "payment-service",
       "version": "v2.0.1",
-      "status": "REQUESTED",
+      "status": "SUCCESS",
       "environment": "STAGING",
       "deployedAt": null,
       "deployedBy": "u2",
-      "createdAt": "2023-11-15T10:00:00Z",
-      "updatedAt": "2023-11-15T10:00:00Z",
+      "createdAt": "2023-11-15T10:00:00.000Z",
+      "updatedAt": "2026-02-10T22:18:31.237Z",
       "history": [
         {
           "status": "REQUESTED",
-          "timestamp": "2023-11-15T10:00:00Z",
+          "timestamp": "2023-11-15T10:00:00.000Z",
           "userId": "u2",
           "comment": "Requesting deploy for payment-service v2.0.1"
+        },
+        {
+          "status": "APPROVED",
+          "timestamp": "2026-02-10T22:18:24.974Z",
+          "userId": "admin",
+          "comment": "Aprobación manual"
+        },
+        {
+          "status": "RUNNING",
+          "timestamp": "2026-02-10T22:18:26.202Z",
+          "userId": "system",
+          "comment": "Deployment execution started"
+        },
+        {
+          "status": "SUCCESS",
+          "timestamp": "2026-02-10T22:18:31.237Z",
+          "userId": "system",
+          "comment": "All checks passed"
         }
       ],
-      "logs": []
+      "logs": [
+        "Initializing deployment engine...",
+        "Downloading artifacts...",
+        "Preparing environment...",
+        "Executing database migrations...",
+        "Applying security patches...",
+        "Configuring horizontal scaling...",
+        "Health checks passed.",
+        "Endpoint active: https://payment-service.opsboard-pro.io",
+        "Deployment completed successfully."
+      ]
     },
     {
       "id": "dep-203",
@@ -681,6 +779,197 @@
       "resource": "AUTH",
       "metadata": {
         "method": "mfa"
+      }
+    },
+    {
+      "id": "7876",
+      "timestamp": "2026-02-10T21:47:21.739Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "1939",
+      "timestamp": "2026-02-10T21:48:22.037Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "ef31",
+      "timestamp": "2026-02-10T21:48:47.018Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "53fd",
+      "timestamp": "2026-02-10T21:49:27.035Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "d0c6",
+      "timestamp": "2026-02-10T21:49:58.800Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "129e",
+      "timestamp": "2026-02-10T21:50:00.217Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-113F8545",
+        "title": "E2E Test Incident"
+      }
+    },
+    {
+      "id": "327e",
+      "timestamp": "2026-02-10T21:54:45.253Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "23bb",
+      "timestamp": "2026-02-10T21:54:46.573Z",
+      "userId": "system-user",
+      "action": "CREATE_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-30893B43",
+        "title": "E2E Test Incident"
+      }
+    },
+    {
+      "id": "d4ba",
+      "timestamp": "2026-02-10T22:00:33.481Z",
+      "userId": "admin-1",
+      "action": "LOGIN",
+      "resource": "AUTH",
+      "metadata": {
+        "method": "mfa"
+      }
+    },
+    {
+      "id": "73c2",
+      "timestamp": "2026-02-10T22:11:16.841Z",
+      "userId": "admin-1",
+      "action": "ASSIGN_INCIDENT",
+      "resource": "INCIDENT",
+      "metadata": {
+        "incidentId": "INC-113F8545",
+        "assigneeId": "admin-1"
+      }
+    },
+    {
+      "id": "8352",
+      "timestamp": "2026-02-10T22:12:21.332Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": false
+        }
+      }
+    },
+    {
+      "id": "1107",
+      "timestamp": "2026-02-10T22:12:22.086Z",
+      "userId": "admin",
+      "action": "UPDATE_USER",
+      "resource": "USER",
+      "metadata": {
+        "userId": "usr-001",
+        "changes": {
+          "uuid": "usr-001",
+          "active": true
+        }
+      }
+    },
+    {
+      "id": "92ac",
+      "timestamp": "2026-02-10T22:17:45.770Z",
+      "userId": "admin-1",
+      "action": "LOGOUT",
+      "resource": "AUTH"
+    },
+    {
+      "id": "2b98",
+      "timestamp": "2026-02-10T22:18:06.711Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.com",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "b89d",
+      "timestamp": "2026-02-10T22:18:23.047Z",
+      "userId": "unknown",
+      "action": "LOGIN_FAILED",
+      "resource": "AUTH",
+      "metadata": {
+        "email": "admin@opsboard.pro",
+        "error": "Invalid credentials"
+      }
+    },
+    {
+      "id": "0325",
+      "timestamp": "2026-02-10T22:18:24.981Z",
+      "userId": "admin",
+      "action": "APPROVE_DEPLOYMENT",
+      "resource": "DEPLOYMENT",
+      "metadata": {
+        "deploymentId": "dep-202",
+        "comment": "Aprobación manual"
+      }
+    },
+    {
+      "id": "1f40",
+      "timestamp": "2026-02-10T22:18:26.202Z",
+      "userId": "system",
+      "action": "EXECUTE_DEPLOYMENT_START",
+      "resource": "DEPLOYMENT",
+      "metadata": {
+        "deploymentId": "dep-202"
+      }
+    },
+    {
+      "id": "0df6",
+      "timestamp": "2026-02-10T22:18:31.237Z",
+      "userId": "system",
+      "action": "EXECUTE_DEPLOYMENT_SUCCESS",
+      "resource": "DEPLOYMENT",
+      "metadata": {
+        "deploymentId": "dep-202"
       }
     }
   ]

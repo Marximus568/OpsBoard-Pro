@@ -47,6 +47,6 @@ describe('IncidentMapper', () => {
         expect(dto.priority).toBe(mockDto.priority);
         expect(dto.severity).toBe(mockDto.severity);
         expect(dto.tags).toEqual(mockDto.tags);
-        expect(dto.timeline[0].id).toBe('EVT-1');
+        expect((dto.timeline[0] as Record<string, unknown>)['id']).toBe('EVT-1');
     });
 });

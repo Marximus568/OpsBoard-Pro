@@ -70,15 +70,19 @@ export class AuthHttpRepository implements IAuthRepository {
     /**
      * Refreshes the authentication session.
      */
-    async refreshToken(): Promise<AuthToken> {
+    async refreshToken(token: string): Promise<AuthToken> {
+        console.log('[Auth] [PRO] Refreshing token using:', token.substring(0, 5) + '...');
         // Simulate network delay for "Pro" feel
         await new Promise(resolve => setTimeout(resolve, 800));
 
-        return new AuthToken(
+        const newTokens = new AuthToken(
             'new-jwt-' + Math.random().toString(36).substring(7),
             'new-refresh-' + Math.random().toString(36).substring(7),
             Date.now() + 3600000
         );
+
+        this.saveTokens(newTokens);
+        return newTokens;
     }
 
     /**

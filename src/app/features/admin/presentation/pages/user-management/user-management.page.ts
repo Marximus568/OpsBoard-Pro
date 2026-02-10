@@ -62,9 +62,12 @@ export class UserManagementPage implements OnInit {
             this.closeModal();
         } else {
             // Handle creation
-            const newUser = { ...this.editForm() };
-            delete (newUser as Partial<UserAdmin>).uuid;
-            this.adminFacade.createUser(newUser as unknown as UserAdmin);
+            const newUser = {
+                ...this.editForm(),
+                uuid: 'usr-' + Math.random().toString(36).substring(2, 9),
+                createdAt: new Date().toISOString()
+            };
+            this.adminFacade.createUser(newUser as UserAdmin);
             this.closeModal();
         }
     }
@@ -83,7 +86,12 @@ export class UserManagementPage implements OnInit {
     }
 
     updateEditForm(field: keyof UserAdmin, value: unknown): void {
-        this.editForm.update(form => ({ ...form, [field]: value }));
+        if (field === 'permission_roles' && typeof value === 'string') {
+            const roles = value.split(',').map(r => r.trim()).filter(r => r.length > 0);
+            this.editForm.update(form => ({ ...form, [field]: roles }));
+        } else {
+            this.editForm.update(form => ({ ...form, [field]: value }));
+        }
     }
 
     // Helper for badge type
