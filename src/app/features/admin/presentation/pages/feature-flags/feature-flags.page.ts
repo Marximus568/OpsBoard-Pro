@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, OnInit, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminFacade } from '../../../application/admin.facade';
 import { BadgeComponent, BadgeType } from '../../../../../shared/ui/atoms/badge/badge.component';

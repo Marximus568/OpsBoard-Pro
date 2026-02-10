@@ -17,8 +17,8 @@ import { IncidentCreateFormComponent } from '../../components/organisms/incident
 
         <div class="form-wrapper">
             <app-incident-create-form 
-                (submitForm)="onSubmit($event)" 
-                (cancel)="onCancel()">
+                (create)="onSubmit($event)" 
+                (canceled)="onCancel()">
             </app-incident-create-form>
         </div>
     </div>
@@ -34,14 +34,15 @@ export class IncidentCreatePageComponent {
     private readonly facade = inject(IncidentsFacade);
     private readonly router = inject(Router);
 
-    onSubmit(formData: any): void {
+    onSubmit(data: unknown): void {
+        const formData = data as Record<string, unknown>;
         const incidentData = {
-            title: formData.title,
-            description: formData.description,
-            priority: formData.priority,
-            severity: formData.severity,
-            service: formData.service,
-            tags: formData.tags || [],
+            title: formData['title'] as string,
+            description: formData['description'] as string,
+            priority: formData['priority'] as string,
+            severity: formData['severity'] as string,
+            service: formData['service'] as string,
+            tags: (formData['tags'] as string[]) || [],
             reporterId: 'system-user', // Mock user
             createdAt: new Date(),
             updatedAt: new Date(),

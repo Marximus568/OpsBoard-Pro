@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeploymentListComponent } from '../../components/organisms/deployment-list/deployment-list.component';
 import { DeploymentsFacade } from '../../../application/deployments.facade';
-import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'app-deployment-list-page',

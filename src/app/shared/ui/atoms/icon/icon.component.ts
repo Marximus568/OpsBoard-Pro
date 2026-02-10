@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconComponent {
-  @Input() name: string = '';
+  @Input() name = '';
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number = 'md';
 
   get sizePx(): number {

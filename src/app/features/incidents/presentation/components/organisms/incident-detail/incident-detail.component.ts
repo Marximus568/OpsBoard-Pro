@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Incident } from '../../../../domain/models/incident.entity';
-import { BadgeComponent } from '../../../../../../shared/ui/atoms/badge/badge.component';
+import { BadgeComponent, BadgeType } from '../../../../../../shared/ui/atoms/badge/badge.component';
 import { IconComponent } from '../../../../../../shared/ui/atoms/icon/icon.component';
 import { IncidentsFacade } from '../../../../application/incidents.facade';
 import { AuthFacade } from '../../../../../auth/application/auth.facade';
@@ -41,30 +41,30 @@ export class IncidentDetailComponent {
         }
     }
 
-    getSeverityType(): any {
+    getSeverityType(): BadgeType {
         if (this.incident.severity.value === 'SEV1') return 'critical';
         if (this.incident.severity.value === 'SEV2') return 'error';
         return 'info';
     }
 
-    getPriorityType(): any {
-        const map: Record<string, string> = {
-            'LOW': 'default',
+    getPriorityType(): BadgeType {
+        const map: Record<string, BadgeType> = {
+            'LOW': 'info',
             'MEDIUM': 'warning',
             'HIGH': 'error',
             'CRITICAL': 'critical'
         };
-        return map[this.incident.priority.value] || 'default';
+        return map[this.incident.priority.value] || 'info';
     }
 
-    getStatusType(): any {
-        const map: Record<string, string> = {
-            'OPEN': 'default',
+    getStatusType(): BadgeType {
+        const map: Record<string, BadgeType> = {
+            'OPEN': 'info',
             'IN_PROGRESS': 'primary',
             'RESOLVED': 'success',
-            'CLOSED': 'default'
+            'CLOSED': 'info'
         };
-        return map[this.incident.status.value] || 'default';
+        return map[this.incident.status.value] || 'info';
     }
 
     getEventIcon(type: string): string {

@@ -7,7 +7,8 @@
     </div>
 
     <div class="flags-list">
-        <div class="flag-item" *ngFor="let flag of flags()">
+        @for (flag of flags(); track flag.id) {
+        <div class="flag-item">
             <div class="flag-info">
                 <div class="flag-header">
                     <h3>{{ flag.name }}</h3>
@@ -25,5 +26,6 @@
                 <span class="status-label">{{ flag.enabled ? 'Enabled' : 'Disabled' }}</span>
             </div>
         </div>
+        }
     </div>
 </div>

@@ -38,8 +38,8 @@ export class IncidentEffects {
         this.actions$.pipe(
             ofType(IncidentActions.createIncident),
             switchMap(({ incident }) =>
-                from(this.createUseCase.execute(incident as any)).pipe(
-                    tap((newIncident: Incident) => {
+                from(this.createUseCase.execute(incident as any)).pipe( // eslint-disable-line @typescript-eslint/no-explicit-any
+                    tap((newIncident) => {
                         this.auditService.log('CREATE_INCIDENT', 'INCIDENT', incident.reporterId || 'system', { incidentId: newIncident.id, title: newIncident.title });
                     }),
                     map((newIncident: Incident) => IncidentActions.createIncidentSuccess({ incident: newIncident })),
@@ -54,10 +54,10 @@ export class IncidentEffects {
             ofType(IncidentActions.assignIncident),
             switchMap(({ incidentId, assigneeId, userId }) =>
                 from(this.assignUseCase.execute({ incidentId, assigneeId, userId })).pipe(
-                    tap((updatedIncident: Incident) => {
+                    tap(() => {
                         this.auditService.log('ASSIGN_INCIDENT', 'INCIDENT', userId, { incidentId, assigneeId });
                     }),
-                    map((updatedIncident: Incident) => IncidentActions.assignIncidentSuccess({ incident: updatedIncident })),
+                    map((updatedIncident) => IncidentActions.assignIncidentSuccess({ incident: updatedIncident })),
                     catchError((error) => of(IncidentActions.assignIncidentFailure({ error: error.message })))
                 )
             )
@@ -69,10 +69,10 @@ export class IncidentEffects {
             ofType(IncidentActions.resolveIncident),
             switchMap(({ incidentId, userId, comment }) =>
                 from(this.resolveUseCase.execute({ incidentId, userId, comment })).pipe(
-                    tap((updatedIncident: Incident) => {
+                    tap(() => {
                         this.auditService.log('RESOLVE_INCIDENT', 'INCIDENT', userId, { incidentId });
                     }),
-                    map((updatedIncident: Incident) => IncidentActions.resolveIncidentSuccess({ incident: updatedIncident })),
+                    map((updatedIncident) => IncidentActions.resolveIncidentSuccess({ incident: updatedIncident })),
                     catchError((error) => of(IncidentActions.resolveIncidentFailure({ error: error.message })))
                 )
             )

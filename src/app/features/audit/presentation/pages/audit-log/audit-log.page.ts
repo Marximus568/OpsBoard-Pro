@@ -5,7 +5,7 @@ import { AuditFacade } from '../../../application/audit.facade';
 import { BadgeComponent } from '../../../../../shared/ui/atoms/badge/badge.component';
 import { ButtonComponent } from '../../../../../shared/ui/atoms/button/button.component';
 import { IconComponent } from '../../../../../shared/ui/atoms/icon/icon.component';
-import { AuditLog } from '../../../domain/models/audit-log.entity';
+
 
 @Component({
     selector: 'app-audit-log',

@@ -19,13 +19,13 @@ export class AuthFacade {
     readonly isLoading = selectIsLoading;
     readonly error = selectAuthError;
 
-    async login(credentials: any, returnUrl?: string): Promise<void> {
+    async login(credentials: Record<string, unknown>, returnUrl?: string): Promise<void> {
         this.updateState({ isLoading: true, error: null });
         try {
             const result = await this.authRepository.login(credentials);
 
-            if (credentials.rememberMe) {
-                localStorage.setItem('opsboard_remembered_email', credentials.email);
+            if (credentials['rememberMe']) {
+                localStorage.setItem('opsboard_remembered_email', credentials['email'] as string);
             } else {
                 localStorage.removeItem('opsboard_remembered_email');
             }
@@ -43,14 +43,14 @@ export class AuthFacade {
                     mfaRequired: false,
                     isLoading: false
                 });
-                this.auditService.log('LOGIN', 'AUTH', result.user.id, { email: credentials.email, method: 'password' });
+                this.auditService.log('LOGIN', 'AUTH', result.user.id, { email: credentials['email'], method: 'password' });
                 await this.router.navigateByUrl(returnUrl || '/dashboard');
 
                 // Simulate Pro Refresh Logic
                 this.startRefreshTimer(result.tokens);
             }
         } catch (err) {
-            this.auditService.log('LOGIN_FAILED', 'AUTH', 'unknown', { email: credentials.email, error: (err as Error).message });
+            this.auditService.log('LOGIN_FAILED', 'AUTH', 'unknown', { email: credentials['email'], error: (err as Error).message });
             this.updateState({
                 isLoading: false,
                 error: (err as Error).message || 'Login failed'
@@ -62,7 +62,7 @@ export class AuthFacade {
         return localStorage.getItem('opsboard_remembered_email');
     }
 
-    private startRefreshTimer(tokens: any): void {
+    private startRefreshTimer(tokens: { refreshToken: string }): void {
         // In a real app, this would refresh before expiry. 
         // Here we just simulate a "silent refresh" every 5 minutes if logged in.
         setTimeout(async () => {

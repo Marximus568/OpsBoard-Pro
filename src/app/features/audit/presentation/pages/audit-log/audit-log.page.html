@@ -31,7 +31,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let log of filteredLogs()">
+                @for (log of filteredLogs(); track log.id) {
+                <tr>
                     <td class="timestamp">{{ log.timestamp | date:'medium' }}</td>
                     <td>
                         <div class="user-cell">
@@ -44,11 +45,15 @@
                     </td>
                     <td class="resource">{{ log.resource }}</td>
                     <td class="metadata">
-                        <code *ngIf="log.metadata">{{ log.metadata | json }}</code>
-                        <span *ngIf="!log.metadata" class="text-muted">-</span>
+                        @if (log.metadata) {
+                        <code>{{ log.metadata | json }}</code>
+                        } @else {
+                        <span class="text-muted">-</span>
+                        }
                     </td>
                 </tr>
-                <tr *ngIf="filteredLogs().length === 0">
+                } @empty {
+                <tr>
                     <td colspan="5" class="empty-state">
                         <div class="empty-content">
                             <app-icon name="search" [size]="48"></app-icon>
@@ -56,6 +61,7 @@
                         </div>
                     </td>
                 </tr>
+                }
             </tbody>
         </table>
     </div>

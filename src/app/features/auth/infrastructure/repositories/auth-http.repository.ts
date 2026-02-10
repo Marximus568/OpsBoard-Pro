@@ -67,7 +67,7 @@ export class AuthHttpRepository implements IAuthRepository {
     /**
      * Refreshes the authentication session.
      */
-    async refreshToken(token: string): Promise<AuthToken> {
+    async refreshToken(): Promise<AuthToken> {
         // Simulate network delay for "Pro" feel
         await new Promise(resolve => setTimeout(resolve, 800));
 

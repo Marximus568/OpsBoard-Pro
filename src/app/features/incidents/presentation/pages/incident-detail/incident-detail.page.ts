@@ -12,12 +12,13 @@ import { Incident } from '../../../domain/models/incident.entity';
     standalone: true,
     imports: [CommonModule, IncidentDetailComponent],
     template: `
-    <div class="page-container" *ngIf="incident$ | async as incident; else loading">
+    @if (incident$ | async; as incident) {
+    <div class="page-container">
         <app-incident-detail [incident]="incident"></app-incident-detail>
     </div>
-    <ng-template #loading>
+    } @else {
         <div class="loading-state">Syncing incident details...</div>
-    </ng-template>
+    }
   `,
     styles: [`
     .page-container { padding: 32px; max-width: 1400px; margin: 0 auto; }

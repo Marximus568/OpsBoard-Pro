@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { PriorityLevel } from '../../../../domain/value-objects/priority.vo';
 import { SeverityLevel } from '../../../../domain/value-objects/severity.vo';
 import { ButtonComponent } from '../../../../../../shared/ui/atoms/button/button.component';
@@ -16,11 +16,23 @@ export type FormStep = 1 | 2 | 3;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IncidentCreateFormComponent {
-    @Output() submitForm = new EventEmitter<any>();
-    @Output() cancel = new EventEmitter<void>();
+    private readonly fb = inject(FormBuilder);
+
+    @Output() create = new EventEmitter<unknown>();
+    @Output() canceled = new EventEmitter<void>();
 
     currentStep: FormStep = 1;
-    incidentForm: FormGroup;
+    incidentForm = this.fb.group({
+        // Step 1
+        title: ['', [Validators.required, Validators.minLength(5)]],
+        description: ['', [Validators.required, Validators.minLength(10)]],
+        // Step 2
+        priority: [PriorityLevel.MEDIUM, Validators.required],
+        severity: [SeverityLevel.SEV3, Validators.required],
+        service: ['', Validators.required],
+        // Step 3
+        tags: ['']
+    });
 
     priorities = [
         { value: PriorityLevel.LOW, label: 'Low' },
@@ -36,19 +48,7 @@ export class IncidentCreateFormComponent {
         { value: SeverityLevel.SEV4, label: 'SEV-4 (Low)' }
     ];
 
-    constructor(private fb: FormBuilder) {
-        this.incidentForm = this.fb.group({
-            // Step 1
-            title: ['', [Validators.required, Validators.minLength(5)]],
-            description: ['', [Validators.required, Validators.minLength(10)]],
-            // Step 2
-            priority: [PriorityLevel.MEDIUM, Validators.required],
-            severity: [SeverityLevel.SEV3, Validators.required],
-            service: ['', Validators.required],
-            // Step 3
-            tags: ['']
-        });
-    }
+
 
     nextStep(): void {
         if (this.currentStep < 3) {
@@ -80,7 +80,7 @@ export class IncidentCreateFormComponent {
         if (this.incidentForm.valid) {
             const rawValue = this.incidentForm.value;
             const tags = rawValue.tags ? rawValue.tags.split(',').map((t: string) => t.trim()) : [];
-            this.submitForm.emit({ ...rawValue, tags });
+            this.create.emit({ ...rawValue, tags });
         }
     }
 }

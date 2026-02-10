@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +10,7 @@ export class AuditService {
     // Using localhost for now as per previous patterns seen in admin repo
     private readonly apiUrl = 'http://localhost:3000/auditLogs';
 
-    async log(action: string, resource: string, userId: string, metadata?: Record<string, any>): Promise<void> {
+    async log(action: string, resource: string, userId: string, metadata?: Record<string, unknown>): Promise<void> {
         const entry = {
             timestamp: new Date().toISOString(),
             userId,

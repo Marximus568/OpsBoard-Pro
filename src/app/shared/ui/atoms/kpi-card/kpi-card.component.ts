@@ -12,6 +12,6 @@ import { CommonModule } from '@angular/common';
 export class KpiCardComponent {
     @Input({ required: true }) label!: string;
     @Input({ required: true }) value: number | string = 0;
-    @Input() color: string = 'var(--primary-color)';
+    @Input() color = 'var(--primary-color)';
     @Input() icon?: string;
 }

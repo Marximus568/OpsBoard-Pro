@@ -5,6 +5,6 @@ export class IncidentEvent {
         public readonly timestamp: Date,
         public readonly userId: string,
         public readonly description: string,
-        public readonly metadata: any = {}
+        public readonly metadata: Record<string, unknown> = {}
     ) { }
 }

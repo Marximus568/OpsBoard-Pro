@@ -22,7 +22,7 @@ export class SystemSettingsPage implements OnInit {
 
     // Group configs by category
     protected readonly groupedConfigs = computed(() => {
-        const groups: { [key: string]: SystemConfig[] } = {};
+        const groups: Record<string, SystemConfig[]> = {};
         this.configs().forEach(c => {
             if (!groups[c.category]) groups[c.category] = [];
             groups[c.category].push(c);

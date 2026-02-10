@@ -4,12 +4,12 @@ export interface AuditLog {
     userId: string;
     action: string;
     resource: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
 }
 
 export interface CreateAuditLogInput {
     userId: string;
     action: string;
     resource: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
 }

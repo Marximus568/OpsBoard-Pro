@@ -6,15 +6,21 @@
 
     <div class="select-group">
         <select [(ngModel)]="filters.status" (change)="onFilterChange()">
-            <option *ngFor="let s of statuses" [value]="s.value">{{ s.label }}</option>
+            @for (s of statuses; track s.value) {
+            <option [value]="s.value">{{ s.label }}</option>
+            }
         </select>
 
         <select [(ngModel)]="filters.priority" (change)="onFilterChange()">
-            <option *ngFor="let p of priorities" [value]="p.value">{{ p.label }}</option>
+            @for (p of priorities; track p.value) {
+            <option [value]="p.value">{{ p.label }}</option>
+            }
         </select>
 
         <select [(ngModel)]="filters.severity" (change)="onFilterChange()">
-            <option *ngFor="let v of severities" [value]="v.value">{{ v.label }}</option>
+            @for (v of severities; track v.value) {
+            <option [value]="v.value">{{ v.label }}</option>
+            }
         </select>
     </div>
 

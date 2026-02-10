@@ -62,8 +62,9 @@ export class UserManagementPage implements OnInit {
             this.closeModal();
         } else {
             // Handle creation
-            const { uuid, ...newUser } = this.editForm();
-            this.adminFacade.createUser(newUser);
+            const newUser = { ...this.editForm() };
+            delete (newUser as Partial<UserAdmin>).uuid;
+            this.adminFacade.createUser(newUser as unknown as UserAdmin);
             this.closeModal();
         }
     }
@@ -81,7 +82,7 @@ export class UserManagementPage implements OnInit {
         });
     }
 
-    updateEditForm(field: keyof UserAdmin, value: any): void {
+    updateEditForm(field: keyof UserAdmin, value: unknown): void {
         this.editForm.update(form => ({ ...form, [field]: value }));
     }
 

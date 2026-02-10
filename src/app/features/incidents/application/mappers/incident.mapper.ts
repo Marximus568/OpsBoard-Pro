@@ -1,4 +1,4 @@
-import { Incident, IncidentProps } from '../../domain/models/incident.entity';
+import { Incident } from '../../domain/models/incident.entity';
 import { IncidentStatus, IncidentStatusEnum } from '../../domain/value-objects/incident-status.vo';
 import { Priority, PriorityLevel } from '../../domain/value-objects/priority.vo';
 import { Severity, SeverityLevel } from '../../domain/value-objects/severity.vo';
@@ -24,7 +24,7 @@ export interface IncidentDto {
     resolvedAt: string | null;
     closedAt: string | null;
     tags: string[];
-    timeline: any[]; // Raw objects from DB
+    timeline: unknown[]; // Raw objects from DB
 }
 
 /**
@@ -34,34 +34,34 @@ export class IncidentMapper {
     /**
      * Transforms an IncidentDto from the infrastructure into a Domain Entity.
      */
-    static toDomain(dto: any): Incident {
-        const safeStatus = (dto.status as IncidentStatusEnum) || IncidentStatusEnum.OPEN;
-        const safePriority = (dto.priority as PriorityLevel) || PriorityLevel.LOW;
-        const safeSeverity = (dto.severity as SeverityLevel) || SeverityLevel.SEV4;
+    static toDomain(rawDto: IncidentDto | Record<string, unknown>): Incident {
+        const safeStatus = (rawDto['status'] as IncidentStatusEnum) || IncidentStatusEnum.OPEN;
+        const safePriority = (rawDto['priority'] as PriorityLevel) || PriorityLevel.LOW;
+        const safeSeverity = (rawDto['severity'] as SeverityLevel) || SeverityLevel.SEV4;
 
         return new Incident({
-            id: dto.id,
-            title: dto.title,
-            description: dto.description || '',
+            id: rawDto['id'] as string,
+            title: rawDto['title'] as string,
+            description: (rawDto['description'] as string) || '',
             status: IncidentStatus.create(safeStatus),
             priority: Priority.create(safePriority),
             severity: Severity.create(safeSeverity),
-            assigneeId: dto.assigneeId || null,
-            reporterId: dto.reporterId || dto.reportedBy || 'system',
-            service: dto.service || 'unknown',
-            slaBreached: !!dto.slaBreached,
-            createdAt: dto.createdAt ? new Date(dto.createdAt) : new Date(),
-            updatedAt: dto.updatedAt ? new Date(dto.updatedAt) : new Date(),
-            resolvedAt: dto.resolvedAt ? new Date(dto.resolvedAt) : null,
-            closedAt: dto.closedAt ? new Date(dto.closedAt) : null,
-            tags: dto.tags || [],
-            timeline: (dto.timeline || []).map((e: any) => new IncidentEvent(
-                e.id,
-                e.type,
-                new Date(e.timestamp),
-                e.userId || e.performedBy || 'system',
-                e.description,
-                e.metadata
+            assigneeId: (rawDto['assigneeId'] as string) || null,
+            reporterId: (rawDto['reporterId'] as string) || (rawDto as Record<string, unknown>)['reportedBy'] as string || 'system',
+            service: (rawDto['service'] as string) || 'unknown',
+            slaBreached: !!rawDto['slaBreached'],
+            createdAt: rawDto['createdAt'] ? new Date(rawDto['createdAt'] as string) : new Date(),
+            updatedAt: rawDto['updatedAt'] ? new Date(rawDto['updatedAt'] as string) : new Date(),
+            resolvedAt: rawDto['resolvedAt'] ? new Date(rawDto['resolvedAt'] as string) : null,
+            closedAt: rawDto['closedAt'] ? new Date(rawDto['closedAt'] as string) : null,
+            tags: (rawDto['tags'] as string[]) || [],
+            timeline: ((rawDto['timeline'] as Record<string, unknown>[]) || []).map((e: Record<string, unknown>) => new IncidentEvent(
+                e['id'] as string,
+                e['type'] as string,
+                new Date(e['timestamp'] as string),
+                (e['userId'] || e['performedBy'] || 'system') as string,
+                e['description'] as string,
+                e['metadata'] as Record<string, unknown>
             ))
         });
     }

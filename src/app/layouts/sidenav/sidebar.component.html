@@ -19,14 +19,16 @@
             <span class="material-icons">segment</span>
             <span class="label">Logs</span>
         </a>
-        <a *ngIf="currentUser()?.hasRole('role-admin')" routerLink="/admin" routerLinkActive="active" class="nav-item">
+        @if (currentUser()?.hasRole('role-admin')) {
+        <a routerLink="/admin" routerLinkActive="active" class="nav-item">
             <span class="material-icons">admin_panel_settings</span>
             <span class="label">Admin</span>
         </a>
-        <a *ngIf="currentUser()?.hasRole('role-admin')" routerLink="/audit" routerLinkActive="active" class="nav-item">
+        <a routerLink="/audit" routerLinkActive="active" class="nav-item">
             <span class="material-icons">history</span>
             <span class="label">Audit</span>
         </a>
+        }
     </nav>
     <div class="sidebar-footer">
         <button class="logout-btn" (click)="onLogout()">

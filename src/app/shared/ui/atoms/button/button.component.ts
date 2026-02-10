@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -7,7 +7,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <button 
       [type]="type"
@@ -16,7 +16,9 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
       [class.btn-lg]="size === 'lg'"
       [disabled]="disabled || isLoading"
       (click)="onClick($event)">
-      <span *ngIf="isLoading" class="loader"></span>
+      @if (isLoading) {
+        <span class="loader"></span>
+      }
       <ng-content></ng-content>
     </button>
   `,

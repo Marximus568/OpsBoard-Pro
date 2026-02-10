@@ -39,14 +39,17 @@
             <p class="description">{{ incident.description }}</p>
 
             <div class="tags-group">
-                <span class="tag" *ngFor="let tag of incident.tags">#{{ tag }}</span>
+                @for (tag of incident.tags; track tag) {
+                <span class="tag">#{{ tag }}</span>
+                }
             </div>
         </section>
 
         <section class="timeline-section">
             <h2>Timeline</h2>
             <div class="timeline">
-                <div class="timeline-item" *ngFor="let event of incident.timeline; let last = last" [class.last]="last">
+                @for (event of incident.timeline; track event.id; let last = $last) {
+                <div class="timeline-item" [class.last]="last">
                     <div class="timeline-icon">
                         <app-icon [name]="getEventIcon(event.type)" [size]="16"></app-icon>
                     </div>
@@ -59,6 +62,7 @@
                         <span class="event-user">User: {{ event.userId }}</span>
                     </div>
                 </div>
+                }
             </div>
         </section>
     </div>

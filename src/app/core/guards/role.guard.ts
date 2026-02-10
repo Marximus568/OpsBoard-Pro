@@ -6,7 +6,7 @@ export const roleGuard: CanActivateFn = (route, state) => {
     const authFacade = inject(AuthFacade);
     const router = inject(Router);
 
-    const expectedRoles = route.data['roles'] as Array<string>;
+    const expectedRoles = route.data['roles'] as string[];
     const user = authFacade.user();
 
     if (!user || !authFacade.isAuthenticated()) {

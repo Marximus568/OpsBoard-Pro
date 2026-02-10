@@ -38,6 +38,7 @@ export class Deployment {
     get reviewedBy(): string | undefined { return this.props.reviewedBy; }
     get approvedBy(): string | undefined { return this.props.approvedBy; }
     get createdAt(): Date { return this.props.createdAt; }
+    get updatedAt(): Date { return this.props.updatedAt; }
     get history(): DeploymentHistoryEntry[] { return this.props.history; }
     get logs(): string[] { return this.props.logs; }
 

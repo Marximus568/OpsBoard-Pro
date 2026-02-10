@@ -186,7 +186,9 @@ export class LogsViewerComponent implements AfterViewChecked {
             try {
                 const el = this.scrollContainer.nativeElement;
                 el.scrollTop = el.scrollHeight;
-            } catch (err) { }
+            } catch {
+                // Ignore scroll errors
+            }
         }
     }
 }

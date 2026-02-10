@@ -9,40 +9,50 @@
 
     <form [formGroup]="incidentForm" (ngSubmit)="onSubmit()">
         <!-- Step 1: Details -->
-        <div class="step-content" *ngIf="currentStep === 1">
+        @if (currentStep === 1) {
+        <div class="step-content">
             <div class="form-field">
                 <label for="title">Incident Title</label>
                 <input id="title" type="text" formControlName="title" placeholder="e.g., API Gateway Latency Spike">
-                <span class="error" *ngIf="incidentForm.get('title')?.touched && incidentForm.get('title')?.invalid">
+                @if (incidentForm.get('title')?.touched && incidentForm.get('title')?.invalid) {
+                <span class="error">
                     Title is required (min 5 characters)
                 </span>
+                }
             </div>
 
             <div class="form-field">
                 <label for="description">Full Description</label>
                 <textarea id="description" formControlName="description" rows="5"
                     placeholder="Describe the impact and technical details..."></textarea>
-                <span class="error"
-                    *ngIf="incidentForm.get('description')?.touched && incidentForm.get('description')?.invalid">
+                @if (incidentForm.get('description')?.touched && incidentForm.get('description')?.invalid) {
+                <span class="error">
                     Description is required (min 10 characters)
                 </span>
+                }
             </div>
         </div>
+        }
 
         <!-- Step 2: Classification -->
-        <div class="step-content" *ngIf="currentStep === 2">
+        @if (currentStep === 2) {
+        <div class="step-content">
             <div class="form-row">
                 <div class="form-field">
                     <label for="priority">Priority</label>
                     <select id="priority" formControlName="priority">
-                        <option *ngFor="let p of priorities" [value]="p.value">{{ p.label }}</option>
+                        @for (p of priorities; track p.value) {
+                        <option [value]="p.value">{{ p.label }}</option>
+                        }
                     </select>
                 </div>
 
                 <div class="form-field">
                     <label for="severity">Severity</label>
                     <select id="severity" formControlName="severity">
-                        <option *ngFor="let s of severities" [value]="s.value">{{ s.label }}</option>
+                        @for (s of severities; track s.value) {
+                        <option [value]="s.value">{{ s.label }}</option>
+                        }
                     </select>
                 </div>
             </div>
@@ -53,9 +63,11 @@
                     placeholder="e.g., auth-service, payment-gateway">
             </div>
         </div>
+        }
 
         <!-- Step 3: Extras -->
-        <div class="step-content" *ngIf="currentStep === 3">
+        @if (currentStep === 3) {
+        <div class="step-content">
             <div class="form-field">
                 <label for="tags">Tags (comma-separated)</label>
                 <input id="tags" type="text" formControlName="tags" placeholder="e.g., api, slow-query, production">
@@ -67,16 +79,21 @@
                 <p><strong>Service:</strong> {{ incidentForm.get('service')?.value }}</p>
             </div>
         </div>
+        }
 
         <div class="form-actions">
-            <app-button variant="ghost" type="button" (btnClick)="cancel.emit()">Cancel</app-button>
+            <app-button variant="ghost" type="button" (btnClick)="canceled.emit()">Cancel</app-button>
             <div class="spacer"></div>
-            <app-button variant="secondary" type="button" *ngIf="currentStep > 1"
-                (btnClick)="prevStep()">Back</app-button>
-            <app-button variant="primary" type="button" *ngIf="currentStep < 3" [disabled]="!isStepValid(currentStep)"
+            @if (currentStep > 1) {
+            <app-button variant="secondary" type="button" (btnClick)="prevStep()">Back</app-button>
+            }
+            @if (currentStep < 3) { <app-button variant="primary" type="button" [disabled]="!isStepValid(currentStep)"
                 (btnClick)="nextStep()">Next</app-button>
-            <app-button variant="primary" type="submit" *ngIf="currentStep === 3"
-                [disabled]="incidentForm.invalid">Report Incident</app-button>
+                }
+                @if (currentStep === 3) {
+                <app-button variant="primary" type="submit" [disabled]="incidentForm.invalid">Report
+                    Incident</app-button>
+                }
         </div>
     </form>
 </div>

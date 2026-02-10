@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, inject
 import { CommonModule } from '@angular/common';
 import { Deployment } from '../../../../domain/models/deployment.entity';
 import { DeploymentStatus } from '../../../../domain/models/deployment-status.model';
-import { BadgeComponent } from '../../../../../../shared/ui/atoms/badge/badge.component';
+import { BadgeComponent, BadgeType } from '../../../../../../shared/ui/atoms/badge/badge.component';
 import { AuthFacade } from '../../../../../auth/application/auth.facade';
 import { DeploymentsFacade } from '../../../../application/deployments.facade';
 
@@ -11,7 +11,8 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
     standalone: true,
     imports: [CommonModule, BadgeComponent],
     template: `
-        <div class="deployment-detail" *ngIf="deployment">
+        @if (deployment) {
+        <div class="deployment-detail">
             <div class="detail-header">
                 <div class="title-section">
                     <h2>{{ deployment.service }} <span class="version">{{ deployment.version }}</span></h2>
@@ -21,15 +22,15 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
                 </div>
                 <div class="actions">
                     @if (canApprove() && auth.user()?.hasRole('role-admin')) {
-                        <button class="btn-approve" (click)="onApprove.emit(deployment.id)">
+                        <button class="btn-approve" (click)="approve.emit(deployment.id)">
                             <span class="material-icons">check_circle</span> Aprobar
                         </button>
-                        <button class="btn-reject" (click)="onReject.emit(deployment.id)">
+                        <button class="btn-reject" (click)="reject.emit(deployment.id)">
                             <span class="material-icons">cancel</span> Rechazar
                         </button>
                     }
                     @if (deployment.status === 'APPROVED') {
-                        <button class="btn-execute" (click)="onExecute.emit(deployment.id)">
+                        <button class="btn-execute" (click)="execute.emit(deployment.id)">
                             <span class="material-icons">play_circle</span> Ejecutar Despliegue
                         </button>
                     }
@@ -49,9 +50,11 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
                                 </div>
                                 <div class="info">
                                     <span class="label">{{ step.label }}</span>
-                                    <span class="time" *ngIf="getHistoryEntry(step.status) as entry">
-                                        {{ entry.timestamp | date:'short' }} por {{ entry.userId }}
-                                    </span>
+                                    @if (getHistoryEntry(step.status); as entry) {
+                                        <span class="time">
+                                            {{ entry.timestamp | date:'short' }} por {{ entry.userId }}
+                                        </span>
+                                    }
                                 </div>
                             </div>
                         }
@@ -62,7 +65,9 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
                 <div class="logs-card">
                     <div class="card-header">
                         <h3>Logs de Ejecución</h3>
-                        <span class="pulse" *ngIf="deployment.status === 'RUNNING'"></span>
+                        @if (deployment.status === 'RUNNING') {
+                            <span class="pulse"></span>
+                        }
                     </div>
                     <div class="terminal">
                         @for (log of deployment.logs; track log) {
@@ -70,13 +75,16 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
                                 <span class="prefix">[{{ deployment.service }}]</span> {{ log }}
                             </div>
                         }
-                        <div class="log-line pulse-text" *ngIf="deployment.status === 'RUNNING'">
-                            > Aguardando salida del proceso...
-                        </div>
+                        @if (deployment.status === 'RUNNING') {
+                            <div class="log-line pulse-text">
+                                > Aguardando salida del proceso...
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
+        }
     `,
     styles: [`
         .deployment-detail {
@@ -240,9 +248,9 @@ import { DeploymentsFacade } from '../../../../application/deployments.facade';
 })
 export class DeploymentDetailComponent {
     @Input({ required: true }) deployment!: Deployment;
-    @Output() onApprove = new EventEmitter<string>();
-    @Output() onReject = new EventEmitter<string>();
-    @Output() onExecute = new EventEmitter<string>();
+    @Output() approve = new EventEmitter<string>();
+    @Output() reject = new EventEmitter<string>();
+    @Output() execute = new EventEmitter<string>();
 
     protected readonly facade = inject(DeploymentsFacade);
     protected readonly auth = inject(AuthFacade);
@@ -282,7 +290,7 @@ export class DeploymentDetailComponent {
             this.deployment.status === DeploymentStatus.REVIEW;
     }
 
-    getEnvBadgeType(env: string): any {
+    getEnvBadgeType(env: string): BadgeType {
         switch (env) {
             case 'PRODUCTION': return 'error';
             case 'STAGING': return 'warning';

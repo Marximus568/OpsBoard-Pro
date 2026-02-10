@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { INCIDENTS_PROVIDERS } from './incidents.providers';
+
 
 export const INCIDENTS_ROUTES: Routes = [
     {

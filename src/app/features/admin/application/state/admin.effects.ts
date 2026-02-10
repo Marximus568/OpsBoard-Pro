@@ -69,7 +69,7 @@ export class AdminEffects {
         ofType(AdminActions.toggleFeatureFlag),
         switchMap(({ id, enabled }) =>
             this.adminRepository.toggleFeatureFlag(id, enabled).pipe(
-                tap((flag) => {
+                tap(() => {
                     this.auditService.log('TOGGLE_FLAG', 'FEATURE_FLAG', 'admin', { flagId: id, enabled });
                 }),
                 map(flag => AdminActions.toggleFeatureFlagSuccess({ flag })),
@@ -82,7 +82,7 @@ export class AdminEffects {
         ofType(AdminActions.updateConfig),
         switchMap(({ id, value }) =>
             this.adminRepository.updateConfiguration(id, value).pipe(
-                tap((config) => {
+                tap(() => {
                     this.auditService.log('UPDATE_CONFIG', 'SYSTEM_CONFIG', 'admin', { configId: id, value });
                 }),
                 map(config => AdminActions.updateConfigSuccess({ config })),

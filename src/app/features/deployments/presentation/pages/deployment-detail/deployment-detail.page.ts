@@ -28,9 +28,9 @@ import { first } from 'rxjs';
                 @if (facade.selectedDeployment(); as selected) {
                     <app-deployment-detail 
                         [deployment]="selected"
-                        (onApprove)="facade.approveDeployment($event, 'Aprobación manual')"
-                        (onReject)="facade.rejectDeployment($event, 'Rechazo manual')"
-                        (onExecute)="facade.executeDeployment($event)">
+                        (approve)="facade.approveDeployment($event, 'Aprobación manual')"
+                        (reject)="facade.rejectDeployment($event, 'Rechazo manual')"
+                        (execute)="facade.executeDeployment($event)">
                     </app-deployment-detail>
                 } @else if (facade.loading$ | async) {
                    <div class="loading">Cargando detalles...</div>

@@ -13,7 +13,11 @@ import { LogsFacade } from '../../../../application/logs.facade';
                 <div class="chips-container">
                     @for (search of facade.savedSearches(); track search) {
                         <div class="search-chip">
-                            <span (click)="facade.updateFilters({ query: search })" class="term">{{ search }}</span>
+                            <span (click)="facade.updateFilters({ query: search })" 
+                                  (keydown.enter)="facade.updateFilters({ query: search })"
+                                  tabindex="0"
+                                  role="button"
+                                  class="term">{{ search }}</span>
                             <button (click)="facade.removeSearch(search)" class="remove-btn">
                                 <span class="material-icons">close</span>
                             </button>

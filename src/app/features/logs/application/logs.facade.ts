@@ -84,14 +84,16 @@ export class LogsFacade implements OnDestroy {
     // Quick Filters
     applyQuickFilter(type: 'ERRORS' | 'LAST_HOUR' | 'ALL'): void {
         switch (type) {
-            case 'ERRORS':
+            case 'ERRORS': {
                 this.updateFilters({ levels: [LogLevel.ERROR], query: undefined });
                 break;
-            case 'LAST_HOUR':
+            }
+            case 'LAST_HOUR': {
                 const oneHourAgo = new Date();
                 oneHourAgo.setHours(oneHourAgo.getHours() - 1);
                 this.updateFilters({ dateFrom: oneHourAgo, levels: undefined });
                 break;
+            }
             case 'ALL':
                 this.updateFilters({ levels: undefined, query: undefined, dateFrom: undefined });
                 break;

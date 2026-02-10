@@ -10,7 +10,13 @@ import { LogsFacade } from '../../../../application/logs.facade';
     imports: [CommonModule, LogStatusBadgeComponent],
     template: `
         <div class="log-row-container">
-            <div class="log-row" [class.is-detailed]="showDetail" (click)="toggleDetail()" [attr.aria-expanded]="showDetail">
+            <div class="log-row" [class.is-detailed]="showDetail" 
+                (click)="toggleDetail()" 
+                (keydown.enter)="toggleDetail()"
+                (keydown.space)="toggleDetail()"
+                tabindex="0"
+                role="button"
+                [attr.aria-expanded]="showDetail">
                 <span class="timestamp">{{ log.timestamp | date: 'HH:mm:ss.SSS' }}</span>
                 <app-log-status-badge [level]="log.level"></app-log-status-badge>
                 <span class="service">{{ log.service }}</span>

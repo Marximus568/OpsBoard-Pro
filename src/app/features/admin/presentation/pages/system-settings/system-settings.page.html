@@ -7,22 +7,27 @@
     </div>
 
     <div class="settings-grid">
-        <div class="category-section" *ngFor="let category of categories()">
+        @for (category of categories(); track category) {
+        <div class="category-section">
             <h2 class="category-title">{{ category }}</h2>
 
-            <div class="config-card" *ngFor="let config of groupedConfigs()[category]">
+            @for (config of groupedConfigs()[category]; track config.id) {
+            <div class="config-card">
                 <div class="config-info">
-                    <label>{{ config.key }}</label>
+                    <label [for]="config.id">{{ config.key }}</label>
                     <span class="config-id">{{ config.id }}</span>
                 </div>
 
                 <div class="config-input">
-                    <input type="text" [ngModel]="config.value" (change)="onSave(config, $any($event.target).value)">
+                    <input [id]="config.id" type="text" [ngModel]="config.value"
+                        (change)="onSave(config, $any($event.target).value)">
                     <button class="save-indicator" title="Saved">
                         <app-icon name="check" size="sm"></app-icon>
                     </button>
                 </div>
             </div>
+            }
         </div>
+        }
     </div>
 </div>

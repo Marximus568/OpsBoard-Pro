@@ -6,7 +6,7 @@ export interface AuditLogDto {
     userId: string;
     action: string;
     resource: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
 }
 
 export class AuditMapper {

@@ -7,7 +7,8 @@
     </div>
 
     <div class="roles-grid">
-        <div class="role-card" *ngFor="let role of roles()">
+        @for (role of roles(); track role.id) {
+        <div class="role-card">
             <div class="role-header">
                 <h3>{{ role.name }}</h3>
                 <span class="role-id">{{ role.id }}</span>
@@ -20,11 +21,16 @@
                 <button class="action-btn edit">Edit</button>
             </div>
 
-            <div class="permissions-list" *ngIf="expandedRoleId() === role.id">
-                <div class="permission-tag" *ngFor="let perm of role.permissions">
+            @if (expandedRoleId() === role.id) {
+            <div class="permissions-list">
+                @for (perm of role.permissions; track perm) {
+                <div class="permission-tag">
                     {{ perm }}
                 </div>
+                }
             </div>
+            }
         </div>
+        }
     </div>
 </div>

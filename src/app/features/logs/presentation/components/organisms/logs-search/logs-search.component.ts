@@ -44,7 +44,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
             @if (showAdvanced()) {
                 <div class="advanced-filters fade-in">
                     <div class="filter-group">
-                        <label>Level</label>
+                        <span class="group-label">Level</span>
                         <div class="options">
                             @for (level of levels; track level) {
                                 <label class="checkbox-label">
@@ -56,8 +56,8 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
                     </div>
 
                     <div class="filter-group">
-                        <label>Service</label>
-                        <select class="filter-select" (change)="updateService($event)">
+                        <label for="service-select">Service</label>
+                        <select id="service-select" class="filter-select" (change)="updateService($event)">
                             <option value="">All Services</option>
                             @for (service of services; track service) {
                                 <option [value]="service">{{ service }}</option>
@@ -66,11 +66,11 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
                     </div>
 
                     <div class="filter-group">
-                        <label>Date Range</label>
+                        <label for="date-from">Date Range</label>
                         <div class="date-inputs">
-                            <input type="datetime-local" class="date-input" (change)="updateDateFrom($event)">
+                            <input id="date-from" type="datetime-local" class="date-input" (change)="updateDateFrom($event)">
                             <span>to</span>
-                            <input type="datetime-local" class="date-input" (change)="updateDateTo($event)">
+                            <input type="datetime-local" class="date-input" (change)="updateDateTo($event)" aria-label="Date to">
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ import { SavedSearchesComponent } from '../../molecules/saved-searches/saved-sea
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            label { font-size: 0.813rem; font-weight: 600; color: var(--text-secondary); }
+            label, .group-label { font-size: 0.813rem; font-weight: 600; color: var(--text-secondary); }
         }
         .options { display: flex; flex-wrap: wrap; gap: 1rem; }
         .checkbox-label {
